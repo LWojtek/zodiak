@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --animate-bounce: bounce 1500ms ease-in-out infinite;
+  --font-display: "DM Serif Display", sans-serif;
+  --font-sans: "DM Sans", Arial, sans-serif;
+
+  --color-burgundy-950: #1a0a0f;
+  --color-burgundy-900: #2d1219;
+  --color-burgundy-800: #4a1c27;
+  --color-burgundy-700: #671a2d;
+  --color-burgundy-600: #8c3a4d;
+  --color-burgundy-500: #a84d62;
+  --color-burgundy-400: #c46b7f;
+  --color-burgundy-300: #d99aa8;
+  --color-burgundy-200: #e8c2ca;
+  --color-burgundy-100: #f3dfe3;
+  --color-burgundy-50: #faf2f4;
+
+  --color-yellow-950: #daa520;
+  --color-yellow-900: #e6b422;
+  --color-yellow-800: #f0c040;
+  --color-yellow-700: #f5cc5c;
+  --color-yellow-500: #f9de8f;
+  --color-yellow-400: #fbe6a8;
+  --color-yellow-300: #fcedc0;
+  --color-yellow-200: #fdf4d8;
+  --color-yellow-100: #fef9eb;
+  --color-yellow-50: #fffcf5;
+
+  --ui-primary: var(--color-burgundy-700);
+  --ui-secondary: var(--color-yellow-950);
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(-25%);
+      animation-timing-function: ease-in-out;
+    }
+    50% {
+      transform: none;
+      animation-timing-function: ease-in;
+    }
+  }
+}
+
+:root {
+  --ui-header-height: 4.5rem;
+  --ui-scroll-margin: var(--ui-header-height);
+  --ui-container: 96rem;
+  --ui-border: #f1f1f1;
+}
+
+@media screen and (max-width: 1023px) {
+  :root {
+    --ui-header-height: 3.5rem;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--ui-primary);
+  }
+}
