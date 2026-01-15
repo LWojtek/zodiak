@@ -4,7 +4,9 @@
       <AppHeader class="bg-primary" />
     </ClientOnly>
 
-    <UMain as="main"><slot /> </UMain>
+    <UMain as="main">
+      <slot />
+    </UMain>
     <AppFooter />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <!-- <SectionHero id="home" /> -->
+  <SectionHero id="home" />
 
   <div id="przyjecia" class="h-screen scroll-mt-(--ui-scroll-margin)">
     <h1>Strona główna</h1>
