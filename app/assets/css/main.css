@@ -6,6 +6,29 @@
   --font-display: "DM Serif Display", sans-serif;
   --font-sans: "DM Sans", Arial, sans-serif;
 
+  /* --color-burgundy-950: #1a0a0f;
+  --color-burgundy-900: #2d1219;
+  --color-burgundy-800: #4a1c27;
+  --color-burgundy-700: #671a2d;
+  --color-burgundy-600: #8c3a4d;
+  --color-burgundy-500: #a84d62;
+  --color-burgundy-400: #c46b7f;
+  --color-burgundy-300: #d99aa8;
+  --color-burgundy-200: #e8c2ca;
+  --color-burgundy-100: #f3dfe3;
+  --color-burgundy-50: #faf2f4;
+
+  --color-yellow-950: #daa520;
+  --color-yellow-900: #e6b422;
+  --color-yellow-800: #f0c040;
+  --color-yellow-700: #f5cc5c;
+  --color-yellow-500: #f9de8f;
+  --color-yellow-400: #fbe6a8;
+  --color-yellow-300: #fcedc0;
+  --color-yellow-200: #fdf4d8;
+  --color-yellow-100: #fef9eb;
+  --color-yellow-50: #fffcf5; */
+
   --color-akaroa-50: #f9f7f3;
   --color-akaroa-100: #f2ede2;
   --color-akaroa-200: #e4d9c4;
@@ -32,6 +55,8 @@
 
   --ui-primary: var(--color-akaroa-950);
   --ui-secondary: var(--color-almond-400);
+  /* --ui-primary: var(--color-burgundy-600);
+  --ui-secondary: var(--color-yellow-); */
 
   @keyframes bounce {
     0%,
