@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@nuxtjs/google-fonts",
     "@vueuse/nuxt",
     "@nuxt/image",
+    "@vueuse/motion/nuxt",
   ],
 
   devtools: {
@@ -31,6 +32,25 @@ export default defineNuxtConfig({
       },
       "DM Serif Display": {
         wght: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+      },
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      motion: {
+        directives: {
+          "pop-bottom": {
+            initial: {
+              opacity: 0,
+              y: 50,
+            },
+            visible: {
+              opacity: 1,
+              y: 0,
+            },
+          },
+        },
       },
     },
   },

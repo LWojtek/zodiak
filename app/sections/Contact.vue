@@ -22,17 +22,26 @@
       class="relative z-1 flex flex-col gap-12 md:gap-24 items-center"
     >
       <div class="flex flex-col items-center gap-6 text-center">
-        <UBadge color="secondary" size="xl" variant="subtle" label="Kontakt">
+        <UBadge
+          color="secondary"
+          size="xl"
+          variant="subtle"
+          label="Kontakt"
+          v-motion-pop-bottom
+          :duration="700"
+        >
           <template #leading>
             <UIcon name="i-lucide-mail" class="size-4.5" />
           </template>
         </UBadge>
         <h2
           class="leading-tight text-3xl md:text-4xl lg:text-6xl text-almond-950 font-bold font-display"
+          v-motion-pop-bottom
+          :duration="700"
         >
           Skontaktuj się z nami
         </h2>
-        <p>
+        <p v-motion-pop-bottom :duration="700">
           Masz pytania? Skontaktuj się z nami telefonicznie lub odwiedź nas
           osobiście.
         </p>
@@ -41,6 +50,8 @@
     <UContainer class="px-0 mt-12 md:mt-24">
       <div
         class="relative sm:rounded-3xl overflow-hidden shadow-3xl grid grid-cols-1 md:grid-cols-2 w-full bg-white"
+        v-motion-pop-bottom
+        :duration="700"
       >
         <div
           class="absolute inset-0 bg-cover bg-center bg-[url('/images/hero.jpg')]"
@@ -59,6 +70,8 @@
             size="xl"
             variant="ghost"
             label="Odwiedź nas"
+            v-motion-pop-bottom
+            :duration="700"
           >
             <template #leading>
               <UIcon name="i-lucide-navigation" class="size-4.5" />
@@ -66,12 +79,16 @@
           </UBadge>
           <h3
             class="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-white"
+            v-motion-pop-bottom
+            :duration="700"
           >
             Restauracja Zodiak
           </h3>
           <div class="flex flex-col text-white w-full gap-4">
             <div
               class="p-4 bg-white/10 border border-white/30 backdrop-blur-xs rounded-lg"
+              v-motion-pop-bottom
+              :duration="700"
             >
               <div class="flex items-start gap-3">
                 <UBadge
@@ -89,53 +106,63 @@
                 </div>
               </div>
             </div>
-            <UButton
-              class="p-4 bg-white/10 border border-white/30 group text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
-              to="tel:+48731763752"
-              external
-              variant="link"
-            >
-              <div class="flex items-start gap-3">
-                <UBadge
-                  class="rounded-lg p-2.5 group-hover:bg-white group-hover:text-primary transition"
-                  color="secondary"
-                  size="xl"
-                  variant="ghost"
-                >
-                  <UIcon name="i-lucide-phone" class="size-7" />
-                </UBadge>
-                <div>
-                  <span class="text-white/85 font-normal">
-                    Organizacja przyjęć & catering
-                  </span>
-                  <span class="block font-semibold"> +48 731 763 752 </span>
+            <div v-motion-pop-bottom :duration="700">
+              <UButton
+                class="p-4 bg-white/10 border border-white/30 group w-full text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
+                to="tel:+48731763752"
+                external
+                variant="link"
+                v-motion-pop-bottom
+                :duration="700"
+              >
+                <div class="flex items-start gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5 group-hover:bg-white group-hover:text-primary transition"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <UIcon name="i-lucide-phone" class="size-7" />
+                  </UBadge>
+                  <div>
+                    <span class="text-white/85 font-normal">
+                      Organizacja przyjęć & catering
+                    </span>
+                    <span class="block font-semibold"> +48 731 763 752 </span>
+                  </div>
                 </div>
-              </div>
-            </UButton>
-            <UButton
-              class="p-4 bg-white/10 border border-white/30 group text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
-              to="tel:+48731763752"
-              external
-              variant="link"
-            >
-              <div class="flex items-start gap-3">
-                <UBadge
-                  class="rounded-lg p-2.5 group-hover:bg-white group-hover:text-primary transition"
-                  color="secondary"
-                  size="xl"
-                  variant="ghost"
-                >
-                  <UIcon name="i-lucide-phone" class="size-7" />
-                </UBadge>
-                <div>
-                  <span class="text-white/85 font-normal">
-                    Pub & kręgielnia
-                  </span>
-                  <span class="block font-semibold"> +48 731 763 752 </span>
+              </UButton>
+            </div>
+            <div v-motion-pop-bottom :duration="700">
+              <UButton
+                class="p-4 bg-white/10 border w-full border-white/30 group text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
+                to="tel:+48731763752"
+                external
+                variant="link"
+              >
+                <div class="flex items-start gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5 group-hover:bg-white group-hover:text-primary transition"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <UIcon name="i-lucide-phone" class="size-7" />
+                  </UBadge>
+                  <div>
+                    <span class="text-white/85 font-normal">
+                      Pub & kręgielnia
+                    </span>
+                    <span class="block font-semibold"> +48 731 763 752 </span>
+                  </div>
                 </div>
-              </div>
-            </UButton>
-            <div class="flex items-center gap-2">
+              </UButton>
+            </div>
+            <div
+              class="flex items-center gap-2"
+              v-motion-pop-bottom
+              :duration="700"
+            >
               <UButton
                 size="lg"
                 square

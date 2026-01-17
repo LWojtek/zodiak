@@ -3,38 +3,45 @@
     class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
     :class="`lg:${gridColsClass}`"
   >
-    <UButton
-      class="p-0 sm:p-0 relative group rounded-lg overflow-hidden max-h-50 sm:max-h-72"
+    <div
       v-for="(image, index) in images"
       :key="index"
-      @click="openModal(index)"
+      v-motion-pop-bottom
+      :duration="700"
+      :delay="index * 100"
+      class="h-full"
     >
-      <NuxtImg
-        :src="image.src"
-        class="w-full h-full transition-all duration-300 scale-100 group-hover:scale-125 object-cover"
-        :alt="image.alt"
-      />
-      <div
-        class="absolute flex flex-col inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+      <UButton
+        class="p-0 sm:p-0 relative group block w-full h-full rounded-lg overflow-hidden max-h-50 sm:max-h-72"
+        @click="openModal(index)"
       >
-        <UButton
-          class="absolute rounded-full p-2 sm:p-2 top-2 right-2 opacity-0 transition duration-300 group-hover:opacity-100"
-          variant="outline"
-          color="neutral"
-          square
-        >
-          <template #leading>
-            <UIcon class="size-5" name="i-lucide-search" />
-          </template>
-        </UButton>
+        <NuxtImg
+          :src="image.src"
+          class="w-full h-full transition-all duration-300 scale-100 group-hover:scale-125 object-cover"
+          :alt="image.alt"
+        />
         <div
-          class="mt-auto p-4 flex flex-col gap-1 text-left w-full translate-y-full transition-all duration-300 group-hover:translate-y-0"
+          class="absolute flex flex-col inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         >
-          <p class="text-lg truncate">{{ image.alt }}</p>
-          <p class="text-sm text-white/75">Kliknij, aby powiększyć</p>
+          <UButton
+            class="absolute rounded-full p-2 sm:p-2 top-2 right-2 opacity-0 transition duration-300 group-hover:opacity-100"
+            variant="outline"
+            color="neutral"
+            square
+          >
+            <template #leading>
+              <UIcon class="size-5" name="i-lucide-search" />
+            </template>
+          </UButton>
+          <div
+            class="mt-auto p-4 flex flex-col gap-1 text-left w-full translate-y-full transition-all duration-300 group-hover:translate-y-0"
+          >
+            <p class="text-lg truncate">{{ image.alt }}</p>
+            <p class="text-sm text-white/75">Kliknij, aby powiększyć</p>
+          </div>
         </div>
-      </div>
-    </UButton>
+      </UButton>
+    </div>
 
     <div class="hidden lg:grid-cols-4 lg:grid-cols-3 lg:grid-cols-2"></div>
 

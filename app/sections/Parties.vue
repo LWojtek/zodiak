@@ -27,6 +27,8 @@
           size="xl"
           variant="subtle"
           label="Organizacja imprez"
+          v-motion-pop-bottom
+          :duration="700"
         >
           <template #leading>
             <UIcon name="i-lucide-balloon" class="size-4.5" />
@@ -34,10 +36,12 @@
         </UBadge>
         <h2
           class="leading-tight text-3xl md:text-4xl lg:text-6xl text-almond-950 font-bold font-display"
+          v-motion-pop-bottom
+          :duration="700"
         >
           Przyjęcia okolicznościowe
         </h2>
-        <p class="max-w-[65ch]">
+        <p class="max-w-[65ch]" v-motion-pop-bottom :duration="700">
           Organizujemy wesela, komunie, chrzciny, urodziny i wszelkie imprezy
           okolicznościowe. Nasze sale bankietowe pomieszczą zarówno kameralne
           spotkania, jak i duże przyjęcia.
@@ -52,6 +56,8 @@
     <UContainer class="mt-12 md:mt-24 px-0">
       <section
         class="relative grid grid-cols-1 md:grid-cols-2 px-4 py-8 sm:px-8 sm:py-8 gap-16 md:rounded-lg shadow-lg overflow-hidden w-full"
+        v-motion-pop-bottom
+        :duration="700"
       >
         <div
           aria-hidden="true"
@@ -74,17 +80,27 @@
           </UBadge>
           <h3
             class="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-white"
+            v-motion-pop-bottom
+            :duration="700"
           >
             Oferta cateringowa
           </h3>
-          <p class="text-base text-white max-w-[45ch]">
+          <p
+            class="text-base text-white max-w-[45ch]"
+            v-motion-pop-bottom
+            :duration="700"
+          >
             Przygotowujemy wyśmienitą polską kuchnię z najświeższych, lokalnych
             składników. Nasze menu dostosowujemy do Twoich potrzeb i
             preferencji.
           </p>
 
           <div class="grid text-white grid-cols-2 w-full gap-4">
-            <div class="flex items-center gap-3">
+            <div
+              class="flex items-center gap-3"
+              v-motion-pop-bottom
+              :duration="700"
+            >
               <UBadge
                 class="rounded-lg p-2.5"
                 color="secondary"
@@ -95,7 +111,11 @@
               </UBadge>
               <span class="text-sm">Świeże składniki</span>
             </div>
-            <div class="flex items-center gap-3">
+            <div
+              class="flex items-center gap-3"
+              v-motion-pop-bottom
+              :duration="700"
+            >
               <UBadge
                 class="rounded-lg p-2.5"
                 color="secondary"
@@ -106,7 +126,11 @@
               </UBadge>
               <span class="text-sm">Do 200 gości</span>
             </div>
-            <div class="flex items-center gap-3">
+            <div
+              class="flex items-center gap-3"
+              v-motion-pop-bottom
+              :duration="700"
+            >
               <UBadge
                 class="rounded-lg p-2.5"
                 color="secondary"
@@ -117,7 +141,11 @@
               </UBadge>
               <span class="text-sm">Dostawa na czas</span>
             </div>
-            <div class="flex items-center gap-3">
+            <div
+              class="flex items-center gap-3"
+              v-motion-pop-bottom
+              :duration="700"
+            >
               <UBadge
                 class="rounded-lg p-2.5"
                 color="secondary"
@@ -131,6 +159,8 @@
           </div>
           <div
             class="grid grid-cols-1 sm:grid-cols-2 md:flex items-center gap-4 w-full"
+            v-motion-pop-bottom
+            :duration="700"
           >
             <UButton
               color="secondary"
@@ -164,6 +194,8 @@
             ></div>
             <div
               class="w-60 h-60 rounded-full bg-white/10 backdrop-blur-md flex flex-col items-center justify-center text-white border-2 border-white/40"
+              v-motion-pop-bottom
+              :duration="700"
             >
               <div class="text-6xl md:text-7xl font-serif font-bold text-white">
                 20+
@@ -179,6 +211,8 @@
           </div>
           <div
             class="mt-8 flex flex-col sm:flex-row items-center gap-4 px-6 py-3 backdrop-blur-sm rounded-full"
+            v-motion-pop-bottom
+            :duration="700"
           >
             <div class="flex gap-2">
               <div
@@ -201,7 +235,6 @@
 
 <script setup>
 import { onMounted } from "vue";
-
 import Rellax from "rellax";
 
 onMounted(() => {

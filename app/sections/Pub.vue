@@ -6,17 +6,26 @@
       class="relative z-1 flex flex-col gap-12 md:gap-24 items-center"
     >
       <div class="flex flex-col items-center gap-6 text-center">
-        <UBadge color="secondary" size="xl" variant="subtle" label="Rozrywka">
+        <UBadge
+          color="secondary"
+          size="xl"
+          variant="subtle"
+          label="Rozrywka"
+          v-motion-pop-bottom
+          :duration="700"
+        >
           <template #leading>
             <UIcon name="i-lucide-martini" class="size-4.5" />
           </template>
         </UBadge>
         <h2
           class="leading-tight text-3xl md:text-4xl lg:text-6xl text-almond-950 font-bold font-display"
+          v-motion-pop-bottom
+          :duration="700"
         >
           Pub i kręgielnia
         </h2>
-        <p class="max-w-[45ch]">
+        <p class="max-w-[45ch]" v-motion-pop-bottom :duration="700">
           Klimatyczny pub z profesjonalną kręgielnią i stołami bilardowymi.
           Idealne miejsce na spotkania ze znajomymi.
         </p>
@@ -28,7 +37,11 @@
     </UContainer>
 
     <UContainer class="mt-12 md:mt-24 px-0">
-      <div class="relative sm:rounded-3xl overflow-hidden shadow-3xl w-full">
+      <div
+        class="relative sm:rounded-3xl overflow-hidden shadow-3xl w-full"
+        v-motion-pop-bottom
+        :duration="700"
+      >
         <div
           class="absolute inset-0 bg-cover bg-center bg-[url('/images/kregle.jpg')]"
           aria-hidden="true"
@@ -45,6 +58,8 @@
                 size="xl"
                 variant="ghost"
                 label="Pub & Kręgielnia"
+                v-motion-pop-bottom
+                :duration="700"
               >
                 <template #leading>
                   <UIcon name="i-lucide-target" class="size-4.5" />
@@ -53,16 +68,26 @@
 
               <h3
                 class="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-white"
+                v-motion-pop-bottom
+                :duration="700"
               >
                 Zarezerwuj tor do kręgli
               </h3>
-              <p class="text-white/85 text-lg mb-8 leading-relaxed max-w-lg">
+              <p
+                class="text-white/85 text-lg mb-8 leading-relaxed max-w-lg"
+                v-motion-pop-bottom
+                :duration="700"
+              >
                 Rezerwacji dokonasz telefonicznie w godzinach otwarcia
                 kręgielni. Zapraszamy na kręgle, bilard oraz pyszne przekąski i
                 napoje z naszego menu.
               </p>
               <div class="grid text-white grid-cols-2 w-full gap-4">
-                <div class="flex items-center gap-3">
+                <div
+                  class="flex items-center gap-3"
+                  v-motion-pop-bottom
+                  :duration="700"
+                >
                   <UBadge
                     class="rounded-lg p-2.5"
                     color="secondary"
@@ -84,7 +109,11 @@
                   </UBadge>
                   <span class="text-sm">Do 200 gości</span>
                 </div>
-                <div class="flex items-center gap-3">
+                <div
+                  class="flex items-center gap-3"
+                  v-motion-pop-bottom
+                  :duration="700"
+                >
                   <UBadge
                     class="rounded-lg p-2.5"
                     color="secondary"
@@ -95,7 +124,11 @@
                   </UBadge>
                   <span class="text-sm">Dostawa na czas</span>
                 </div>
-                <div class="flex items-center gap-3">
+                <div
+                  class="flex items-center gap-3"
+                  v-motion-pop-bottom
+                  :duration="700"
+                >
                   <UBadge
                     class="rounded-lg p-2.5"
                     color="secondary"
@@ -108,12 +141,18 @@
                 </div>
               </div>
 
-              <div class="flex flex-col items-start w-full gap-3">
+              <div
+                class="flex flex-col items-start w-full gap-3"
+                v-motion-pop-bottom
+                :duration="700"
+              >
                 <UButton
                   color="secondary"
                   class="justify-center w-full md:w-auto"
                   size="md"
                   href="tel:+48731763752"
+                  v-motion-pop-bottom
+                  :duration="700"
                 >
                   <template #leading>
                     <UIcon name="i-lucide-phone" class="size-5" />
@@ -121,7 +160,11 @@
                   +48 731 763 752
                 </UButton>
 
-                <p class="text-sm text-center md:text-left text-white/90">
+                <p
+                  class="text-sm text-center md:text-left text-white/90"
+                  v-motion-pop-bottom
+                  :duration="700"
+                >
                   Telefon czynny w godzinach otwartcia kręgielni
                 </p>
               </div>
@@ -136,31 +179,43 @@
                   >
                     <UIcon name="i-lucide-clock" class="size-6 text-white" />
                   </div>
-                  <h4 class="font-display text-2xl font-bold text-white">
+                  <h4
+                    class="font-display text-2xl font-bold text-white"
+                    v-motion-pop-bottom
+                    :duration="700"
+                  >
                     Godziny otwarcia
                   </h4>
                 </div>
                 <div class="space-y-4">
                   <div
                     class="flex justify-between items-center py-3 border-b border-white/30 last:border-0"
+                    v-motion-pop-bottom
+                    :duration="700"
                   >
                     <span class="font-medium text-white/90">Czwartek</span>
                     <span class="text-white font-bold">17:00 - 22:00</span>
                   </div>
                   <div
                     class="flex justify-between items-center py-3 border-b border-white/30 last:border-0"
+                    v-motion-pop-bottom
+                    :duration="700"
                   >
                     <span class="font-medium text-white/90">Piątek</span>
                     <span class="text-white font-bold">17:00 - 01:00</span>
                   </div>
                   <div
                     class="flex justify-between items-center py-3 border-b border-white/30 last:border-0"
+                    v-motion-pop-bottom
+                    :duration="700"
                   >
                     <span class="font-medium text-white/90">Sobota</span>
                     <span class="text-white font-bold">17:00 - 01:00</span>
                   </div>
                   <div
                     class="flex justify-between items-center py-3 border-b border-white/30 last:border-0"
+                    v-motion-pop-bottom
+                    :duration="700"
                   >
                     <span class="font-medium text-white/90">Niedziela</span>
                     <span class="text-white font-bold">17:00 - 22:00</span>
@@ -168,6 +223,8 @@
                 </div>
                 <div
                   class="mt-6 pt-4 border-t border-white/30 text-sm text-white/70"
+                  v-motion-pop-bottom
+                  :duration="700"
                 >
                   <strong>Poniedziałek - Środa:</strong> nieczynne
                 </div>
