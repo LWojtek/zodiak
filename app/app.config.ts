@@ -10,7 +10,7 @@ export default defineAppConfig({
       },
     },
     container: {
-      base: "w-full max-w-(--ui-container) mx-auto px-2 sm:px-4 lg:px-6",
+      base: "w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8",
     },
     button: {
       slots: {
@@ -43,6 +43,13 @@ export default defineAppConfig({
     badge: {
       slots: {
         base: "",
+      },
+      variants: {
+        size: {
+          md: {
+            base: "!text-xs",
+          },
+        },
       },
       compoundVariants: [
         {

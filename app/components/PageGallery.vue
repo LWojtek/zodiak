@@ -1,10 +1,10 @@
 <template>
   <section
-    class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+    class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full"
     :class="`lg:${gridColsClass}`"
   >
     <UButton
-      class="p-0 sm:p-0 relative group rounded-lg overflow-hidden"
+      class="p-0 sm:p-0 relative group rounded-lg overflow-hidden max-h-50 sm:max-h-72"
       v-for="(image, index) in images"
       :key="index"
       @click="openModal(index)"
@@ -35,6 +35,8 @@
         </div>
       </div>
     </UButton>
+
+    <div class="hidden lg:grid-cols-4 lg:grid-cols-3 lg:grid-cols-2"></div>
 
     <UModal
       v-model:open="state.open"

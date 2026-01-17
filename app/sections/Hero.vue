@@ -16,7 +16,7 @@ a
     <UContainer class="flex items-center justify-center relative z-10 h-full">
       <div class="flex text-center items-center text-inverted flex-col gap-6">
         <h1
-          class="leading-tight text-4xl md:text-6xl lg:text-8xl font-900 font-display"
+          class="leading-tight text-5xl md:text-6xl lg:text-8xl font-900 font-display"
         >
           Restauracja <span class="text-secondary">Zodiak</span>
         </h1>

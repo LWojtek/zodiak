@@ -25,8 +25,10 @@
       <ClientOnly>
         <PageGallery :images="pubImages" />
       </ClientOnly>
+    </UContainer>
 
-      <div class="relative rounded-3xl overflow-hidden shadow-2xl w-full">
+    <UContainer class="mt-12 md:mt-24 px-0">
+      <div class="relative sm:rounded-3xl overflow-hidden shadow-3xl w-full">
         <div
           class="absolute inset-0 bg-cover bg-center bg-[url('/images/kregle.jpg')]"
           aria-hidden="true"
@@ -35,7 +37,7 @@
           class="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/85 to-primary/70"
           aria-hidden="true"
         />
-        <div class="relative z-10 p-8 lg:p-16">
+        <div class="relative z-10 px-4 py-8 sm:px-8 sm:py-8">
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <div class="flex flex-col items-start gap-8 text-white">
               <UBadge
@@ -50,7 +52,7 @@
               </UBadge>
 
               <h3
-                class="text-xl md:text-3xl lg:text-4xl font-bold font-display text-white"
+                class="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-white"
               >
                 Zarezerwuj tor do kręgli
               </h3>
@@ -125,14 +127,16 @@
               </div>
             </div>
             <div class="block">
-              <div class="bg-white/5 border backdrop-blur-md rounded-2xl p-8">
+              <div
+                class="bg-white/5 border backdrop-blur-md rounded-2xl px-4 py-8 sm:px-8 sm:py-8"
+              >
                 <div class="flex items-center gap-3 mb-8">
                   <div
                     class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center"
                   >
                     <UIcon name="i-lucide-clock" class="size-6 text-white" />
                   </div>
-                  <h4 class="font-serif text-2xl font-bold text-white">
+                  <h4 class="font-display text-2xl font-bold text-white">
                     Godziny otwarcia
                   </h4>
                 </div>

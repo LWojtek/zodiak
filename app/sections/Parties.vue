@@ -47,9 +47,11 @@
       <ClientOnly>
         <PageGallery :images="partiesImages" />
       </ClientOnly>
+    </UContainer>
 
-      <div
-        class="relative grid grid-cols-1 md:grid-cols-2 p-8 gap-16 rounded-lg shadow-lg overflow-hidden w-full"
+    <UContainer class="mt-12 md:mt-24 px-0">
+      <section
+        class="relative grid grid-cols-1 md:grid-cols-2 px-4 py-8 sm:px-8 sm:py-8 gap-16 md:rounded-lg shadow-lg overflow-hidden w-full"
       >
         <div
           aria-hidden="true"
@@ -71,7 +73,7 @@
             </template>
           </UBadge>
           <h3
-            class="text-xl md:text-3xl lg:text-4xl font-bold font-display text-white"
+            class="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-white"
           >
             Oferta cateringowa
           </h3>
@@ -192,7 +194,7 @@
             </span>
           </div>
         </div>
-      </div>
+      </section>
     </UContainer>
   </section>
 </template>
@@ -203,7 +205,9 @@ import { onMounted } from "vue";
 import Rellax from "rellax";
 
 onMounted(() => {
-  let rellax = new Rellax(".parties");
+  requestAnimationFrame(() => {
+    new Rellax(".parties", { center: true });
+  });
 });
 const partiesImages = [
   {
