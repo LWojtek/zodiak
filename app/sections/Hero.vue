@@ -1,7 +1,6 @@
 a
 <template>
   <section
-    id="home"
     class="relative z-1 overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
   >
     <img

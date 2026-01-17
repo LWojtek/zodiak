@@ -1,5 +1,8 @@
 <template>
-  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <section
+    class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+    :class="`lg:${gridColsClass}`"
+  >
     <UButton
       class="p-0 sm:p-0 relative group rounded-lg overflow-hidden"
       v-for="(image, index) in images"
@@ -85,6 +88,16 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+});
+
+const gridColsClass = computed(() => {
+  const count = props.images.length;
+
+  if (count === 1) return "grid-cols-1";
+  if (count === 2) return "grid-cols-2";
+  if (count === 4) return "grid-cols-4";
+
+  return "grid-cols-3";
 });
 
 const state = reactive({
