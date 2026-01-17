@@ -18,6 +18,9 @@ export default defineAppConfig({
       },
       variants: {
         size: {
+          md: {
+            base: "px-4 py-2.5 text-base rounded-xl",
+          },
           lg: {
             base: "px-6 py-3 sm:py-4 sm:px-8 text-lg rounded-xl",
           },
@@ -36,6 +39,33 @@ export default defineAppConfig({
             "bg-white/5 backdrop-blur-xs text-inverted  focus-visible:ring-white/100  ring-white/30 hover:bg-primary/0 active:bg-primary/50 ",
         },
       ],
+    },
+    badge: {
+      slots: {
+        base: "",
+      },
+      compoundVariants: [
+        {
+          color: "secondary",
+          variant: "subtle",
+          class: "bg-almond-100  rounded-full text-almond-700",
+        },
+        {
+          color: "secondary",
+          variant: "ghost",
+          class:
+            "bg-white/10 backdrop-blur-xs rounded-full text-white ring-none",
+        },
+      ],
+    },
+    modal: {
+      variants: {
+        overlay: {
+          true: {
+            overlay: "bg-black/85 backdrop-blur-xs",
+          },
+        },
+      },
     },
   },
 });

@@ -72,7 +72,7 @@ export const useNavigation = () => {
 
         if (changed) throttledUpdateUnderline();
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     sections.forEach((id) => {

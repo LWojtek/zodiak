@@ -1,10 +1,8 @@
 <template>
   <SectionHero id="home" />
 
-  <div id="przyjecia" class="h-screen scroll-mt-(--ui-scroll-margin)">
-    <h1>Strona główna</h1>
-    <UButton color="secondary">Test</UButton>
-  </div>
+  <SectionParties id="przyjecia" />
+
   <div id="pub" class="h-screen scroll-mt-(--ui-scroll-margin)">
     <h1>Strona główna</h1>
     <UButton color="secondary">Test</UButton>
@@ -17,6 +15,7 @@
 
 <script setup>
 import SectionHero from "../sections/Hero.vue";
+import SectionParties from "../sections/Parties.vue";
 definePageMeta({
   layout: "page",
 });

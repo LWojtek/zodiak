@@ -1,7 +1,8 @@
+a
 <template>
   <section
     id="home"
-    class="relative overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
+    class="relative z-1 overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
   >
     <img
       src="/images/hero.jpg"
@@ -10,7 +11,7 @@
       data-rellax-xs-speed="-2"
       data-rellax-mobile-speed="-2"
       data-rellax-tablet-speed="-3"
-      class="absolute rellax top-0 left-0 h-full w-full object-cover"
+      class="absolute hero top-0 left-0 h-full w-full object-cover"
     />
 
     <UContainer class="flex items-center justify-center relative z-10 h-full">
@@ -92,6 +93,6 @@ import { onMounted } from "vue";
 import Rellax from "rellax";
 
 onMounted(() => {
-  let rellax = new Rellax(".rellax");
+  let rellax = new Rellax(".hero");
 });
 </script>

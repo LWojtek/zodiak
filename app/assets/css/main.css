@@ -53,11 +53,23 @@
   --color-almond-900: #613c2d;
   --color-almond-950: #341e16;
 
+  --color-black-50: #f6f6f6;
+  --color-black-100: #e7e7e7;
+  --color-black-200: #d1d1d1;
+  --color-black-300: #b0b0b0;
+  --color-black-400: #888888;
+  --color-black-500: #6d6d6d;
+  --color-black-600: #5d5d5d;
+  --color-black-700: #4f4f4f;
+  --color-black-800: #454545;
+  --color-black-900: #3d3d3d;
+  --color-black-950: #000000;
+
   --ui-primary: var(--color-akaroa-950);
   --ui-secondary: var(--color-almond-400);
+
   /* --ui-primary: var(--color-burgundy-600);
   --ui-secondary: var(--color-yellow-); */
-
   @keyframes bounce {
     0%,
     100% {
@@ -76,6 +88,7 @@
   --ui-scroll-margin: var(--ui-header-height);
   --ui-container: 96rem;
   --ui-border: #f1f1f1;
+  --ui-text: var(--color-black-500);
 }
 
 @media screen and (max-width: 1023px) {
