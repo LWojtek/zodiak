@@ -2,6 +2,7 @@ export const useAuth = () => {
   const USER_KEY = "auth:user";
 
   const user = useState("user", () => {
+    if (!import.meta.client) return null;
     const stored = localStorage.getItem(USER_KEY);
     return stored ? JSON.parse(stored) : null;
   });
@@ -9,6 +10,7 @@ export const useAuth = () => {
   const api = useApi();
 
   const restoreUser = () => {
+    if (!import.meta.client) return;
     try {
       const stored = localStorage.getItem(USER_KEY);
       if (stored) {
@@ -26,6 +28,7 @@ export const useAuth = () => {
     try {
       const data = await api("/api/auth/me");
       user.value = data;
+      if (!import.meta.client) return;
       localStorage.setItem(USER_KEY, JSON.stringify(data));
       return data;
     } catch {
