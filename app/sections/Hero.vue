@@ -3,9 +3,9 @@ a
   <section
     class="relative z-1 overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
   >
-    <div
-      class="absolute z-10 inset-0 flex flex-wrap justify-around bg-[radial-gradient(circle,_#fff_4%,_transparent_11%)] bg-[size:5px_5px]"
-    />
+    <!-- <div
+      class="absolute z-10 inset-0 flex flex-wrap justify-around bg-[radial-gradient(circle,_#fff_4%,_transparent_8%)] bg-[size:2.5px_px]"
+    /> -->
     <img
       src="/images/hero.jpg"
       alt="Restauracja Zodiak"
