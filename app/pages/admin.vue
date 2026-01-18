@@ -15,7 +15,7 @@ definePageMeta({
   middleware: "admin",
 });
 
-const { user } = useAuth();
+const { user, fetchUser } = useAuth();
 
 const firstName = ref("");
 const lastName = ref("");
@@ -34,6 +34,7 @@ const updateUser = async () => {
     async onResponse({ response }) {
       if (response.ok) {
         console.log(response);
+        await fetchUser();
       } else {
         // state.error = response._data.message;
       }

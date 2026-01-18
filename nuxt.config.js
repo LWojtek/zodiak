@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxt/image",
     "@vueuse/motion/nuxt",
+    "@nuxtjs/supabase",
   ],
 
   devtools: {
@@ -40,7 +41,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     supabaseUrl: process.env.SUPABASE_URL,
-    supabaseKey: process.env.SUPABASE_PUBLISHABLE_KEY,
+    supabaseKey: process.env.SUPABASE_KEY,
 
     public: {
       apiUrl: process.env.NUXT_API_URL,

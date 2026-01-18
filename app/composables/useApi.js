@@ -1,44 +1,19 @@
-const useApiBase = () => {
-  const config = useRuntimeConfig();
-
-  let headers = {
-    Accept: "application/json",
-    "Accept-Language": "pl",
-  };
-
-  if (token) {
-    headers["authorization"] = `Bearer ${token}`;
-  }
-
-  return { config, headers };
-};
-
 export const useApi = () => {
   const config = useRuntimeConfig();
 
   return $fetch.create({
     baseURL: config.public.apiBase,
     credentials: "include",
-
     headers: {
       Accept: "application/json",
       "Accept-Language": "pl",
-    },
-
-    onResponseError({ response }) {
-      if (response.status === 401) {
-        auth.clearUser();
-        navigateTo("/login");
-      }
     },
   });
 };
 
 export const useFetchApi = (path, options = {}) => {
-  const { config, headers } = useApiBase();
-
   return useFetch(path, {
-    baseURL: config.public.apiUrl,
+    baseURL: config.public.apiBase,
     ...options,
 
     async onRequest(ctx) {
@@ -50,8 +25,8 @@ export const useFetchApi = (path, options = {}) => {
 
     onResponseError({ response }) {
       if (response.status === 401) {
-        auth.clearUser();
-        navigateTo("/login");
+        // auth.clearUser();
+        // navigateTo("/login");
       }
     },
   });

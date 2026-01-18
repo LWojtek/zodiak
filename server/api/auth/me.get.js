@@ -1,27 +1,11 @@
-import { createClient } from "@supabase/supabase-js";
+import { serverSupabaseUser } from "#supabase/server";
+
 export default defineEventHandler(async (event) => {
-  const token = getCookie(event, "sb-access-token");
+  const user = await serverSupabaseUser(event);
 
-  if (!token) {
+  if (!user) {
     throw createError({ statusCode: 401 });
   }
 
-  const config = useRuntimeConfig();
-
-  const supabase = createClient(config.supabaseUrl, config.supabaseKey, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    auth: { persistSession: false },
-  });
-
-  const { data, error } = await supabase.auth.getUser();
-
-  if (error || !data.user) {
-    throw createError({ statusCode: 401 });
-  }
-
-  return data.user;
+  return user;
 });

@@ -1,27 +1,10 @@
-import { createClient } from "@supabase/supabase-js";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
-  const token = getCookie(event, "sb-access-token");
-
-  if (!token) {
-    throw createError({ statusCode: 401 });
-  }
-
-  const config = useRuntimeConfig();
-
-  const supabase = createClient(config.supabaseUrl, config.supabaseKey, {
-    global: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-
-    auth: { persistSession: false },
-  });
+  const supabase = await serverSupabaseClient(event);
 
   const data = {};
-
   if (body.first_name) data.first_name = body.first_name;
   if (body.last_name) data.last_name = body.last_name;
 
@@ -33,6 +16,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const { error } = await supabase.auth.updateUser({ data });
+  await supabase.auth.refreshSession();
 
   if (error) {
     throw createError({

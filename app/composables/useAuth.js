@@ -8,21 +8,27 @@ export const useAuth = () => {
 
   const api = useApi();
 
-  const fetchUser = async () => {
-    if (user.value) return user.value;
+  const restoreUser = () => {
+    try {
+      const stored = localStorage.getItem(USER_KEY);
+      if (stored) {
+        user.value = JSON.parse(stored);
+        return user.value;
+      }
+    } catch {
+      localStorage.removeItem(USER_KEY);
+    }
 
+    return null;
+  };
+
+  const fetchUser = async () => {
     try {
       const data = await api("/api/auth/me");
       user.value = data;
-
       localStorage.setItem(USER_KEY, JSON.stringify(data));
-
       return data;
     } catch {
-      user.value = null;
-
-      localStorage.removeItem(USER_KEY);
-
       return null;
     }
   };
@@ -44,7 +50,7 @@ export const useAuth = () => {
     }
   };
 
-  const isLoggedIn = computed(() => !!user.value);
+  const isLoggedIn = computed(() => restoreUser());
 
   return {
     user,
@@ -52,5 +58,6 @@ export const useAuth = () => {
     fetchUser,
     logout,
     clearUser,
+    restoreUser,
   };
 };

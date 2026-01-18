@@ -1,25 +1,17 @@
-import { createClient } from "@supabase/supabase-js";
+import { serverSupabaseClient } from "#supabase/server";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   const { email, password } = body || {};
 
-  if (!email) {
+  if (!email || !password) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Adres email jest wymagany",
-    });
-  }
-  if (!password) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Hasło jest wymagane",
+      message: "Email i hasło są wymagane",
     });
   }
 
-  const config = useRuntimeConfig();
-
-  const supabase = createClient(config.supabaseUrl, config.supabaseKey, {
+  const supabase = await serverSupabaseClient(event, {
     auth: { persistSession: false },
   });
 
@@ -28,20 +20,17 @@ export default defineEventHandler(async (event) => {
     password,
   });
 
-  if (error || !data.session) {
+  console.log(data);
+
+  if (error) {
     throw createError({
       statusCode: 401,
-      statusMessage: "Wprowadzono złe dane logowania",
+      message: "Wprowadzono złe dane logowania",
     });
   }
 
-  setCookie(event, "sb-access-token", data.session.access_token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-    maxAge: data.session.expires_in,
-  });
+  // ✅ NO manual cookies
+  // ✅ Supabase handled session internally
 
   return {
     user: data.user,

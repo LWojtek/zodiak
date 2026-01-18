@@ -16,7 +16,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxt/ui": "^4.3.0",
     "@nuxtjs/google-fonts": "^3.2.0",
-    "@supabase/supabase-js": "^2.90.1",
+    "@nuxtjs/supabase": "^2.0.3",
     "@vueuse/motion": "^3.0.3",
     "nuxt": "^4.2.2",
     "rellax": "^1.12.1"
