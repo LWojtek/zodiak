@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 export default defineEventHandler(async (event) => {
   const token = getCookie(event, "sb-access-token");
-  console.log("COOKIE TOKEN:", token ? token : "NO");
+
   if (!token) {
     throw createError({ statusCode: 401 });
   }
