@@ -1,4 +1,3 @@
-import { throttle } from "lodash";
 import {
   ref,
   onMounted,
@@ -7,6 +6,7 @@ import {
   computed,
   watch,
 } from "vue";
+import { throttle } from "@/utilities/throttle";
 
 export const useNavigation = () => {
   const links = [

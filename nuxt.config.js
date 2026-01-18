@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   routeRules: {
     "/": { ssr: true },
     "/admin/**": { ssr: false },
-    "/auth/**": { ssr: false },
+    "/login/**": { ssr: false },
   },
 
   googleFonts: {
@@ -39,7 +39,11 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    supabaseUrl: process.env.SUPABASE_URL,
+    supabaseKey: process.env.SUPABASE_PUBLISHABLE_KEY,
+
     public: {
+      apiUrl: process.env.NUXT_API_URL,
       motion: {
         directives: {
           "pop-bottom-once": {

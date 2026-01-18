@@ -1,5 +1,10 @@
 <template>
-  <UForm :state="state" :validate="validate" class="flex flex-col gap-6">
+  <UForm
+    :state="state"
+    :validate="validate"
+    @submit="login"
+    class="flex flex-col gap-6"
+  >
     <UFormField name="email" label="Adres e-mail">
       <UInput
         type="email"
@@ -38,10 +43,15 @@
     </UFormField>
 
     <p v-if="state.error" class="text-error text-sm py-2 text-center">
-      Wystąpił błąd podczas logowania
+      {{ state.error }}
     </p>
 
-    <UButton variant="solid" class="justify-center" :loading="state.loading">
+    <UButton
+      color="primary"
+      type="submit"
+      class="justify-center"
+      :loading="state.loading"
+    >
       Zaloguj
     </UButton>
   </UForm>
@@ -49,7 +59,10 @@
 <script setup>
 definePageMeta({
   layout: "auth",
+  middleware: "guest",
 });
+
+const { fetchUser } = useAuth();
 
 const show = ref(false);
 
@@ -74,5 +87,30 @@ const validate = (state) => {
   }
 
   return errors;
+};
+
+const login = async () => {
+  state.loading = true;
+  state.error = null;
+
+  const api = useApi();
+
+  await api("/api/auth/login", {
+    method: "POST",
+    body: {
+      email: state.email,
+      password: state.password,
+    },
+    async onResponse({ response }) {
+      if (response.ok) {
+        await fetchUser();
+        navigateTo("/admin");
+      } else {
+        state.error = response._data.message;
+      }
+
+      state.loading = false;
+    },
+  });
 };
 </script>

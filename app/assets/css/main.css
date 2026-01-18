@@ -80,8 +80,6 @@
   --ui-primary: var(--color-akaroa-950);
   --ui-secondary: var(--color-almond-400);
 
-  /* --ui-primary: var(--color-burgundy-600);
-  --ui-secondary: var(--color-yellow-); */
   @keyframes bounce {
     0%,
     100% {

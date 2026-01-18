@@ -1,11 +1,11 @@
 <template>
-  <div class="flex items-center justify-center w-full h-screen bg-akaroa-50">
+  <div
+    class="relative flex items-center justify-center w-full h-screen overflow-hidden"
+  >
     <div
-      class="hidden md:block absolute inset h-full w-full bg-[url('/images/hero.jpg')] bg-cover"
+      class="hidden hero-zoom md:block absolute inset h-full w-full bg-[url('/images/hero.jpg')] bg-cover before:backdrop-blur-xs before:bg-linear-to-b before:absolute before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-akaroa-950/80 before:via-akaroa-950/70 before:to-akaroa-950/80"
     ></div>
-    <div
-      class="absolute inset h-full w-full bg-black/50 backdrop-blur-xs"
-    ></div>
+
     <div
       class="relative z-10 flex flex-col gap-4 w-full md:w-auto h-full md:h-auto"
     >
