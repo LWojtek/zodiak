@@ -40,6 +40,16 @@ export default defineNuxtConfig({
     public: {
       motion: {
         directives: {
+          "pop-bottom-once": {
+            initial: {
+              opacity: 0,
+              y: 50,
+            },
+            visibleOnce: {
+              opacity: 1,
+              y: 0,
+            },
+          },
           "pop-bottom": {
             initial: {
               opacity: 0,

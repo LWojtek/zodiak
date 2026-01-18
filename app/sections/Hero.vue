@@ -4,7 +4,7 @@ a
     class="relative z-1 overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
   >
     <div
-      class="absolute z-10 inset-0 flex flex-wrap justify-around bg-[radial-gradient(circle,_#fff_4%,_transparent_12%)] bg-[size:5px_5px]"
+      class="absolute z-10 inset-0 flex flex-wrap justify-around bg-[radial-gradient(circle,_#fff_4%,_transparent_11%)] bg-[size:5px_5px]"
     />
     <img
       src="/images/hero.jpg"
@@ -13,11 +13,11 @@ a
       data-rellax-xs-speed="-2"
       data-rellax-mobile-speed="-2"
       data-rellax-tablet-speed="-3"
-      class="absolute hero top-0 left-0 h-full w-full object-cover"
+      class="absolute hero top-0 left-0 h-full w-full object-cover hero-zoom"
     />
 
     <UContainer class="flex items-center justify-center relative z-10 h-full">
-      <div x class="flex text-center items-center text-inverted flex-col gap-6">
+      <div class="flex text-center items-center text-inverted flex-col gap-6">
         <h1
           class="leading-tight text-5xl md:text-6xl lg:text-8xl font-900 font-display"
           v-motion-pop-bottom
@@ -37,6 +37,7 @@ a
             Oferujemy również pub z kregielnią i bilardem.
           </p>
         </div>
+
         <div
           class="flex flex-col self-stretch sm:self-center sm:flex-row sm:items-center gap-4 mt-4"
           v-motion-pop-bottom

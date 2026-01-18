@@ -151,8 +151,6 @@
                   class="justify-center w-full md:w-auto"
                   size="md"
                   href="tel:+48731763752"
-                  v-motion-pop-bottom
-                  :duration="700"
                 >
                   <template #leading>
                     <UIcon name="i-lucide-phone" class="size-5" />

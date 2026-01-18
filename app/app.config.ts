@@ -36,7 +36,7 @@ export default defineAppConfig({
           color: "neutral",
           variant: "outline",
           class:
-            "bg-white/5 backdrop-blur-xs text-inverted  focus-visible:ring-white/100  ring-white/30 hover:bg-primary/0 active:bg-primary/50 ",
+            "bg-white/10 backdrop-blur-sm text-inverted  focus-visible:ring-white/100  ring-white/30 hover:bg-primary/0 active:bg-primary/50 ",
         },
       ],
     },

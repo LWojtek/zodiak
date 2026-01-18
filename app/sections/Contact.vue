@@ -112,8 +112,6 @@
                 to="tel:+48731763752"
                 external
                 variant="link"
-                v-motion-pop-bottom
-                :duration="700"
               >
                 <div class="flex items-start gap-3">
                   <UBadge

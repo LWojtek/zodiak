@@ -103,3 +103,22 @@
     background-color: var(--ui-primary);
   }
 }
+
+@layer utilities {
+  @keyframes hero-zoom {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .hero-zoom {
+    animation: hero-zoom 28s ease-in-out infinite;
+    will-change: transform;
+  }
+}
