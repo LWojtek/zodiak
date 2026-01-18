@@ -1,5 +1,5 @@
 <template>
-  <footer class="py-12 bg-akaroa-950">
+  <footer class="py-8 bg-akaroa-950">
     <UContainer class="grid grid-cols-4 gap-12">
       <div class="flex flex-col gap-6 col-span-4 md:col-span-2 lg:col-span-1">
         <AppLogo classes="w-30" />
