@@ -1,4 +1,4 @@
-import { debounce } from "lodash";
+import { throttle } from "lodash";
 import {
   ref,
   onMounted,
@@ -50,11 +50,11 @@ export const useNavigation = () => {
     width: `${underline.value.width}px`,
   }));
 
-  const debouncedUpdateUnderline = debounce(updateUnderline, 50);
+  const throttledUpdateUnderline = throttle(updateUnderline, 50);
 
-  const onResize = debouncedUpdateUnderline;
+  const onResize = throttledUpdateUnderline;
 
-  const onScroll = debounce(() => {
+  const onScroll = throttle(() => {
     isScrolled.value = window.scrollY > 300;
   }, 100);
 
@@ -70,7 +70,7 @@ export const useNavigation = () => {
           }
         });
 
-        if (changed) debouncedUpdateUnderline();
+        if (changed) throttledUpdateUnderline();
       },
       { threshold: 0.6 },
     );
@@ -89,7 +89,7 @@ export const useNavigation = () => {
 
   watch(activeSection, async () => {
     await nextTick();
-    debouncedUpdateUnderline();
+    throttledUpdateUnderline();
   });
 
   onBeforeUnmount(() => {
@@ -97,7 +97,7 @@ export const useNavigation = () => {
     window.removeEventListener("resize", onResize);
     window.removeEventListener("scroll", onScroll);
 
-    debouncedUpdateUnderline.cancel();
+    throttledUpdateUnderline.cancel();
     onScroll.cancel();
   });
 

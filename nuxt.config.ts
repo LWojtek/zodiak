@@ -21,7 +21,7 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   routeRules: {
-    "/": { prerender: true },
+    "/": { ssr: true },
     "/admin/**": { ssr: false },
     "/auth/**": { ssr: false },
   },
