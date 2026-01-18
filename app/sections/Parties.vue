@@ -224,7 +224,7 @@
               </div>
             </div>
             <span class="text-sm font-medium text-white">
-              Setki zadowolonych klientów
+              Tysiące zadowolonych klientów
             </span>
           </div>
         </div>

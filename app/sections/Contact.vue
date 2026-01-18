@@ -167,6 +167,7 @@
                 variant="outline"
                 color="neutral"
                 class="text-white p-4 sm:p-4"
+                label="Instagram"
               >
                 <template #leading>
                   <UIcon name="i-lucide-instagram" class="size-5" />
@@ -178,6 +179,7 @@
                 variant="outline"
                 color="neutral"
                 class="text-white p-4 sm:p-4"
+                label="Facebook"
               >
                 <template #leading>
                   <UIcon name="i-lucide-facebook" class="size-5" />

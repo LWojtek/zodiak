@@ -33,6 +33,12 @@ export default defineAppConfig({
           class: " bg-secondary text-black hover:bg-secondary/80 ",
         },
         {
+          color: "secondary",
+          variant: "link",
+          class:
+            "text-white/85 focus-visible:outline-secondary hover:text-secondary  focus-visible:outline-secondary hover:text-secondary",
+        },
+        {
           color: "neutral",
           variant: "outline",
           class:

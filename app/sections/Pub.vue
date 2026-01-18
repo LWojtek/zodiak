@@ -94,9 +94,28 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-utensils" class="size-5" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden
+                    >
+                      <path d="M9 10h.01" />
+                      <path d="M6 13h.01" />
+                      <path d="M10 14h.01" />
+                      <path d="M11.09 6.07a8 8 0 1 0 .32 15.81" />
+                      <path d="M16 9h4" />
+                      <path
+                        d="M15 5c0 1.5 1 2 1 4 0 2.5-2 4.5-2 7 0 2.6 1.9 6 1.9 6H20s2-3.4 2-6c0-2.5-2-4.5-2-7 0-2 1-2.5 1-4a3 3 0 1 0-6 0"
+                      />
+                    </svg>
                   </UBadge>
-                  <span class="text-sm">Świeże składniki</span>
+                  <span class="text-sm">4 tory do kręgli</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <UBadge
@@ -105,9 +124,9 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-users" class="size-5" />
+                    <UIcon name="i-lucide-dices" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Do 200 gości</span>
+                  <span class="text-sm">Stoły bilardowe</span>
                 </div>
                 <div
                   class="flex items-center gap-3"
@@ -120,9 +139,9 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-clock" class="size-5" />
+                    <UIcon name="i-lucide-beer" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Dostawa na czas</span>
+                  <span class="text-sm">Bogaty bar</span>
                 </div>
                 <div
                   class="flex items-center gap-3"
@@ -135,9 +154,9 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-star" class="size-5" />
+                    <UIcon name="i-lucide-guitar" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Premium jakość</span>
+                  <span class="text-sm">Świetna atmosfera</span>
                 </div>
               </div>
 
