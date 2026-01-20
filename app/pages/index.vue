@@ -16,6 +16,5 @@ import SectionContact from "../sections/Contact.vue";
 
 definePageMeta({
   layout: "page",
-  middleware: "guest",
 });
 </script>
