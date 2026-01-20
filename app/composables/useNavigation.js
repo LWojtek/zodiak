@@ -17,20 +17,25 @@ export const useNavigation = () => {
   ];
 
   const sections = links.map((l) => l.id);
-  const activeSection = ref(null);
-  const linkRefs = ref([]);
 
+  // ✅ IMPORTANT: do NOT start as null
+  const activeSection = ref(links[0].id);
+
+  const linkRefs = ref([]);
   const underline = ref({ left: 0, width: 0 });
   const isScrolled = ref(false);
 
-  let observer;
+  let observer = null;
 
   const setLinkRef = (el, index) => {
-    if (el) linkRefs.value[index] = el.$el || el;
+    if (el) {
+      linkRefs.value[index] = el.$el || el;
+    }
   };
 
   const updateUnderline = () => {
     const index = links.findIndex((l) => l.id === activeSection.value);
+
     const el = linkRefs.value[index];
     const container = document.querySelector("#nav-container");
 
@@ -61,18 +66,18 @@ export const useNavigation = () => {
   onMounted(async () => {
     observer = new IntersectionObserver(
       (entries) => {
-        let changed = false;
-
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             activeSection.value = entry.target.id;
-            changed = true;
+            throttledUpdateUnderline();
+            break;
           }
-        });
-
-        if (changed) throttledUpdateUnderline();
+        }
       },
-      { threshold: 0.6 },
+      {
+        // ✅ More reliable than threshold
+        rootMargin: "-40% 0px -40% 0px",
+      },
     );
 
     sections.forEach((id) => {
@@ -81,6 +86,8 @@ export const useNavigation = () => {
     });
 
     await nextTick();
+
+    // ✅ force first underline render
     updateUnderline();
 
     window.addEventListener("resize", onResize, { passive: true });
@@ -93,7 +100,7 @@ export const useNavigation = () => {
   });
 
   onBeforeUnmount(() => {
-    observer?.disconnect();
+    observer && observer.disconnect();
     window.removeEventListener("resize", onResize);
     window.removeEventListener("scroll", onScroll);
 

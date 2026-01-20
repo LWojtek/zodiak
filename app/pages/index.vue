@@ -5,7 +5,7 @@
 
   <SectionPub id="pub" />
 
-  <SectionContact id="pub" />
+  <SectionContact id="kontakt" />
 </template>
 
 <script setup>
