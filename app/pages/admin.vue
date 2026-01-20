@@ -1,56 +1,43 @@
 <template>
   <div>
     <h1>Admin</h1>
-    {{ user }}
 
     <UInput v-model="firstName" />
     <UInput v-model="lastName" />
-    <UButton @click="updateUser">Submit</UButton>
+    <!-- <UButton @click="updateUser">Submit</UButton> -->
   </div>
 </template>
 
 <script setup>
 definePageMeta({
   layout: "admin",
-  middleware: [
-    () => {
-      if (!import.meta.client) return;
-
-      const { isLoggedIn } = useAuth();
-
-      if (!isLoggedIn.value) {
-        return navigateTo("/login");
-      }
-    },
-  ],
+  middleware: "auth",
 });
-
-const { user, fetchUser } = useAuth();
 
 const firstName = ref("");
 const lastName = ref("");
 
-const updateUser = async () => {
-  console.log("123");
+// const updateUser = async () => {
+//   console.log("123");
 
-  const api = useApi();
+//   const api = useApi();
 
-  await api("/api/auth/update", {
-    method: "POST",
-    body: {
-      first_name: firstName.value,
-      last_name: lastName.value,
-    },
-    async onResponse({ response }) {
-      if (response.ok) {
-        console.log(response);
-        await fetchUser();
-      } else {
-        // state.error = response._data.message;
-      }
+//   await api("/api/auth/update", {
+//     method: "POST",
+//     body: {
+//       first_name: firstName.value,
+//       last_name: lastName.value,
+//     },
+//     async onResponse({ response }) {
+//       if (response.ok) {
+//         console.log(response);
+//         await fetchUser();
+//       } else {
+//         // state.error = response._data.message;
+//       }
 
-      // state.loading = false;
-    },
-  });
-};
+//       // state.loading = false;
+//     },
+//   });
+// };
 </script>

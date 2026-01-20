@@ -65,7 +65,7 @@
         />
         <div
           aria-hidden="true"
-          class="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/85 to-primary/70"
+          class="absolute inset-0 bg-linear-to-r from-primary-950/95 via-primary-950/85 to-primary-950/70"
         />
         <div class="relative z-1 flex items-start flex-col gap-8">
           <UBadge

@@ -47,7 +47,7 @@
           aria-hidden="true"
         />
         <div
-          class="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/85 to-primary/70"
+          class="absolute inset-0 bg-linear-to-r from-primary-950/95 via-primary-950/85 to-primary-950/70"
           aria-hidden="true"
         />
         <div class="relative z-10 px-4 py-8 sm:px-8 sm:py-8">

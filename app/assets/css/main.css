@@ -77,9 +77,6 @@
   --color-black-900: #3d3d3d;
   --color-black-950: #000000;
 
-  --ui-primary: var(--color-akaroa-950);
-  --ui-secondary: var(--color-almond-400);
-
   @keyframes bounce {
     0%,
     100% {

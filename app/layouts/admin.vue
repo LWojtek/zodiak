@@ -19,5 +19,10 @@
   </div>
 </template>
 <script setup>
-const { logout } = useAuth();
+const supabase = useSupabaseClient();
+const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+  navigateTo("/login");
+  if (error) console.log(error);
+};
 </script>

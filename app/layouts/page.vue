@@ -1,7 +1,7 @@
 <template>
   <div>
     <ClientOnly>
-      <PageHeader class="bg-primary" />
+      <PageHeader class="bg-primary-950" />
     </ClientOnly>
 
     <UMain as="main">

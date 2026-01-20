@@ -61,18 +61,14 @@ definePageMeta({
   layout: "auth",
   middleware: [
     () => {
-      if (!import.meta.client) return;
+      const user = useSupabaseUser();
 
-      const { isLoggedIn } = useAuth();
-
-      if (isLoggedIn.value) {
-        return navigateTo("/");
+      if (user.value) {
+        return navigateTo("/admin");
       }
     },
   ],
 });
-
-const { fetchUser } = useAuth();
 
 const show = ref(false);
 
@@ -103,24 +99,24 @@ const login = async () => {
   state.loading = true;
   state.error = null;
 
-  const api = useApi();
+  try {
+    const supabase = useSupabaseClient();
 
-  await api("/api/auth/login", {
-    method: "POST",
-    body: {
+    const { error } = await supabase.auth.signInWithPassword({
       email: state.email,
       password: state.password,
-    },
-    async onResponse({ response }) {
-      if (response.ok) {
-        await fetchUser();
-        navigateTo("/admin");
-      } else {
-        state.error = response._data.message;
-      }
+    });
 
-      state.loading = false;
-    },
-  });
+    if (error) {
+      state.error = error.message;
+      return;
+    }
+
+    navigateTo("/admin");
+  } catch (err) {
+    state.error = "Unexpected error. Please try again.";
+  } finally {
+    state.loading = false;
+  }
 };
 </script>

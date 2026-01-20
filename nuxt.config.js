@@ -19,12 +19,17 @@ export default defineNuxtConfig({
     storageKey: "light",
   },
 
+  supabase: {
+    redirect: false,
+  },
+
   css: ["~/assets/css/main.css"],
 
-  routeRules: {
-    "/": { ssr: true },
-    "/admin/**": { ssr: false },
-    "/login/**": { ssr: false },
+  nitro: {
+    prerender: {
+      routes: ["/user/1", "/user/2"],
+      ignore: ["/dynamic"],
+    },
   },
 
   googleFonts: {
