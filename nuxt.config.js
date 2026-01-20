@@ -27,8 +27,9 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ["/user/1", "/user/2"],
-      ignore: ["/dynamic"],
+      routes: ["/"],
+
+      ignore: ["/admin", "/admin/**", "/login"],
     },
   },
 
