@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="fixed top-0 pt-(--ui-header-height) transition duration-500 left-0 w-full h-auto bg-primary"
+    class="fixed top-0 pt-(--ui-header-height) transition duration-500 left-0 w-full h-auto bg-primary-950"
     :class="[open ? 'translate-y-0' : '-translate-y-full']"
   >
     <ul class="flex flex-col gap-4 relative mx-2 py-2">
