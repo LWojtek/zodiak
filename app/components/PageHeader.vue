@@ -1,7 +1,7 @@
 <template>
   <header class="sticky top-0 z-50">
     <UContainer
-      class="flex items-stretch gap-4 before:absolute before:top-0 before:left-0 before:w-full before:h-(--ui-header-height) before:bg-primary before:z-5 lg:before:hidden"
+      class="flex items-stretch gap-4 before:absolute before:top-0 before:left-0 before:w-full before:h-(--ui-header-height) before:bg-primary-950 before:z-5 lg:before:hidden"
     >
       <NuxtLink to="/" class="relative z-100 p-4 flex items-center">
         <img
@@ -46,7 +46,7 @@ watch(
     if (newRoute) {
       open.value = false;
     }
-  }
+  },
 );
 
 const { links, activeSection, underlineStyle, setLinkRef, isScrolled } =
