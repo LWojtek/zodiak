@@ -41,6 +41,18 @@
   --color-akaroa-900: #5b4233;
   --color-akaroa-950: #30221a;
 
+  --color-gray-50: #f8f8f8;
+  --color-gray-100: #f7f7f7;
+  --color-gray-200: #c7c7c7;
+  --color-gray-300: #ababab;
+  --color-gray-400: #8f8f8f;
+  --color-gray-500: #737373;
+  --color-gray-600: #5c5c5c;
+  --color-gray-700: #454545;
+  --color-gray-800: #2e2e2e;
+  --color-gray-900: #232323;
+  --color-gray-950: #171717;
+
   --color-almond-50: #faf6f2;
   --color-almond-100: #f4ece0;
   --color-almond-200: #e6d2b8;
@@ -53,10 +65,17 @@
   --color-almond-900: #613c2d;
   --color-almond-950: #341e16;
 
-  --ui-primary: var(--color-akaroa-950);
-  --ui-secondary: var(--color-almond-400);
-  /* --ui-primary: var(--color-burgundy-600);
-  --ui-secondary: var(--color-yellow-); */
+  --color-black-50: #f6f6f6;
+  --color-black-100: #e7e7e7;
+  --color-black-200: #d1d1d1;
+  --color-black-300: #b0b0b0;
+  --color-black-400: #888888;
+  --color-black-500: #6d6d6d;
+  --color-black-600: #5d5d5d;
+  --color-black-700: #4f4f4f;
+  --color-black-800: #454545;
+  --color-black-900: #3d3d3d;
+  --color-black-950: #000000;
 
   @keyframes bounce {
     0%,
@@ -76,6 +95,7 @@
   --ui-scroll-margin: var(--ui-header-height);
   --ui-container: 96rem;
   --ui-border: #f1f1f1;
+  --ui-text: var(--color-black-500);
 }
 
 @media screen and (max-width: 1023px) {
@@ -88,5 +108,24 @@
   html {
     scroll-behavior: smooth;
     background-color: var(--ui-primary);
+  }
+}
+
+@layer utilities {
+  @keyframes hero-zoom {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .hero-zoom {
+    animation: hero-zoom 28s ease-in-out infinite;
+    will-change: transform;
   }
 }

@@ -1,8 +1,11 @@
+a
 <template>
   <section
-    id="home"
-    class="relative overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary/80 before:via-primary/70 before:to-primary/80"
+    class="relative z-1 overflow-hidden w-full h-[calc(100vh-var(--ui-header-height))] before:absolute before:bg-gradient-to-b before:w-full before:h-full before:z-1 before:pointer-events-none before:inset-0 before:from-primary-950/80 before:via-primary-950/70 before:to-primary-950/80"
   >
+    <!-- <div
+      class="absolute z-10 inset-0 flex flex-wrap justify-around bg-[radial-gradient(circle,_#fff_4%,_transparent_8%)] bg-[size:2.5px_px]"
+    /> -->
     <img
       src="/images/hero.jpg"
       alt="Restauracja Zodiak"
@@ -10,26 +13,35 @@
       data-rellax-xs-speed="-2"
       data-rellax-mobile-speed="-2"
       data-rellax-tablet-speed="-3"
-      class="absolute rellax top-0 left-0 h-full w-full object-cover"
+      class="absolute hero top-0 left-0 h-full w-full object-cover hero-zoom"
     />
 
     <UContainer class="flex items-center justify-center relative z-10 h-full">
       <div class="flex text-center items-center text-inverted flex-col gap-6">
         <h1
-          class="leading-tight text-4xl md:text-6xl lg:text-8xl font-900 font-display"
+          class="leading-tight text-5xl md:text-6xl lg:text-8xl font-900 font-display"
+          v-motion-pop-bottom
+          :duration="700"
         >
           Restauracja <span class="text-secondary">Zodiak</span>
         </h1>
         <div>
-          <p class="text-lg sm:text-xl text-shadow-lg">
+          <p
+            class="text-lg sm:text-xl text-shadow-lg"
+            v-motion-pop-bottom
+            :duration="700"
+          >
             Oranizujemy wesela komunie urodziny i imprezy okolicznościowe
           </p>
-          <p class="text-lg sm:text-xl">
+          <p class="text-lg sm:text-xl" v-motion-pop-bottom :duration="700">
             Oferujemy również pub z kregielnią i bilardem.
           </p>
         </div>
+
         <div
           class="flex flex-col self-stretch sm:self-center sm:flex-row sm:items-center gap-4 mt-4"
+          v-motion-pop-bottom
+          :duration="700"
         >
           <UButton
             class="w-full justify-center sm:w-auto"
@@ -54,6 +66,8 @@
 
         <div
           class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 flex-col"
+          v-motion-pop-bottom
+          :duration="700"
         >
           <span class="text-base">Przewiń w dół</span>
           <UButton
@@ -65,20 +79,7 @@
             external
             to="#przyjecia"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="size-6"
-            >
-              <path d="m6 9 6 6 6-6"></path>
-            </svg>
+            <UIcon name="i-lucide-arrow-down" class="size-6" />
           </UButton>
         </div>
       </div>
@@ -91,7 +92,12 @@ import { onMounted } from "vue";
 
 import Rellax from "rellax";
 
+const { opacity } = useScrollOpacity({
+  start: 0,
+  end: 400, // tweak fade length here
+});
+
 onMounted(() => {
-  let rellax = new Rellax(".rellax");
+  let rellax = new Rellax(".hero");
 });
 </script>

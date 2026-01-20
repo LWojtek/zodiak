@@ -1,4 +1,3 @@
-import { throttle } from "lodash";
 import {
   ref,
   onMounted,
@@ -7,6 +6,7 @@ import {
   computed,
   watch,
 } from "vue";
+import { throttle } from "@/utilities/throttle";
 
 export const useNavigation = () => {
   const links = [
@@ -72,7 +72,7 @@ export const useNavigation = () => {
 
         if (changed) throttledUpdateUnderline();
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     sections.forEach((id) => {

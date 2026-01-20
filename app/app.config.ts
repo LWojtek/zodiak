@@ -1,8 +1,9 @@
 export default defineAppConfig({
   ui: {
+    colorMode: false,
     colors: {
-      primary: "burgundy",
-      secondary: "yellow",
+      primary: "akaroa",
+      secondary: "almond",
     },
     separator: {
       slots: {
@@ -10,7 +11,7 @@ export default defineAppConfig({
       },
     },
     container: {
-      base: "w-full max-w-(--ui-container) mx-auto px-2 sm:px-4 lg:px-6",
+      base: "w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8",
     },
     button: {
       slots: {
@@ -18,6 +19,10 @@ export default defineAppConfig({
       },
       variants: {
         size: {
+          sm: "py-1.5 px-3 gap-2 text-sm",
+          md: {
+            base: "px-4 py-2.5 text-base rounded-xl",
+          },
           lg: {
             base: "px-6 py-3 sm:py-4 sm:px-8 text-lg rounded-xl",
           },
@@ -30,12 +35,52 @@ export default defineAppConfig({
           class: " bg-secondary text-black hover:bg-secondary/80 ",
         },
         {
+          color: "secondary",
+          variant: "link",
+          class:
+            "text-white/85 focus-visible:outline-secondary hover:text-secondary  focus-visible:outline-secondary hover:text-secondary",
+        },
+        {
           color: "neutral",
           variant: "outline",
           class:
-            "bg-white/5 backdrop-blur-xs text-inverted  focus-visible:ring-white/100  ring-white/30 hover:bg-primary/0 active:bg-primary/50 ",
+            "bg-white/10 backdrop-blur-sm text-inverted  focus-visible:ring-white/100  ring-white/30 hover:bg-primary/0 active:bg-primary/50 ",
         },
       ],
+    },
+    badge: {
+      slots: {
+        base: "",
+      },
+      variants: {
+        size: {
+          md: {
+            base: "!text-xs",
+          },
+        },
+      },
+      compoundVariants: [
+        {
+          color: "secondary",
+          variant: "subtle",
+          class: "bg-almond-100  rounded-full text-almond-700",
+        },
+        {
+          color: "secondary",
+          variant: "ghost",
+          class:
+            "bg-white/10 backdrop-blur-xs rounded-full text-white ring-none",
+        },
+      ],
+    },
+    modal: {
+      variants: {
+        overlay: {
+          true: {
+            overlay: "bg-black/85 backdrop-blur-xs",
+          },
+        },
+      },
     },
   },
 });
