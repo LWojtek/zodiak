@@ -12,7 +12,17 @@
 <script setup>
 definePageMeta({
   layout: "admin",
-  middleware: "admin",
+  middleware: [
+    () => {
+      if (!import.meta.client) return;
+
+      const { isLoggedIn } = useAuth();
+
+      if (!isLoggedIn.value) {
+        return navigateTo("/login");
+      }
+    },
+  ],
 });
 
 const { user, fetchUser } = useAuth();

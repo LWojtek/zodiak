@@ -59,7 +59,17 @@
 <script setup>
 definePageMeta({
   layout: "auth",
-  middleware: "guest",
+  middleware: [
+    () => {
+      if (!import.meta.client) return;
+
+      const { isLoggedIn } = useAuth();
+
+      if (isLoggedIn.value) {
+        return navigateTo("/");
+      }
+    },
+  ],
 });
 
 const { fetchUser } = useAuth();
