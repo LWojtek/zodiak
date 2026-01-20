@@ -190,7 +190,7 @@
         <div class="flex flex-col items-center justify-center">
           <div class="relative">
             <div
-              class="absolute inset-0 w-[70] h-70 -m-5 rounded-full border-2 border-white/80 animate-pulse"
+              class="absolute inset-0 w-70 h-70 -m-5 rounded-full border-2 border-white/80 animate-pulse"
             ></div>
             <div
               class="w-60 h-60 rounded-full bg-white/10 backdrop-blur-md flex flex-col items-center justify-center text-white border-2 border-white/40"
