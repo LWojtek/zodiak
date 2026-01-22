@@ -13,7 +13,7 @@ a
       data-rellax-xs-speed="-2"
       data-rellax-mobile-speed="-2"
       data-rellax-tablet-speed="-3"
-      class="absolute hero top-0 left-0 h-full w-full object-cover hero-zoom"
+      class="absolute hero top-0 left-0 h-full w-full object-cover"
     />
 
     <UContainer class="flex items-center justify-center relative z-10 h-full">
