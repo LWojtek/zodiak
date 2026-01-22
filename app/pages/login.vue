@@ -60,11 +60,11 @@
 definePageMeta({
   layout: "auth",
   middleware: [
-    async () => {
+    () => {
       const user = useSupabaseUser();
 
       if (user.value) {
-        await nextTick();
+        nextTick();
         return navigateTo("/admin");
       }
     },
