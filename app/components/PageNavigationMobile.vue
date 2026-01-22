@@ -7,7 +7,7 @@
       <li v-for="(link, index) in links" :key="index" class="h-full">
         <NuxtLink
           class="flex text-base px-2 py-4 items-center rounded-lg transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-          :to="`#${link.id}`"
+          :to="`/#${link.id}`"
           :class="{ 'text-secondary bg-white/5': activeSection === link.id }"
         >
           {{ link.label }}
@@ -18,32 +18,32 @@
     <div class="flex flex-col mx-4 py-6 border-y border-white/20">
       <NuxtLink
         class="flex px-2 py-3 gap-2 text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:+48731763752"
+        href="tel:+48607588452"
       >
         <UIcon name="i-lucide-phone" class="size-5" />
         <span>Imprezy:</span>
-        731 763 752
+        607 588 452
       </NuxtLink>
       <NuxtLink
         class="flex px-2 py-3 gap-2 text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:+48324262283"
+        href="tel:+48327231703"
       >
         <UIcon name="i-lucide-phone" class="size-5" />
         <span>Kręgle:</span>
-        32 42 62 283
+        32 723 17 03
       </NuxtLink>
     </div>
 
     <div class="flex mx-4 py-6">
       <NuxtLink
         class="flex gap-1 px-2 text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:324262283"
+        href="https://www.facebook.com/ZodiakCzerwionkaLeszczyny"
       >
         <UIcon name="i-lucide-facebook" class="size-6" />
       </NuxtLink>
       <NuxtLink
         class="flex gap-1 px-2 text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:731763752"
+        href="https://instagram.com/zodiakczerwionkaleszczyny"
       >
         <UIcon name="i-lucide-instagram" class="size-6" />
       </NuxtLink>

@@ -178,11 +178,22 @@
               607 588 452
             </UButton>
             <UButton
+              color="secondary"
+              class="justify-center"
+              size="md"
+              href="mailto:mwzodiak@gmail.com"
+            >
+              Napisz do nas
+              <template #leading>
+                <UIcon name="i-lucide-mail" class="size-5" />
+              </template>
+            </UButton>
+            <UButton
               variant="outline"
               color="neutral"
               class="justify-center"
               size="md"
-              href="mailto:mwzodiak@gmail.com"
+              to="/order"
             >
               Zamów online
               <template #trailing>
