@@ -64,7 +64,6 @@ definePageMeta({
       const user = useSupabaseUser();
 
       if (user.value) {
-        nextTick();
         return navigateTo("/admin");
       }
     },
