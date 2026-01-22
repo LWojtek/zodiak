@@ -25,19 +25,19 @@
     <div class="flex self-stretch">
       <NuxtLink
         class="flex px-2 gap-2 text-sm xl:text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:+48731763752"
+        href="tel:+48607588452"
       >
         <UIcon name="i-lucide-phone" class="size-4 xl:size-5" />
         <span class="hidden xl:inline">Imprezy:</span>
-        731 763 752
+        607 588 452
       </NuxtLink>
       <NuxtLink
         class="flex px-2 gap-2 text-sm xl:text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:+48324262283"
+        href="tel:+48327231703"
       >
         <UIcon name="i-lucide-phone" class="size-4 xl:size-5" />
         <span class="hidden xl:inline">Kręgle:</span>
-        32 42 62 283
+        32 723 17 03
       </NuxtLink>
     </div>
 
@@ -46,13 +46,15 @@
     <div class="flex self-stretch">
       <NuxtLink
         class="flex gap-1 px-2 text-sm xl:text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:324262283"
+        target="_blank"
+        href="https://www.facebook.com/ZodiakCzerwionkaLeszczyny"
       >
         <UIcon name="i-lucide-facebook" class="size-5" />
       </NuxtLink>
       <NuxtLink
         class="flex gap-1 px-2 text-sm xl:text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-        href="tel:731763752"
+        target="_blank"
+        href="https://www.instagram.com/p/DDKWa7LoYRW/?utm_source=ig_web_copy_link"
       >
         <UIcon name="i-lucide-instagram" class="size-5" />
       </NuxtLink>

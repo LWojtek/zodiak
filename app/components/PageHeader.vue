@@ -7,8 +7,8 @@
         <img
           src="/images/logo.png"
           :class="[
-            'transition-all duration-300',
-            isScrolled ? 'h-4 lg:h-6' : 'h-6 lg:h-10',
+            'transition-all duration-300 h-10',
+            isScrolled ? 'lg:h-10' : 'lg:h-14',
           ]"
           alt="Logo Zodiak"
         />

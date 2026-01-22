@@ -41,10 +41,11 @@
         >
           Przyjęcia okolicznościowe
         </h2>
-        <p class="max-w-[65ch]" v-motion-pop-bottom :duration="700">
-          Organizujemy wesela, komunie, chrzciny, urodziny i wszelkie imprezy
-          okolicznościowe. Nasze sale bankietowe pomieszczą zarówno kameralne
-          spotkania, jak i duże przyjęcia.
+        <p class="max-w-[63ch]" v-motion-pop-bottom :duration="700">
+          Organizujemy wesela, komunie, chrzciny, urodziny, stypy i wszelkie
+          imprezy okolicznościowe. Wynajmujemy również sale na szkolenia,
+          prezentacje i spotkania biznesowe. <br />Nasze sale bankietowe
+          przeznaczone są zarówno na duże przyjęcia, jak i kameralne spotkania.
         </p>
       </div>
 
@@ -86,13 +87,12 @@
             Oferta cateringowa
           </h3>
           <p
-            class="text-base text-white max-w-[45ch]"
+            class="text-base text-white max-w-[48ch]"
             v-motion-pop-bottom
             :duration="700"
           >
-            Przygotowujemy wyśmienitą polską kuchnię z najświeższych, lokalnych
-            składników. Nasze menu dostosowujemy do Twoich potrzeb i
-            preferencji.
+            Sprawdź naszą ofertę menu dla 15-20 osób (to przykładowa liczba).
+            Nasze menu dostosowujemy do Twoich potrzeb i preferencji.
           </p>
 
           <div class="grid text-white grid-cols-2 w-full gap-4">
@@ -122,9 +122,9 @@
                 size="xl"
                 variant="ghost"
               >
-                <UIcon name="i-lucide-users" class="size-5" />
+                <UIcon name="i-lucide-clock" class="size-5" />
               </UBadge>
-              <span class="text-sm">Do 200 gości</span>
+              <span class="text-sm">Dostawa na czas</span>
             </div>
             <div
               class="flex items-center gap-3"
@@ -137,9 +137,9 @@
                 size="xl"
                 variant="ghost"
               >
-                <UIcon name="i-lucide-clock" class="size-5" />
+                <UIcon name="i-lucide-hand-platter" class="size-5" />
               </UBadge>
-              <span class="text-sm">Dostawa na czas</span>
+              <span class="text-sm">Różnorodne menu</span>
             </div>
             <div
               class="flex items-center gap-3"
@@ -157,6 +157,10 @@
               <span class="text-sm">Premium jakość</span>
             </div>
           </div>
+          <p class="text-white">
+            Zadzwoń lub napisz wiadomość, a z chęcią sprawdzimy wolne terminy i
+            dopasujemy ofertę skrojoną na Twoje potrzeby!
+          </p>
           <div
             class="grid grid-cols-1 sm:grid-cols-2 md:flex items-center gap-4 w-full"
             v-motion-pop-bottom
@@ -166,19 +170,19 @@
               color="secondary"
               class="justify-center"
               size="md"
-              href="tel:+48731763752"
+              href="tel:+48607588452"
             >
               <template #leading>
                 <UIcon name="i-lucide-phone" class="size-5" />
               </template>
-              +48 731 763 752
+              607 588 452
             </UButton>
             <UButton
               variant="outline"
               color="neutral"
               class="justify-center"
               size="md"
-              href="tel:+48731763752"
+              href="mailto:mwzodiak@gmail.com"
             >
               Zamów online
               <template #trailing>
@@ -244,20 +248,28 @@ onMounted(() => {
 });
 const partiesImages = [
   {
-    src: "/images/wedding-hall.jpg",
+    src: "/images/przyjecia1.jpg",
+    alt: "Wyborne menu",
+  },
+  {
+    src: "/images/przyjecia2.jpg",
     alt: "Sala weselna",
+  },
+  {
+    src: "/images/przyjecia3.jpg",
+    alt: "Sala weselna",
+  },
+  {
+    src: "/images/przyjecia4.jpg",
+    alt: "Sala weselna",
+  },
+  {
+    src: "/images/przyjecia5.jpg",
+    alt: "Wyborne menu",
   },
   {
     src: "/images/hero.jpg",
     alt: "Restauracja Zodiak z zewnątrz",
-  },
-  {
-    src: "/images/catering.jpg",
-    alt: "Wyborne menu",
-  },
-  {
-    src: "/images/wedding-hall.jpg",
-    alt: "Sala weselna",
   },
 ];
 </script>

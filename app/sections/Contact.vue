@@ -42,8 +42,7 @@
           Skontaktuj się z nami
         </h2>
         <p v-motion-pop-bottom :duration="700">
-          Masz pytania? Skontaktuj się z nami telefonicznie lub odwiedź nas
-          osobiście.
+          Masz pytania? Zadzwoń lub napisz wiadomość
         </p>
       </div>
     </UContainer>
@@ -109,7 +108,7 @@
             <div v-motion-pop-bottom :duration="700">
               <UButton
                 class="p-4 bg-white/10 border border-white/30 group w-full text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
-                to="tel:+48731763752"
+                to="tel:+48607588452 "
                 external
                 variant="link"
               >
@@ -126,7 +125,7 @@
                     <span class="text-white/85 font-normal">
                       Organizacja przyjęć & catering
                     </span>
-                    <span class="block font-semibold"> +48 731 763 752 </span>
+                    <span class="block font-semibold"> 607 588 452 </span>
                   </div>
                 </div>
               </UButton>
@@ -134,7 +133,7 @@
             <div v-motion-pop-bottom :duration="700">
               <UButton
                 class="p-4 bg-white/10 border w-full border-white/30 group text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
-                to="tel:+48731763752"
+                to="tel:+48327231703"
                 external
                 variant="link"
               >
@@ -151,7 +150,32 @@
                     <span class="text-white/85 font-normal">
                       Pub & kręgielnia
                     </span>
-                    <span class="block font-semibold"> +48 731 763 752 </span>
+                    <span class="block font-semibold"> 32 723 17 03 </span>
+                  </div>
+                </div>
+              </UButton>
+            </div>
+            <div v-motion-pop-bottom :duration="700">
+              <UButton
+                class="p-4 bg-white/10 border w-full border-white/30 group text-white hover:opacity-85 hover:text-white backdrop-blur-xs rounded-lg"
+                to="mailto:mwzodiak@gmail.com"
+                external
+                variant="link"
+              >
+                <div class="flex items-start gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5 group-hover:bg-white group-hover:text-primary transition"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <UIcon name="i-lucide-mail" class="size-7" />
+                  </UBadge>
+                  <div class="text-left">
+                    <span class="text-white/85 font-normal">
+                      Napisz do nas
+                    </span>
+                    <span class="block font-semibold"> mwzodiak@gmail.com</span>
                   </div>
                 </div>
               </UButton>
@@ -168,6 +192,8 @@
                 color="neutral"
                 class="text-white p-4 sm:p-4"
                 label="Instagram"
+                target="_blank"
+                to="https://www.instagram.com/p/DDKWa7LoYRW/?utm_source=ig_web_copy_link"
               >
                 <template #leading>
                   <UIcon name="i-lucide-instagram" class="size-5" />
@@ -180,6 +206,8 @@
                 color="neutral"
                 class="text-white p-4 sm:p-4"
                 label="Facebook"
+                target="_blank"
+                to="https://www.facebook.com/ZodiakCzerwionkaLeszczyny"
               >
                 <template #leading>
                   <UIcon name="i-lucide-facebook" class="size-5" />
