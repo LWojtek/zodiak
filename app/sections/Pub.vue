@@ -25,9 +25,9 @@
         >
           Pub i kręgielnia
         </h2>
-        <p class="max-w-[45ch]" v-motion-pop-bottom :duration="700">
-          Klimatyczny pub z profesjonalną kręgielnią i stołami bilardowymi.
-          Idealne miejsce na spotkania ze znajomymi.
+        <p class="max-w-[30ch]" v-motion-pop-bottom :duration="700">
+          Klimatyczny pub z profesjonalną kręgielnią. Idealne miejsce na
+          spotkania ze znajomymi.
         </p>
       </div>
 
@@ -74,14 +74,37 @@
                 Zarezerwuj tor do kręgli
               </h3>
               <p
-                class="text-white/85 text-lg mb-8 leading-relaxed max-w-lg"
+                class="text-white/85 text-lg leading-relaxed max-w-[35ch]"
                 v-motion-pop-bottom
                 :duration="700"
               >
                 Rezerwacji dokonasz telefonicznie w godzinach otwarcia
-                kręgielni. Zapraszamy na kręgle, bilard oraz pyszne przekąski i
-                napoje z naszego menu.
+                kręgielni.
               </p>
+              <div
+                class="flex flex-col items-start w-full gap-3 mb-2"
+                v-motion-pop-bottom
+                :duration="700"
+              >
+                <UButton
+                  color="secondary"
+                  class="justify-center w-full md:w-auto"
+                  size="md"
+                  href="tel:+48327231703"
+                >
+                  <template #leading>
+                    <UIcon name="i-lucide-phone" class="size-5" />
+                  </template>
+                  32 723 17 03
+                </UButton>
+                <p
+                  class="text-sm text-center md:text-left text-white/90"
+                  v-motion-pop-bottom
+                  :duration="700"
+                >
+                  Telefon czynny w godzinach otwartcia kręgielni
+                </p>
+              </div>
               <div class="grid text-white grid-cols-2 w-full gap-4">
                 <div
                   class="flex items-center gap-3"
@@ -115,7 +138,7 @@
                       />
                     </svg>
                   </UBadge>
-                  <span class="text-sm">4 tory do kręgli</span>
+                  <span class="text-sm">2 tory do kręgli</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <UBadge
@@ -126,7 +149,75 @@
                   >
                     <UIcon name="i-lucide-dices" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Stoły bilardowe</span>
+                  <span class="text-sm">2 stoły bilardowe</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                      aria-hidden="true"
+                    >
+                      <circle cx="17" cy="19" r="3" />
+                      <path
+                        d="M2.8 13a5.95 5.95 0 1 0 10.4 6l8.5-14a1.94 1.94 0 1 0-3.4-2L9.7 17a1.88 1.88 0 1 1-3.4-2 1.94 1.94 0 1 0-3.5-2"
+                      />
+                      <path d="m20.6 6.8-3.3-2.1" />
+                      <path d="m15.2 8.1 3.3 2.1" />
+                    </svg>
+                  </UBadge>
+                  <span class="text-sm">2 stoły air hockey (cymbergaj)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-5"
+                    >
+                      <path d="M12 5v5" />
+                      <path d="M12 14v5" />
+                      <circle cx="12" cy="12" r="2" />
+                      <path d="M2 9h4v6H2" />
+                      <path
+                        d="M3 19c-.6 0-1-.4-1-1V6c0-.6.4-1 1-1h18c.6 0 1 .4 1 1v12c0 .6-.4 1-1 1Z"
+                      />
+                      <path d="M22 15h-4V9h4" />
+                    </svg>
+                  </UBadge>
+                  <span class="text-sm">Piłkarzyki</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <UBadge
+                    class="rounded-lg p-2.5"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <UIcon name="i-lucide-target" class="size-5" />
+                  </UBadge>
+                  <span class="text-sm">Dart</span>
                 </div>
                 <div
                   class="flex items-center gap-3"
@@ -139,9 +230,9 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-beer" class="size-5" />
+                    <UIcon name="i-lucide-martini" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Bogaty bar</span>
+                  <span class="text-sm">Piwo i drinki</span>
                 </div>
                 <div
                   class="flex items-center gap-3"
@@ -154,36 +245,25 @@
                     size="xl"
                     variant="ghost"
                   >
-                    <UIcon name="i-lucide-guitar" class="size-5" />
+                    <UIcon name="i-lucide-cup-soda" class="size-5" />
                   </UBadge>
-                  <span class="text-sm">Świetna atmosfera</span>
+                  <span class="text-sm">Napoje alkoholowe i bezalkoholowe</span>
                 </div>
-              </div>
-
-              <div
-                class="flex flex-col items-start w-full gap-3"
-                v-motion-pop-bottom
-                :duration="700"
-              >
-                <UButton
-                  color="secondary"
-                  class="justify-center w-full md:w-auto"
-                  size="md"
-                  href="tel:+48731763752"
-                >
-                  <template #leading>
-                    <UIcon name="i-lucide-phone" class="size-5" />
-                  </template>
-                  +48 731 763 752
-                </UButton>
-
-                <p
-                  class="text-sm text-center md:text-left text-white/90"
+                <div
+                  class="flex items-center gap-3"
                   v-motion-pop-bottom
                   :duration="700"
                 >
-                  Telefon czynny w godzinach otwartcia kręgielni
-                </p>
+                  <UBadge
+                    class="rounded-lg p-2.5"
+                    color="secondary"
+                    size="xl"
+                    variant="ghost"
+                  >
+                    <UIcon name="i-lucide-popcorn" class="size-5" />
+                  </UBadge>
+                  <span class="text-sm">Przekąski</span>
+                </div>
               </div>
             </div>
             <div class="block">
@@ -256,16 +336,24 @@
 <script setup>
 const pubImages = [
   {
-    src: "/images/kregle.jpg",
+    src: "/images/pub1.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/bilard.jpg",
-    alt: "Stoły bilardowe",
+    src: "/images/pub2.jpg",
+    alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/bar.jpg",
-    alt: "Klimatyczny barek",
+    src: "/images/pub3.jpg",
+    alt: "Profesjonalne tory do kręgli",
+  },
+  {
+    src: "/images/pub4.jpg",
+    alt: "Profesjonalne tory do kręgli",
+  },
+  {
+    src: "/images/pub5.jpg",
+    alt: "Profesjonalne tory do kręgli",
   },
 ];
 </script>

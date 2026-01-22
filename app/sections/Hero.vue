@@ -23,7 +23,7 @@ a
           v-motion-pop-bottom
           :duration="700"
         >
-          Restauracja <span class="text-secondary">Zodiak</span>
+          Zodiak <span class="text-secondary"></span>
         </h1>
         <div>
           <p
@@ -31,11 +31,11 @@ a
             v-motion-pop-bottom
             :duration="700"
           >
-            Oranizujemy wesela komunie urodziny i imprezy okolicznościowe
+            Imprezy okolicznościowe | Spotkania | Catering | Pub & Kręgielnia
           </p>
-          <p class="text-lg sm:text-xl" v-motion-pop-bottom :duration="700">
+          <!-- <p class="text-lg sm:text-xl" v-motion-pop-bottom :duration="700">
             Oferujemy również pub z kregielnią i bilardem.
-          </p>
+          </p> -->
         </div>
 
         <div

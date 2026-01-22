@@ -2,7 +2,7 @@
   <footer class="py-8 bg-akaroa-950">
     <UContainer class="grid grid-cols-4 gap-12">
       <div class="flex flex-col gap-6 col-span-4 md:col-span-2 lg:col-span-1">
-        <AppLogo classes="w-30" />
+        <AppLogo classes="w-40" />
         <p class="text-white/85">
           Przyjęcia okolicznościowe, catering oraz pub z kręgielnią. Tworzymy
           wyjątkowe wspomnienia od ponad 20 lat.
@@ -13,6 +13,8 @@
             variant="link"
             class="text-sm gap-3"
             color="secondary"
+            target="_blank"
+            to="https://www.instagram.com/p/DDKWa7LoYRW/?utm_source=ig_web_copy_link"
           >
             <template #leading>
               <UIcon
@@ -26,6 +28,8 @@
             variant="link"
             class="text-sm gap-3"
             color="secondary"
+            target="_blank"
+            to="https://www.facebook.com/ZodiakCzerwionkaLeszczyny"
           >
             <template #leading>
               <UIcon
@@ -58,7 +62,7 @@
         <div class="flex flex-col gap-1 -translate-x-3">
           <UButton
             external
-            href="tel:+48731763752"
+            href="tel:+48607588452"
             variant="link"
             color="secondary"
             class="text-sm gap-3"
@@ -69,11 +73,11 @@
               class="min-w-4 size-4 xl:size-5 xl:min-w-5"
             />
             <span class="hidden xl:inline">Imprezy:</span>
-            731 763 752
+            607 588 452
           </UButton>
           <UButton
             external
-            href="tel:+48324262283"
+            href="tel:+48327231703"
             variant="link"
             color="secondary"
             class="text-sm gap-3"
@@ -84,7 +88,7 @@
               class="min-w-4 size-4 xl:size-5 xl:min-w-5"
             />
             <span class="hidden xl:inline">Kręgle:</span>
-            32 42 62 283
+            32 723 17 03
           </UButton>
           <div class="flex px-3.5 gap-2 text-sm items-start text-white/85">
             <UIcon

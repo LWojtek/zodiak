@@ -6,7 +6,7 @@ import { defineProps } from "vue";
 defineProps({
   classes: {
     type: String,
-    default: "w-96",
+    default: "w-[200px]",
   },
 });
 </script>

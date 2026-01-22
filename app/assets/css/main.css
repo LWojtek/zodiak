@@ -107,7 +107,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--ui-primary);
+    background-color: var(--ui-primary-950);
   }
 }
 
