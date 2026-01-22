@@ -60,10 +60,11 @@
 definePageMeta({
   layout: "auth",
   middleware: [
-    () => {
+    async () => {
       const user = useSupabaseUser();
 
       if (user.value) {
+        await nextTick();
         return navigateTo("/admin");
       }
     },
@@ -111,8 +112,8 @@ const login = async () => {
       state.error = error.message;
       return;
     }
-
-    navigateTo("/admin");
+    await nextTick();
+    await navigateTo("/admin");
   } catch (err) {
     state.error = "Unexpected error. Please try again.";
   } finally {
