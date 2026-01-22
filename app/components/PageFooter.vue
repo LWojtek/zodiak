@@ -14,7 +14,7 @@
             class="text-sm gap-3"
             color="secondary"
             target="_blank"
-            to="https://www.instagram.com/p/DDKWa7LoYRW/?utm_source=ig_web_copy_link"
+            to="https://instagram.com/zodiakczerwionkaleszczyny"
           >
             <template #leading>
               <UIcon

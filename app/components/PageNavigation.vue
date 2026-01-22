@@ -5,7 +5,7 @@
         <NuxtLink
           :ref="(el) => setLinkRef(el, index)"
           class="flex text-sm xl:text-base items-center h-full transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
-          :to="`#${link.id}`"
+          :to="`/#${link.id}`"
           :class="{ 'text-secondary': activeSection === link.id }"
         >
           {{ link.label }}
@@ -54,7 +54,7 @@
       <NuxtLink
         class="flex gap-1 px-2 text-sm xl:text-base items-center transition-colors duration-300 text-inverted/95 focus-visible:outline-secondary hover:text-secondary whitespace-nowrap"
         target="_blank"
-        href="https://www.instagram.com/p/DDKWa7LoYRW/?utm_source=ig_web_copy_link"
+        href="https://instagram.com/zodiakczerwionkaleszczyny"
       >
         <UIcon name="i-lucide-instagram" class="size-5" />
       </NuxtLink>
