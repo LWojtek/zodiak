@@ -102,17 +102,17 @@ const login = async () => {
   try {
     const supabase = useSupabaseClient();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const response = await supabase.auth.signInWithPassword({
       email: state.email,
       password: state.password,
     });
 
-    if (error) {
-      state.error = error.message;
+    if (response.error) {
+      state.error = response.error.message;
       return;
     }
-    await nextTick();
-    await navigateTo("/admin");
+
+    navigateTo("/admin");
   } catch (err) {
     state.error = "Unexpected error. Please try again.";
   } finally {
