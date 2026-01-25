@@ -8,7 +8,7 @@
   >
     <OrderSummary />
 
-    <USeparator class="my-8 uppercase">Dane kontaktowe</USeparator>
+    <USeparator class="my-4 uppercase">Dane kontaktowe</USeparator>
 
     <div class="grid grid-cols-2 gap-4">
       <UFormField required label="Imię i nazwisko" name="customer_name">
@@ -44,9 +44,13 @@
         />
       </UFormField>
     </div>
-    <USeparator class="my-8 uppercase"> Szczegóły wydarzenia </USeparator>
+    <USeparator class="my-4 uppercase"> Szczegóły zamówienia</USeparator>
     <div class="grid grid-cols-2 gap-4">
-      <UFormField required label="Data dostawy" name="order_delivery_date">
+      <UFormField
+        required
+        label="Data dostawy/odbioru"
+        name="order_delivery_date"
+      >
         <UInputDate
           ref="inputDate"
           class="w-full"
@@ -78,7 +82,7 @@
         </UInputDate>
       </UFormField>
       <UFormField
-        label="Preferowana godzina dostawy"
+        label="Preferowana godzina dostawy/odbioru"
         name="order_delivery_time"
       >
         <UInputTime
@@ -103,7 +107,46 @@
         />
       </UFormField>
     </div>
-    <USeparator class="my-8 uppercase">Płatność</USeparator>
+    <USeparator class="my-4 uppercase">
+      Sposób realizacji zamówienia
+    </USeparator>
+    <UFormField name="order_fulfillment_method" class="col-span-2">
+      <URadioGroup
+        variant="card"
+        size="xl"
+        class="col-span-2"
+        :ui="{ fieldset: 'grid grid-cols-2 gap-4' }"
+        :items="[
+          {
+            value: 'pickup',
+            label: 'Odbiór osobisty',
+          },
+          {
+            value: 'delivery',
+            label: 'Dostawa',
+          },
+        ]"
+        v-model="state.order_fulfillment_method"
+      />
+    </UFormField>
+
+    <UFormField
+      v-if="state.order_fulfillment_method === 'delivery'"
+      name="order_delivery_address"
+      label="Adres dostawy"
+      required
+      class="mt-4"
+    >
+      <UTextarea
+        v-model="state.delivery_address"
+        size="xl"
+        class="w-full"
+        :rows="3"
+        placeholder="Ulica, numer, kod pocztowy, miasto, piętro itp."
+      />
+    </UFormField>
+
+    <USeparator class="my-4 uppercase">Płatność</USeparator>
     <div class="grid grid-cols-2 gap-4">
       <UFormField name="order_payment_method" class="col-span-2">
         <URadioGroup
@@ -192,6 +235,8 @@ const state = reactive({
   order_delivery_date: null,
   order_delivery_time: null,
   order_note: "",
+  order_fulfillment_method: "pickup",
+  order_delivery_address: "",
   order_payment_method: "onsite",
   order_invoice_required: false,
   company_name: "",
@@ -233,6 +278,14 @@ const schema = object({
     .email("Wprowadź poprawny adres email"),
   order_delivery_date: string().required("To pole jest wymagane"),
   order_delivery_time: string().required("To pole jest wymagane"),
+  order_fulfillment_method: string().required("To pole jest wymagane"),
+  order_delivery_address: lazy(() => {
+    if (state.order_fulfillment_method === "pickup") {
+      return string().nullable();
+    }
+
+    return string().required("To pole jest wymagane");
+  }),
   company_name: lazy(() => {
     if (state.order_invoice_required) {
       return string().required("To pole jest wymagane");
