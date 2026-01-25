@@ -134,6 +134,7 @@
           <p class="text-white/85 text-sm">
             © 2026 Zodiak. Wszelkie prawa zastrzeżone.
           </p>
+          <img src="/images/kpo.webp" class="sm:h-12" alt="Naklejka KPO" />
           <div class="flex items-center gap-2">
             <span class="text-white/95 text-sm">Do góry</span>
             <UButton
