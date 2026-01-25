@@ -19,7 +19,8 @@
     "@nuxtjs/supabase": "^2.0.3",
     "@vueuse/motion": "^3.0.3",
     "nuxt": "^4.2.2",
-    "rellax": "^1.12.1"
+    "rellax": "^1.12.1",
+    "yup": "^1.7.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.12.1",

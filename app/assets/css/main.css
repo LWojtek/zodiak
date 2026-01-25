@@ -95,7 +95,18 @@
   --ui-scroll-margin: var(--ui-header-height);
   --ui-container: 96rem;
   --ui-border: #f1f1f1;
-  --ui-text: var(--color-black-500);
+  --ui-border-accented: color-mix(
+    in oklab,
+    var(--color-almond-200) 75%,
+    transparent
+  );
+  --ui-text: var(--color-black-900);
+  --ui-text-dimmed: var(--color-gray-200);
+  --ui-bg-elevated: color-mix(
+    in oklab,
+    var(--color-almond-50) 40%,
+    transparent
+  );
 }
 
 @media screen and (max-width: 1023px) {
