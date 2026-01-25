@@ -39,7 +39,7 @@
         <!-- CONTENT -->
         <div class="mt-12 grid grid-cols-12 gap-6">
           <!-- LEFT -->
-          <div class="col-span-7">
+          <div class="col-span-12 lg:col-span-7">
             <div
               class="sticky flex transition-all flex-col gap-6"
               :class="[isScrolled ? 'top-40' : 'top-44']"
@@ -48,7 +48,7 @@
               <ProductFilter />
 
               <!-- PRODUCTS -->
-              <div class="grid grid-cols-2 gap-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <ProductCard
                   v-for="product in filteredProducts"
                   :key="product.id"
@@ -59,7 +59,7 @@
           </div>
 
           <!-- RIGHT / CART -->
-          <aside class="col-span-5">
+          <aside class="col-span-12 lg:col-span-5">
             <OrderForm />
           </aside>
         </div>
