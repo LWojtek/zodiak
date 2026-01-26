@@ -14,6 +14,12 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  vite: {
+    server: {
+      allowedHosts: [".ngrok-free.app"],
+    },
+  },
+
   colorMode: {
     preference: "light",
     storageKey: "light",
@@ -45,12 +51,24 @@ export default defineNuxtConfig({
     },
   },
 
+  server: {
+    allowedHosts: ["localhost", "6c048190fda7.ngrok-free.app"],
+  },
+
   runtimeConfig: {
     supabaseUrl: process.env.SUPABASE_URL,
     supabaseKey: process.env.SUPABASE_KEY,
+    supabaseSecretKey: process.env.SUPABASE_SECRET_KEY,
+    payu: {
+      api: process.env.PAYU_API,
+      posId: process.env.PAYU_POS_ID,
+      clientId: process.env.PAYU_CLIENT_ID,
+      clientSecret: process.env.PAYU_CLIENT_SECRET,
+      md5: process.env.PAYU_MD5_KEY,
+    },
 
     public: {
-      apiUrl: process.env.NUXT_API_URL,
+      siteUrl: process.env.PUBLIC_SITE_URL,
       motion: {
         directives: {
           "pop-bottom-once": {

@@ -46,15 +46,11 @@
     </div>
     <USeparator class="my-4 uppercase"> Szczegóły zamówienia</USeparator>
     <div class="grid grid-cols-2 gap-4">
-      <UFormField
-        required
-        label="Data dostawy/odbioru"
-        name="order_delivery_date"
-      >
+      <UFormField required label="Data dostawy/odbioru" name="service_date">
         <UInputDate
           ref="inputDate"
           class="w-full"
-          v-model="state.order_delivery_date"
+          v-model="state.service_date"
           :min-value="todayCalendarDate()"
           size="xl"
           variant="subtle"
@@ -72,7 +68,7 @@
 
               <template #content>
                 <UCalendar
-                  v-model="state.order_delivery_date"
+                  v-model="state.service_date"
                   class="p-2"
                   :min-value="todayCalendarDate()"
                 />
@@ -83,13 +79,13 @@
       </UFormField>
       <UFormField
         label="Preferowana godzina dostawy/odbioru"
-        name="order_delivery_time"
+        name="service_time"
       >
         <UInputTime
           class="w-full"
           size="xl"
           variant="subtle"
-          v-model="state.order_delivery_time"
+          v-model="state.service_time"
         />
       </UFormField>
       <UFormField
@@ -138,7 +134,7 @@
       class="mt-4"
     >
       <UTextarea
-        v-model="state.delivery_address"
+        v-model="state.order_delivery_address"
         size="xl"
         class="w-full"
         :rows="3"
@@ -218,22 +214,33 @@
       </UFormField>
     </div>
 
-    <UButton size="xl" type="submit" class="w-full mt-8 justify-center">
+    <p v-if="state.error" class="my-4 text-error font-semibold">
+      {{ state.error }}
+    </p>
+
+    <UButton
+      :loading="state.loading"
+      :disabled="state.loading"
+      size="xl"
+      type="submit"
+      class="w-full mt-8 justify-center"
+    >
       Złóż zamówienie
     </UButton>
   </UForm>
 </template>
 <script setup>
-import { CalendarDate } from "@internationalized/date";
-import { Time } from "@internationalized/date";
 import { object, string, lazy } from "yup";
+
+const { formatDateForDb, formatTimeForDb, isValidNip, todayCalendarDate } =
+  useHelpers();
 
 const state = reactive({
   customer_name: "",
   customer_phone: "",
   customer_email: "",
-  order_delivery_date: null,
-  order_delivery_time: null,
+  service_date: null,
+  service_time: null,
   order_note: "",
   order_fulfillment_method: "pickup",
   order_delivery_address: "",
@@ -242,33 +249,12 @@ const state = reactive({
   company_name: "",
   company_nip: "",
   company_address: "",
+
+  loading: false,
+  error: null,
 });
 
-const todayCalendarDate = () => {
-  const d = new Date();
-  return new CalendarDate(d.getFullYear(), d.getMonth() + 1, d.getDate());
-};
-
 const inputDate = useTemplateRef("inputDate");
-
-const isValidNip = (nip) => {
-  if (!nip) return false;
-
-  const normalized = nip.replace(/[\s-]/g, "");
-
-  if (!/^\d{10}$/.test(normalized)) return false;
-
-  const digits = normalized.split("").map(Number);
-  const weights = [6, 5, 7, 2, 3, 4, 5, 6, 7];
-
-  const checksum =
-    weights.reduce((sum, weight, index) => sum + weight * digits[index], 0) %
-    11;
-
-  if (checksum === 10) return false;
-
-  return checksum === digits[9];
-};
 
 const schema = object({
   customer_name: string().required("To pole jest wymagane"),
@@ -276,8 +262,8 @@ const schema = object({
   customer_email: string()
     .required("To pole jest wymagane")
     .email("Wprowadź poprawny adres email"),
-  order_delivery_date: string().required("To pole jest wymagane"),
-  order_delivery_time: string().required("To pole jest wymagane"),
+  service_date: string().required("To pole jest wymagane"),
+  service_time: string().required("To pole jest wymagane"),
   order_fulfillment_method: string().required("To pole jest wymagane"),
   order_delivery_address: lazy(() => {
     if (state.order_fulfillment_method === "pickup") {
@@ -314,8 +300,88 @@ const schema = object({
   }),
 });
 
-const handleSubmit = () => {
-  console.log(state);
+const { cart, totalPrice } = useOrder();
+
+const handleSubmit = async () => {
+  if (state.loading) return;
+  state.loading = true;
+  state.error = null;
+
+  if (!cart.value.length || totalPrice.value <= 0) {
+    state.error = "Koszyk jest pusty.";
+    state.loading = false;
+    return;
+  }
+
+  const supabase = useSupabaseClient();
+
+  try {
+    const { data: order, error } = await supabase
+      .from("orders")
+      .insert({
+        customer_name: state.customer_name,
+        customer_email: state.customer_email,
+        customer_phone: state.customer_phone,
+
+        fulfillment_method: state.order_fulfillment_method,
+        service_date: formatDateForDb(state.service_date),
+        service_time: formatTimeForDb(state.service_time),
+        delivery_address:
+          state.order_fulfillment_method === "delivery"
+            ? state.order_delivery_address
+            : null,
+
+        payment_method: state.order_payment_method,
+        payment_status: "pending",
+        status: "new",
+        notes: state.order_note || null,
+        total_price: totalPrice.value,
+        currency: "PLN",
+        invoice_required: state.order_invoice_required,
+      })
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    await supabase.from("order_items").insert(
+      cart.value.map((item) => ({
+        order_id: order.id,
+        product_id: item.productId,
+        product_name: item.name,
+        unit_price: item.price,
+        qty: item.qty,
+        total_price: item.price * item.qty,
+      })),
+    );
+
+    if (state.order_invoice_required) {
+      await supabase.from("invoice_details").insert({
+        order_id: order.id,
+        company_name: state.company_name,
+        company_nip: state.company_nip,
+        company_address: state.company_address,
+      });
+    }
+
+    console.log(state.order_payment_method);
+
+    if (state.order_payment_method === "online") {
+      const { redirectUrl } = await $fetch("/api/payu/create", {
+        method: "POST",
+        body: { orderId: order.id },
+      });
+
+      window.location.href = redirectUrl;
+      return;
+    }
+
+    navigateTo(`/order/success?id=${order.id}&payment_method=onsite`);
+  } catch (err) {
+    state.error = "Coś poszło nie tak. Spróbuj ponownie później.";
+  } finally {
+    state.loading = false;
+  }
 };
 
 const handleError = (payload) => {
