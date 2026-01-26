@@ -220,6 +220,7 @@
 
     <UButton
       :loading="state.loading"
+      :disabled="state.loading"
       size="xl"
       type="submit"
       class="w-full mt-8 justify-center"
@@ -302,12 +303,17 @@ const schema = object({
 const { cart, totalPrice } = useOrder();
 
 const handleSubmit = async () => {
+  if (state.loading) return;
   state.loading = true;
   state.error = null;
-  const supabase = useSupabaseClient();
 
-  const serviceDate = formatDateForDb(state.service_date);
-  const serviceTime = formatTimeForDb(state.service_time);
+  if (!cart.value.length || totalPrice.value <= 0) {
+    state.error = "Koszyk jest pusty.";
+    state.loading = false;
+    return;
+  }
+
+  const supabase = useSupabaseClient();
 
   try {
     const { data: order, error } = await supabase
@@ -318,18 +324,17 @@ const handleSubmit = async () => {
         customer_phone: state.customer_phone,
 
         fulfillment_method: state.order_fulfillment_method,
-        service_date: serviceDate,
-        service_time: serviceTime,
+        service_date: formatDateForDb(state.service_date),
+        service_time: formatTimeForDb(state.service_time),
         delivery_address:
           state.order_fulfillment_method === "delivery"
             ? state.order_delivery_address
             : null,
 
         payment_method: state.order_payment_method,
-        payment_status: "unpaid",
-        status:
-          state.order_payment_method === "online" ? "pending_payment" : "paid",
-
+        payment_status: "pending",
+        status: "new",
+        notes: state.order_note || null,
         total_price: totalPrice.value,
         currency: "PLN",
         invoice_required: state.order_invoice_required,
@@ -339,7 +344,6 @@ const handleSubmit = async () => {
 
     if (error) throw error;
 
-    /* 2️⃣ ORDER ITEMS */
     await supabase.from("order_items").insert(
       cart.value.map((item) => ({
         order_id: order.id,
@@ -351,17 +355,17 @@ const handleSubmit = async () => {
       })),
     );
 
-    /* 3️⃣ INVOICE (OPTIONAL) */
     if (state.order_invoice_required) {
       await supabase.from("invoice_details").insert({
         order_id: order.id,
         company_name: state.company_name,
-        company_nnip: state.company_nip,
+        company_nip: state.company_nip,
         company_address: state.company_address,
       });
     }
 
-    /* 4️⃣ PAYU FLOW */
+    console.log(state.order_payment_method);
+
     if (state.order_payment_method === "online") {
       const { redirectUrl } = await $fetch("/api/payu/create", {
         method: "POST",
@@ -372,14 +376,12 @@ const handleSubmit = async () => {
       return;
     }
 
-    /* 5️⃣ ONSITE PAYMENT */
-    navigateTo(`/order/success?id=${order.id}`);
+    navigateTo(`/order/success?id=${order.id}&payment_method=onsite`);
   } catch (err) {
-    state.error =
-      "Coś, poszło nie tak. Spróbuj ponownie później lub skontaktuj się z obsługą.";
+    state.error = "Coś poszło nie tak. Spróbuj ponownie później.";
+  } finally {
+    state.loading = false;
   }
-
-  state.loading = false;
 };
 
 const handleError = (payload) => {
