@@ -17,6 +17,12 @@ definePageMeta({
 const firstName = ref("");
 const lastName = ref("");
 
+const { orders, loading, fetchOrders } = useAdminOrders();
+
+onMounted(() => {
+  fetchOrders();
+});
+
 // const updateUser = async () => {
 //   console.log("123");
 
