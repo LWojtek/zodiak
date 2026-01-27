@@ -6,6 +6,8 @@
   --font-display: "DM Serif Display", sans-serif;
   --font-sans: "DM Sans", Arial, sans-serif;
 
+  --breakpoint-xs: 26rem;
+
   /* --color-burgundy-950: #1a0a0f;
   --color-burgundy-900: #2d1219;
   --color-burgundy-800: #4a1c27;

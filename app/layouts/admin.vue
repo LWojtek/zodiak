@@ -1,20 +1,21 @@
 <template>
   <div>
-    <UHeader>
+    <UHeader class="shadow-sm">
       <template #left>
         <NuxtLink to="/">
-          <AppLogo class="w-auto h-6 shrink-0" />
+          <h1 class="text-xl font-semibold">Panel Admina</h1>
         </NuxtLink>
       </template>
 
       <template #right>
-        <UColorModeButton />
         <UButton @click="logout">Wyloguj</UButton>
       </template>
     </UHeader>
 
     <UMain>
-      <slot />
+      <UContainer class="py-8">
+        <slot />
+      </UContainer>
     </UMain>
   </div>
 </template>

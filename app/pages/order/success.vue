@@ -26,7 +26,7 @@
           Wróć na stronę główną
         </UButton>
 
-        <UButton variant="outline" size="lg" to="/menu">
+        <UButton variant="outline" size="lg" to="/order">
           Złóż kolejne zamówienie
         </UButton>
       </div>

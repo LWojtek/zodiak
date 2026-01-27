@@ -91,7 +91,7 @@
             v-motion-pop-bottom
             :duration="700"
           >
-            Sprawdź naszą ofertę menu dla 15-20 osób (to przykładowa liczba).
+            Sprawdź naszą ofertę menu dla 10-12 osób (to przykładowa liczba).
             Nasze menu dostosowujemy do Twoich potrzeb i preferencji.
           </p>
 
@@ -213,7 +213,7 @@
               :duration="700"
             >
               <div class="text-6xl md:text-7xl font-serif font-bold text-white">
-                20+
+                15+
               </div>
               <div class="text-lg font-medium mt-1">lat doświadczenia</div>
               <div class="w-12 h-1 bg-white/10 rounded-full mt-4"></div>
