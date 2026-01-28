@@ -111,7 +111,7 @@
         variant="card"
         size="xl"
         class="col-span-2"
-        :ui="{ fieldset: 'grid grid-cols-2 gap-4' }"
+        :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
         :items="[
           {
             value: 'pickup',
@@ -119,28 +119,67 @@
           },
           {
             value: 'delivery',
-            label: 'Dostawa',
+            label: 'Dostawa +30 zł',
+            description: 'Tylko na terenie gminy Czerwionka-Leszczyny',
           },
         ]"
+        @update:model-value="
+          handleDelivery($event === 'delivery' ? true : false)
+        "
         v-model="state.order_fulfillment_method"
       />
     </UFormField>
 
     <UFormField
       v-if="state.order_fulfillment_method === 'delivery'"
-      name="order_delivery_address"
+      name="order_delivery_city"
       label="Adres dostawy"
       required
       class="mt-4"
     >
-      <UTextarea
-        v-model="state.order_delivery_address"
+      <USelect
+        v-model="state.order_delivery_city"
+        :items="cities"
+        value-key="label"
         size="xl"
         class="w-full"
         :rows="3"
-        placeholder="Ulica, numer, kod pocztowy, miasto, piętro itp."
+        placeholder="Miejscowość"
       />
     </UFormField>
+    <div
+      v-if="state.order_fulfillment_method === 'delivery'"
+      class="grid grid-cols-2 gap-4"
+    >
+      <UFormField
+        name="order_delivery_street"
+        label="Adres dostawy"
+        required
+        class="mt-4"
+      >
+        <UInput
+          v-model="state.order_delivery_street"
+          size="xl"
+          class="w-full"
+          :rows="3"
+          placeholder="Ulica"
+        />
+      </UFormField>
+      <UFormField
+        name="order_delivery_street_number"
+        label="Numer domu/lokalu"
+        required
+        class="mt-4"
+      >
+        <UInput
+          v-model="state.order_delivery_street_number"
+          size="xl"
+          class="w-full"
+          :rows="3"
+          placeholder="Numer budynku / Lokalu"
+        />
+      </UFormField>
+    </div>
 
     <USeparator class="my-4 uppercase">Płatność</USeparator>
     <div class="grid grid-cols-2 gap-4">
@@ -150,7 +189,7 @@
           orientation="horizontal"
           variant="card"
           size="xl"
-          :ui="{ fieldset: 'grid grid-cols-2 gap-4' }"
+          :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
           v-model="state.order_payment_method"
           :items="[
             {
@@ -171,6 +210,7 @@
           v-model="state.order_invoice_required"
           variant="card"
           label="Chcę faktuę VAT"
+          :ui="{ description: 'text-sm' }"
           description="Podaj  dane firmy do wystawienia faktury"
           size="xl"
         />
@@ -254,6 +294,29 @@ const state = reactive({
   error: null,
 });
 
+const cities = [
+  {
+    label: "Czerwionka-Leszczyny",
+    value: "czerwionka-leszczyny",
+  },
+  {
+    label: "Bełk",
+    value: "belk",
+  },
+  {
+    label: "Palowice",
+    value: "palowice",
+  },
+  {
+    label: "Szczejkowice",
+    value: "szczejkowice",
+  },
+  {
+    label: "Stanowice",
+    value: "stanowice",
+  },
+];
+
 const inputDate = useTemplateRef("inputDate");
 
 const schema = object({
@@ -265,7 +328,21 @@ const schema = object({
   service_date: string().required("To pole jest wymagane"),
   service_time: string().required("To pole jest wymagane"),
   order_fulfillment_method: string().required("To pole jest wymagane"),
-  order_delivery_address: lazy(() => {
+  order_delivery_city: lazy(() => {
+    if (state.order_fulfillment_method === "pickup") {
+      return string().nullable();
+    }
+
+    return string().required("To pole jest wymagane");
+  }),
+  order_delivery_street: lazy(() => {
+    if (state.order_fulfillment_method === "pickup") {
+      return string().nullable();
+    }
+
+    return string().required("To pole jest wymagane");
+  }),
+  order_delivery_street_number: lazy(() => {
     if (state.order_fulfillment_method === "pickup") {
       return string().nullable();
     }
@@ -300,14 +377,16 @@ const schema = object({
   }),
 });
 
-const { cart, totalPrice } = useOrder();
+const { cart, totalPrice, handleDelivery, delivery } = useOrder();
 
 const handleSubmit = async () => {
   if (state.loading) return;
   state.loading = true;
   state.error = null;
 
-  if (!cart.value.length || totalPrice.value <= 0) {
+  const isOnlyDeliveryInCart = cart.value.length === 1 && delivery.value;
+
+  if (!cart.value.length || totalPrice.value <= 0 || isOnlyDeliveryInCart) {
     state.error = "Koszyk jest pusty.";
     state.loading = false;
     return;
@@ -326,11 +405,18 @@ const handleSubmit = async () => {
         fulfillment_method: state.order_fulfillment_method,
         service_date: formatDateForDb(state.service_date),
         service_time: formatTimeForDb(state.service_time),
-        delivery_address:
+        delivery_address_city:
           state.order_fulfillment_method === "delivery"
-            ? state.order_delivery_address
+            ? state.order_delivery_city
             : null,
-
+        delivery_address_street:
+          state.order_fulfillment_method === "delivery"
+            ? state.order_delivery_street
+            : null,
+        delivery_address_street_number:
+          state.order_fulfillment_method === "delivery"
+            ? state.order_delivery_street_number
+            : null,
         payment_method: state.order_payment_method,
         payment_status: "pending",
         status: "new",
