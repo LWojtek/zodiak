@@ -51,7 +51,8 @@
           ref="inputDate"
           class="w-full"
           v-model="state.service_date"
-          :min-value="todayCalendarDate()"
+          :min-value="minServiceDate"
+          :default-value="minServiceDate"
           size="xl"
           variant="subtle"
         >
@@ -70,7 +71,12 @@
                 <UCalendar
                   v-model="state.service_date"
                   class="p-2"
-                  :min-value="todayCalendarDate()"
+                  :ui="{
+                    cellTrigger:
+                      'data-disabled:opacity-25 data-disabled:pointer-events-none',
+                  }"
+                  :default-value="minServiceDate"
+                  :min-value="minServiceDate"
                 />
               </template>
             </UPopover>
@@ -271,6 +277,11 @@
 </template>
 <script setup>
 import { object, string, lazy } from "yup";
+import { today, getLocalTimeZone } from "@internationalized/date";
+
+const minServiceDate = computed(() => {
+  return today(getLocalTimeZone()).add({ days: 14 });
+});
 
 const { formatDateForDb, formatTimeForDb, isValidNip, todayCalendarDate } =
   useHelpers();
@@ -293,6 +304,8 @@ const state = reactive({
   loading: false,
   error: null,
 });
+
+state.service_date = minServiceDate.value;
 
 const cities = [
   {
