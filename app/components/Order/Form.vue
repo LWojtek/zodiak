@@ -90,7 +90,8 @@
         <UInputTime
           class="w-full"
           size="xl"
-          variant="subtle"
+          :min-value="minServiceTime"
+          :max-value="maxServiceTime"
           v-model="state.service_time"
         />
       </UFormField>
@@ -276,12 +277,15 @@
   </UForm>
 </template>
 <script setup>
-import { object, string, lazy } from "yup";
-import { today, getLocalTimeZone } from "@internationalized/date";
+import { object, string, lazy, mixed } from "yup";
+import { today, getLocalTimeZone, parseTime } from "@internationalized/date";
 
 const minServiceDate = computed(() => {
   return today(getLocalTimeZone()).add({ days: 14 });
 });
+
+const minServiceTime = parseTime("14:00");
+const maxServiceTime = parseTime("19:00");
 
 const { formatDateForDb, formatTimeForDb, isValidNip, todayCalendarDate } =
   useHelpers();
@@ -339,8 +343,16 @@ const schema = object({
     .required("To pole jest wymagane")
     .email("Wprowadź poprawny adres email"),
   service_date: string().required("To pole jest wymagane"),
-  service_time: string().required("To pole jest wymagane"),
+
+  service_time: mixed()
+    .required("To pole jest wymagane")
+    .test("time-range", "Dostawy między 14:00 - 19:00", (value) => {
+      if (!value) return false;
+      const minutes = value.hour * 60 + value.minute;
+      return minutes >= 14 * 60 && minutes <= 19 * 60;
+    }),
   order_fulfillment_method: string().required("To pole jest wymagane"),
+
   order_delivery_city: lazy(() => {
     if (state.order_fulfillment_method === "pickup") {
       return string().nullable();
