@@ -28,6 +28,8 @@ export const useOrder = () => {
 
   /* ----------------- CART ----------------- */
   const cart = useState("order:cart", () => []);
+  const delivery = useState("order:delivery", () => false);
+  const deliveryCost = computed(() => (delivery.value ? 30 : 0));
 
   const getCartItem = (id) => cart.value.find((item) => item.productId === id);
 
@@ -48,6 +50,29 @@ export const useOrder = () => {
     }
   };
 
+  const handleDelivery = (add) => {
+    delivery.value = add;
+
+    const deliveryIndex = cart.value.findIndex(
+      (item) => item.name === "Dostawa",
+    );
+
+    if (add) {
+      if (deliveryIndex === -1) {
+        cart.value.push({
+          productId: 0,
+          name: "Dostawa",
+          price: 30,
+          qty: 1,
+        });
+      }
+    } else {
+      if (deliveryIndex !== -1) {
+        cart.value.splice(deliveryIndex, 1);
+      }
+    }
+  };
+
   const removeFromCart = (id) => {
     const item = getCartItem(id);
     if (!item) return;
@@ -59,8 +84,10 @@ export const useOrder = () => {
     }
   };
 
-  const totalPrice = computed(() =>
-    cart.value.reduce((sum, i) => sum + i.price * i.qty, 0),
+  const totalPrice = computed(
+    () =>
+      cart.value.reduce((sum, i) => sum + i.price * i.qty, 0) +
+      deliveryCost.value,
   );
 
   const priceFormatter = new Intl.NumberFormat("pl-PL", {
@@ -76,6 +103,9 @@ export const useOrder = () => {
     category,
     categories,
     filteredProducts,
+    handleDelivery,
+    delivery,
+    deliveryCost,
     cart,
     totalPrice,
     formatPrice,
