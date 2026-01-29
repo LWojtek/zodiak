@@ -126,7 +126,7 @@
             v-motion-pop-bottom
             :duration="700"
           >
-            <p class="text-almond-900">Wartość projektu (całkowity koszt)</p>
+            <p class="text-almond-900">Wysokość wkładu Funduszy Europejskich</p>
             <p class="text-2xl font-bold text-secondary">
               162 990,75 <span class="text-lg">PLN</span>
             </p>
