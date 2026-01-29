@@ -1,7 +1,27 @@
 <script setup>
 useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
-  link: [{ rel: "icon", href: "/favicon.ico" }],
+  link: [
+    { rel: "icon", href: "/favicon.ico" },
+
+    // ✅ SILKTIDE CSS
+    {
+      rel: "stylesheet",
+      href: "/silktide/silktide-consent-manager.css",
+    },
+  ],
+  script: [
+    // ✅ SILKTIDE CORE
+    {
+      src: "/silktide/silktide-consent-manager.js",
+      defer: true,
+    },
+    // ✅ SILKTIDE CONFIG (TWÓJ BANER)
+    {
+      src: "/silktide/config.js",
+      defer: true,
+    },
+  ],
   htmlAttrs: {
     lang: "pl",
   },
