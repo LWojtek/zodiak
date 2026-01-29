@@ -10,17 +10,17 @@
 -------------------------------- */
 /* Wrapper (Global) */
 #silktide-wrapper {
-              --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
-              --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
-              --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
-              --primaryColor: #b28a5d;
-              --backgroundColor: #341E16;
-              --textColor: #e5f6fa;
-              --backdropBackgroundColor: #00000033;
-              --backdropBackgroundBlur: 0px;
-              --cookieIconColor: #B28A5D;
-              --cookieIconBackgroundColor: #341E16;
-              position: fixed;
+  --focus: 0 0 0 2px #ffffff, 0 0 0 4px #000000, 0 0 0 6px #ffffff;
+  --boxShadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  --fontFamily: Helvetica Neue, Segoe UI, Arial, sans-serif;
+  --primaryColor: #b28a5d;
+  --backgroundColor: #341e16;
+  --textColor: #e5f6fa;
+  --backdropBackgroundColor: #00000033;
+  --backdropBackgroundBlur: 0px;
+  --cookieIconColor: #b28a5d;
+  --cookieIconBackgroundColor: #341e16;
+  position: fixed;
   bottom: 0;
   right: 0;
   width: 100%;
@@ -30,8 +30,8 @@
   border: 0px;
   display: flex;
   justify-content: center;
-  align-items: center
-            }
+  align-items: center;
+}
 
 /* Backdrop (Global) */
 #silktide-backdrop-global {
@@ -53,6 +53,7 @@
   display: inline-block;
   color: var(--primaryColor);
   text-decoration: underline;
+  white-space: nowrap;
 }
 
 #silktide-wrapper a:hover {
@@ -92,6 +93,7 @@
   line-height: 24px;
   cursor: pointer;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 #silktide-wrapper .st-button--primary {
@@ -127,7 +129,7 @@
   position: fixed;
   bottom: 16px;
   right: 16px;
-  width: 600px;
+  width: auto;
   overflow: auto;
   max-width: calc(100% - 32px);
   max-height: calc(100vh - 32px);
@@ -135,7 +137,13 @@
   opacity: 0;
   animation: silktide-slideInDown 350ms ease-out forwards;
   animation-delay: 0.3s;
-  box-shadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  box-shadow:
+    -5px 5px 10px 0px #00000012,
+    0px 0px 50px 0px #0000001a;
+}
+
+#silktide-banner p {
+  max-width: 65ch;
 }
 
 #silktide-banner:focus {
@@ -189,7 +197,7 @@
 
 #silktide-banner .preferences:after {
   display: block;
-  content: '>';
+  content: ">";
   text-decoration: none;
 }
 
@@ -197,6 +205,7 @@
   font-size: 16px;
   line-height: 24px;
   margin: 0px 0px 15px;
+  max-width: 55ch;
 }
 
 #silktide-banner a {
@@ -219,7 +228,6 @@
   width: 48px;
   height: 48px;
 }
-
 
 #silktide-banner .actions {
   display: flex;
@@ -258,7 +266,9 @@
   transform: translate(0px, -20px);
   opacity: 0;
   animation: silktide-slideInUp-center 350ms ease-out forwards;
-  box-shadow: -5px 5px 10px 0px #00000012, 0px 0px 50px 0px #0000001a;
+  box-shadow:
+    -5px 5px 10px 0px #00000012,
+    0px 0px 50px 0px #0000001a;
   font-family: var(--fontFamily);
   color: var(--textColor);
   flex-direction: column;
@@ -353,7 +363,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 24px;  
+  gap: 24px;
 }
 
 /* --------------------------------
@@ -410,7 +420,9 @@
   position: absolute;
   top: 7px;
   right: 8px;
-  transition: right 150ms ease-out, opacity 150ms ease-out;
+  transition:
+    right 150ms ease-out,
+    opacity 150ms ease-out;
 }
 
 #silktide-modal .switch__off {
