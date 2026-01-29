@@ -1,4 +1,5 @@
 <script setup>
+const route = useRoute();
 useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
   link: [
@@ -24,6 +25,10 @@ useHead({
   ],
   htmlAttrs: {
     lang: "pl",
+    class: () =>
+      route.fullPath.includes("admin") || route.fullPath.includes("login")
+        ? "hide-cookie"
+        : "",
   },
 });
 
@@ -49,3 +54,8 @@ useSeoMeta({
     </NuxtLayout>
   </UApp>
 </template>
+<style>
+.hide-cookie #silktide-wrapper {
+  display: none;
+}
+</style>
