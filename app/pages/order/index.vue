@@ -33,7 +33,7 @@
         <section>
           <!-- HERO -->
           <div class="flex flex-col items-center gap-4 text-center">
-            <h1 class="text-4xl lg:text-6xl font-bold font-display">
+            <h1 class="text-3xl lg:text-6xl font-bold font-display">
               Zamów wyśmienite dania
             </h1>
             <p>Wybierz z menu i złóż zamówienie online</p>

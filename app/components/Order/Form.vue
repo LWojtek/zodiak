@@ -10,7 +10,7 @@
 
     <USeparator class="my-4 uppercase">Dane kontaktowe</USeparator>
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField required label="Imię i nazwisko" name="customer_name">
         <UInput
           class="w-full"
@@ -28,7 +28,7 @@
         />
       </UFormField>
       <UFormField
-        class="col-span-2"
+        class="lg:col-span-2"
         required
         label="Adres e-mail"
         name="customer_email"
@@ -42,7 +42,7 @@
       </UFormField>
     </div>
     <USeparator class="my-4 uppercase"> Szczegóły zamówienia</USeparator>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField required label="Data dostawy/odbioru" name="service_date">
         <UInputDate
           ref="inputDate"
@@ -92,7 +92,7 @@
         />
       </UFormField>
       <UFormField
-        class="col-span-2"
+        class="lg:col-span-2"
         label="Uwagi do zamówienia:"
         name="order_note"
       >
@@ -113,7 +113,10 @@
         variant="card"
         size="xl"
         class="col-span-2"
-        :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
+        :ui="{
+          fieldset: 'grid grid-cols-1 sm:grid-cols-2 gap-4',
+          description: 'text-sm',
+        }"
         :items="[
           {
             value: 'pickup',
@@ -151,7 +154,7 @@
     </UFormField>
     <div
       v-if="state.order_fulfillment_method === 'delivery'"
-      class="grid grid-cols-2 gap-4"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-4"
     >
       <UFormField
         name="order_delivery_street"
@@ -184,14 +187,17 @@
     </div>
 
     <USeparator class="my-4 uppercase">Płatność</USeparator>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField name="order_payment_method" class="col-span-2">
         <URadioGroup
           class="w-full"
           orientation="horizontal"
           variant="card"
           size="xl"
-          :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
+          :ui="{
+            fieldset: 'grid grid-cols-1 sm:grid-cols-2 gap-4',
+            description: 'text-sm',
+          }"
           v-model="state.order_payment_method"
           :items="[
             {
@@ -220,7 +226,7 @@
     </div>
     <div
       v-if="state.order_invoice_required"
-      class="grid grid-cols-2 gap-4 mt-4"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4"
     >
       <UFormField name="company_name" label="Nazwa firmy" required>
         <UInput

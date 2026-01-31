@@ -19,7 +19,7 @@ export default defineAppConfig({
       },
       variants: {
         size: {
-          sm: "py-1.5 px-3 gap-2 text-sm",
+          sm: "py-2 px-3 gap-2 text-sm",
           md: {
             base: "px-4 py-2.5 text-base rounded-xl",
           },

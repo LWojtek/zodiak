@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sticky top-24 bg-white flex flex-wrap gap-3 p-2 rounded-lg border border-primary-100"
+    class="sticky z-1 top-20 lg:top-24 bg-white flex flex-wrap gap-3 p-2 rounded-lg border border-primary-100"
   >
     <!-- <UTabs
       :items="categories"

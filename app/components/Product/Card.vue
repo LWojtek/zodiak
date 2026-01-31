@@ -10,7 +10,7 @@
   >
     <template #header>
       <div>
-        <h3 class="font-semibold text-xl">{{ product.name }}</h3>
+        <h3 class="font-semibold text-base">{{ product.name }}</h3>
 
         <p class="text-sm text-muted">
           {{ suffix }}
@@ -20,7 +20,11 @@
         {{ formatPrice(product.price) }}
       </UBadge>
     </template>
-    <UCollapsible v-model:open="open">
+    <UCollapsible
+      v-model:open="open"
+      class="relative before:absolute before:bottom-0 before:left-0 before:w-full before:h-px before:bg-primary-100 origin-center before:transition"
+      :class="{ 'before:scale-x-0': !open }"
+    >
       <template #content>
         <ul :class="['grid gap-2 p-4 sm:p-4', dynamicGridCols]">
           <li v-for="section in product.sections" :key="section.id">
@@ -44,10 +48,10 @@
     </UCollapsible>
 
     <template #footer>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-4">
         <UButton
           v-if="hasDetails"
-          class="justify-center"
+          class="justify-center lg:col-start-3"
           variant="subtle"
           size="sm"
           @click="open = !open"
@@ -55,17 +59,18 @@
           {{ open ? "Zwiń" : "Rozwiń" }} szczegóły
         </UButton>
 
-        <div class="flex justify-between items-center md:col-start-2">
+        <div class="flex justify-between items-center lg:col-start-4">
           <!-- ADD / +/- -->
           <div
             v-if="isInCart(product.id)"
-            class="flex justify-end items-center gap-2 w-full"
+            class="flex items-center gap-2 w-full rounded-lg pl-5 pr-1 py-1 border border-primary-100"
           >
+            <span class="justify-start"> Ilość </span>
             <UButton
               size="sm"
               variant="subtle"
               @click="removeFromCart(product.id)"
-              class=""
+              class="ml-auto"
             >
               <template #leading>
                 <UIcon name="i-lucide-minus" />
@@ -76,12 +81,7 @@
               {{ getCartItem(product.id).qty }}
             </span>
 
-            <UButton
-              size="sm"
-              variant="subtle"
-              class=""
-              @click="addToCart(product)"
-            >
+            <UButton size="sm" variant="subtle" @click="addToCart(product)">
               <template #leading>
                 <UIcon name="i-lucide-plus" />
               </template>
