@@ -13,6 +13,16 @@ export default defineAppConfig({
     container: {
       base: "w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8",
     },
+    radioGroup: {
+      slots: {
+        item: "border not-data-[state=checked]:border-primary-100",
+      },
+    },
+    checkbox: {
+      slots: {
+        root: "not-has-data-[state=checked]:border-primary-100",
+      },
+    },
     button: {
       slots: {
         base: "cursor-pointer",
