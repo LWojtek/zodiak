@@ -3,6 +3,7 @@
 </template>
 <style>
 .loader {
+  display: block;
   position: relative;
   width: 85px;
   height: 50px;

@@ -1,29 +1,20 @@
 export const useOrder = () => {
   /* ----------------- CATEGORY ----------------- */
   const category = useState("order:product:filter", () => "all");
-
-  const categories = [
-    { id: 0, slug: "all", name: "Wszystkie" },
-    { id: 1, slug: "sets", name: "Zestawy" },
-    { id: 2, slug: "appetizers", name: "Przystawki" },
-    { id: 3, slug: "soups", name: "Zupy" },
-    { id: 4, slug: "main", name: "Dania główne" },
-  ];
+  const categories = useState("order:categories", () => []);
 
   /* ----------------- PRODUCTS ----------------- */
-  const products = [
-    { id: 1, name: "Kotlet schabowy", price: 24.5, categoryId: 4 },
-    { id: 2, name: "Rosół domowy", price: 18, categoryId: 3 },
-    { id: 3, name: "Zestaw obiadowy", price: 39, categoryId: 1 },
-  ];
+  const products = useState("order:products", () => []);
 
   const filteredProducts = computed(() => {
-    if (category.value === "all") return products;
+    if (category.value === "all") {
+      return products.value ?? [];
+    }
 
-    const cat = categories.find((c) => c.slug === category.value);
+    const cat = (categories.value ?? []).find((c) => c.slug === category.value);
     if (!cat) return [];
 
-    return products.filter((p) => p.categoryId === cat.id);
+    return (products.value ?? []).filter((p) => p.category_slug === cat.slug);
   });
 
   /* ----------------- CART ----------------- */
@@ -102,6 +93,7 @@ export const useOrder = () => {
   return {
     category,
     categories,
+    products,
     filteredProducts,
     handleDelivery,
     delivery,

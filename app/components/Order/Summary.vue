@@ -26,7 +26,7 @@
       <!-- TOTAL -->
       <div class="border-t border-default pt-3 mt-3">
         <div
-          class="flex justify-between font-semibold rounded-lg border border-accented p-4 bg-primary-50"
+          class="flex justify-between font-semibold rounded-lg border border-accented p-4 bg-primary/10"
         >
           <span>Suma</span>
           <span>{{ formatPrice(totalPrice) }}</span>

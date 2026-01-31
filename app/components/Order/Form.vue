@@ -10,12 +10,11 @@
 
     <USeparator class="my-4 uppercase">Dane kontaktowe</USeparator>
 
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField required label="Imię i nazwisko" name="customer_name">
         <UInput
           class="w-full"
           size="xl"
-          variant="subtle"
           v-model="state.customer_name"
           placeholder="Jan Kowalski"
         />
@@ -24,20 +23,18 @@
         <UInput
           class="w-full"
           size="xl"
-          variant="subtle"
           v-model="state.customer_phone"
           placeholder="+48 123 456 789"
         />
       </UFormField>
       <UFormField
-        class="col-span-2"
+        class="lg:col-span-2"
         required
         label="Adres e-mail"
         name="customer_email"
       >
         <UInput
           class="w-full"
-          variant="subtle"
           size="xl"
           v-model="state.customer_email"
           placeholder="jan@example.com"
@@ -45,7 +42,7 @@
       </UFormField>
     </div>
     <USeparator class="my-4 uppercase"> Szczegóły zamówienia</USeparator>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField required label="Data dostawy/odbioru" name="service_date">
         <UInputDate
           ref="inputDate"
@@ -54,7 +51,6 @@
           :min-value="minServiceDate"
           :default-value="minServiceDate"
           size="xl"
-          variant="subtle"
         >
           <template #trailing>
             <UPopover :reference="inputDate?.inputsRef[3]?.$el">
@@ -96,7 +92,7 @@
         />
       </UFormField>
       <UFormField
-        class="col-span-2"
+        class="lg:col-span-2"
         label="Uwagi do zamówienia:"
         name="order_note"
       >
@@ -104,7 +100,6 @@
           class="w-full"
           :rows="4"
           size="xl"
-          variant="subtle"
           v-model="state.order_note"
           placeholder="Dodatkowe informacje, alergie, preferencje, inne..."
         />
@@ -118,7 +113,10 @@
         variant="card"
         size="xl"
         class="col-span-2"
-        :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
+        :ui="{
+          fieldset: 'grid grid-cols-1 sm:grid-cols-2 gap-4',
+          description: 'text-sm',
+        }"
         :items="[
           {
             value: 'pickup',
@@ -156,7 +154,7 @@
     </UFormField>
     <div
       v-if="state.order_fulfillment_method === 'delivery'"
-      class="grid grid-cols-2 gap-4"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-4"
     >
       <UFormField
         name="order_delivery_street"
@@ -189,14 +187,17 @@
     </div>
 
     <USeparator class="my-4 uppercase">Płatność</USeparator>
-    <div class="grid grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <UFormField name="order_payment_method" class="col-span-2">
         <URadioGroup
           class="w-full"
           orientation="horizontal"
           variant="card"
           size="xl"
-          :ui="{ fieldset: 'grid grid-cols-2 gap-4', description: 'text-sm' }"
+          :ui="{
+            fieldset: 'grid grid-cols-1 sm:grid-cols-2 gap-4',
+            description: 'text-sm',
+          }"
           v-model="state.order_payment_method"
           :items="[
             {
@@ -225,13 +226,12 @@
     </div>
     <div
       v-if="state.order_invoice_required"
-      class="grid grid-cols-2 gap-4 mt-4"
+      class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4"
     >
       <UFormField name="company_name" label="Nazwa firmy" required>
         <UInput
           v-model="state.company_name"
           size="xl"
-          variant="subtle"
           class="w-full"
           placeholder="Firma Sp. z o.o."
         />
@@ -240,7 +240,6 @@
         <UInput
           v-model="state.company_nip"
           size="xl"
-          variant="subtle"
           placeholder="123-456-78-90"
           class="w-full"
         />
@@ -254,7 +253,6 @@
         <UInput
           v-model="state.company_address"
           size="xl"
-          variant="subtle"
           class="w-full"
           placeholder="ul. Przykładowa 1, 00-000"
         />
