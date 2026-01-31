@@ -51,7 +51,7 @@
                 <ProductFilter />
 
                 <!-- PRODUCTS -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-4">
                   <ProductCard
                     v-for="product in filteredProducts"
                     :key="product.id"

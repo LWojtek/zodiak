@@ -9,6 +9,8 @@ import {
 import { throttle } from "@/utilities/throttle";
 
 export const useNavigation = () => {
+  const route = useRoute();
+
   const links = [
     { id: "home", label: "Home" },
     { id: "przyjecia", label: "Przyjęcia i catering" },
@@ -60,6 +62,7 @@ export const useNavigation = () => {
   const onResize = throttledUpdateUnderline;
 
   const onScroll = throttle(() => {
+    if (route.fullPath.includes("order")) return;
     isScrolled.value = window.scrollY > 300;
   }, 100);
 

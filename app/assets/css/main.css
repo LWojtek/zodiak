@@ -104,7 +104,8 @@
   );
   --ui-text: var(--color-black-900);
   --ui-text-dimmed: var(--color-gray-200);
-  --ui-bg-elevated: var(--color-primary);
+  --ui-text-muted: var(--color-black-400);
+  --ui-bg-elevated: var(--color-almond-100);
 }
 
 @media screen and (max-width: 1023px) {
