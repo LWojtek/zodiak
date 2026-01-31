@@ -1,20 +1,18 @@
 <template>
-  <div class="flex flex-col grow gap-8 bg-almond-50">
+  <div class="flex flex-col grow gap-8">
     <UTabs
       :items="tabs"
       :content="false"
       v-model="tab"
+      color="primary"
       default-value="orders"
       :ui="{
         list: 'bg-white border border-primary-100',
         trigger: 'cursor-pointer data-[state=inactive]:text-primary/90',
+        indicator: 'bg-primary',
       }"
     />
-    <div
-      class="grow bg-white p-4 rounded-lg border border-primary-100 shadow-sm"
-    >
-      <component :is="component" />
-    </div>
+    <component :is="component" />
   </div>
 </template>
 
@@ -23,12 +21,19 @@ definePageMeta({
   layout: "admin",
   middleware: "auth",
 });
-
+const route = useRoute();
 const tab = ref("orders");
 
 watch(tab, (newTab) => {
   navigateTo({ query: { tab: newTab } });
 });
+
+onMounted(() => {
+  if (route.query?.tab) {
+    tab.value = route.query.tab;
+  }
+});
+
 const tabs = [
   {
     label: "Zamówienia",
@@ -39,11 +44,6 @@ const tabs = [
     label: "Kategorie",
     value: "categories",
     component: defineAsyncComponent(() => import("./partials/categories.vue")),
-  },
-  {
-    label: "Zestawy",
-    value: "sets",
-    component: defineAsyncComponent(() => import("./partials/sets.vue")),
   },
   {
     label: "Produkty",

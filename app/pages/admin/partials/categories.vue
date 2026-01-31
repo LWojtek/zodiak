@@ -1,25 +1,42 @@
 <template>
   <div class="h-full flex flex-col gap-4">
     <!-- HEADER -->
-    <div
-      class="flex items-center justify-between pb-4 border-b border-primary-100"
-    >
+    <div class="flex items-center justify-between">
       <h2 class="font-semibold text-lg">Kategorie</h2>
       <UButton
         size="sm"
-        leading-icon="i-lucide-plus"
-        label="Utwórz kategorię"
+        icon="i-lucide-plus"
+        label="Dodaj kategorię"
         variant="subtle"
-        @click="open = true"
+        @click="openCreate"
       />
     </div>
 
     <!-- TABLE -->
     <UTable
       :data="categories"
-      :loading="status === 'pending'"
       :columns="columns"
+      :loading="status === 'pending'"
+      class="rounded-lg border border-primary-100 bg-white"
+      :ui="{ th: 'bg-primary/10', td: 'last:text-right' }"
     >
+      <template #actions-cell="{ row }">
+        <div class="flex justify-end gap-2">
+          <UButton
+            size="xs"
+            icon="i-lucide-pencil"
+            variant="ghost"
+            @click="openEdit(row.original)"
+          />
+          <UButton
+            size="xs"
+            icon="i-lucide-trash"
+            color="error"
+            variant="ghost"
+            @click="askDelete(row.original)"
+          />
+        </div>
+      </template>
       <template #empty>
         <div
           class="flex items-center justify-center min-h-24 text-sm text-gray-500"
@@ -35,88 +52,83 @@
       </template>
     </UTable>
 
-    <!-- CREATE CATEGORY MODAL -->
+    <!-- CREATE / EDIT MODAL -->
     <UModal
       v-model:open="open"
-      title="Tworzenie kategorii"
-      :ui="{ content: 'max-w-xs', footer: 'flex flex-col' }"
+      title="Kategoria"
+      :ui="{ content: 'max-w-sm' }"
       @after:leave="resetForm"
     >
       <template #body>
         <UForm
-          ref="form"
-          class="flex flex-col gap-4"
-          :state="state"
+          ref="formRef"
+          :state="form"
           :schema="schema"
-          @submit="addCategory"
+          @submit="saveCategory"
+          class="flex flex-col gap-4"
         >
-          <UFormField label="Nazwa kategorii" name="name">
+          <UFormField label="Nazwa" name="name">
             <UInput
               size="xl"
-              v-model="state.name"
-              @update:model-value="state.slug = slugify($event)"
+              v-model="form.name"
               class="w-full"
+              @update:model-value="form.slug = slugify($event)"
             />
           </UFormField>
 
-          <UFormField label="Slug">
+          <!-- <UFormField label="Slug">
             <UInput
-              :disabled="true"
               size="xl"
-              v-model="state.slug"
+              v-model="form.slug"
               disabled
-              class="w-ful"
+              class="w-full"
               :ui="{ base: 'disabled:opacity-50' }"
             />
-          </UFormField>
+          </UFormField> -->
         </UForm>
       </template>
 
       <template #footer>
-        <p v-if="state.error" class="text-error text-sm font-medium">
-          {{ state.error }}
-        </p>
-
-        <div class="flex self-stretch justify-between gap-4 mt-4">
-          <UButton variant="subtle" size="sm" @click="open = false">
+        <div class="flex justify-between grow gap-4">
+          <UButton size="sm" variant="subtle" @click="open = false">
             Anuluj
           </UButton>
-          <UButton size="sm" :loading="state.loading" @click="form.submit()">
-            Utwórz
+          <UButton size="sm" :loading="form.loading" @click="formRef.submit()">
+            Zapisz
           </UButton>
         </div>
       </template>
     </UModal>
 
-    <!-- CONFIRM DELETE MODAL -->
+    <!-- DELETE CONFIRM -->
     <UModal
-      v-model:open="confirmOpen"
-      title="Jesteś pewien?"
-      :ui="{ content: 'max-w-xs', footer: 'flex flex-col gap-3' }"
+      v-model:open="deleteOpen"
+      title="Usuń kategorię"
+      :ui="{ content: 'max-w-sm' }"
     >
       <template #body>
         <p class="text-sm">
           Czy na pewno chcesz usunąć kategorię
-          <strong>{{ categoryToDelete?.name }}</strong
+          <strong>{{ deleting?.name }}</strong
           >?
+          <br />
+          <span class="font-medium"> Tej operacji nie można cofnąć. </span>
         </p>
-
-        <p class="text-sm font-medium mt-2">Tej operacji nie można cofnąć.</p>
       </template>
 
       <template #footer>
-        <div class="flex self-stretch justify-between gap-4">
-          <UButton variant="subtle" size="sm" @click="confirmOpen = false">
+        <div class="flex justify-between grow gap-4">
+          <UButton variant="subtle" @click="deleteOpen = false" size="sm">
             Anuluj
           </UButton>
           <UButton
             color="error"
-            size="sm"
+            :loading="deletingLoading"
+            @click="deleteCategory"
             variant="subtle"
-            :loading="deleting === categoryToDelete?.id"
-            @click="confirmDelete"
+            size="sm"
           >
-            Usuń kategorię
+            Usuń
           </UButton>
         </div>
       </template>
@@ -127,27 +139,173 @@
 <script setup>
 import { object, string } from "yup";
 
-/* ---------- STATE ---------- */
-const open = ref(false);
-const confirmOpen = ref(false);
-const deleting = ref(null);
-const categoryToDelete = ref(null);
+const supabase = useSupabaseClient();
 
-const state = reactive({
+/* ================= DATA ================= */
+
+const { data, refresh, status } = useAsyncData("categories", async () => {
+  const { data } = await supabase.from("categories").select("*").order("name");
+  return data ?? [];
+});
+
+const categories = computed(() => data.value ?? []);
+
+/* ================= TABLE ================= */
+
+const columns = [
+  { header: "Nazwa", accessorKey: "name" },
+  { header: "Slug", accessorKey: "slug" },
+
+  {
+    header: "Utworzono",
+    cell: ({ row }) =>
+      new Intl.DateTimeFormat("pl-PL", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(row.original.created_at)),
+  },
+  {
+    header: "Aktywna",
+    cell: ({ row }) =>
+      h(resolveComponent("USwitch"), {
+        modelValue: row.original.is_active,
+        loading: toggling.value === row.original.id,
+        color: "success",
+        "onUpdate:modelValue": () => toggleActive(row.original),
+      }),
+  },
+  { id: "actions" },
+];
+
+/* ================= FORM ================= */
+
+const open = ref(false);
+const formRef = ref();
+
+const form = reactive({
+  id: null,
   name: "",
   slug: "",
   loading: false,
-  error: null,
 });
 
-const form = ref();
-
-/* ---------- VALIDATION ---------- */
 const schema = object({
   name: string().required("To pole jest wymagane"),
 });
 
-/* ---------- HELPERS ---------- */
+const resetForm = () => {
+  form.id = null;
+  form.name = "";
+  form.slug = "";
+  form.loading = false;
+};
+
+const openCreate = () => {
+  resetForm();
+  open.value = true;
+};
+
+const openEdit = (category) => {
+  resetForm();
+  Object.assign(form, category);
+  open.value = true;
+};
+
+/* ================= SAVE ================= */
+
+const saveCategory = async () => {
+  if (!form.name || !form.slug) return;
+
+  form.loading = true;
+
+  if (!form.id) {
+    // CREATE
+    const { error } = await supabase.from("categories").insert({
+      name: form.name,
+      slug: form.slug,
+    });
+
+    if (error) {
+      console.error(error);
+      form.loading = false;
+      return;
+    }
+  } else {
+    // UPDATE
+    const { error } = await supabase
+      .from("categories")
+      .update({
+        name: form.name,
+        slug: form.slug,
+      })
+      .eq("id", form.id);
+
+    if (error) {
+      console.error(error);
+      form.loading = false;
+      return;
+    }
+  }
+
+  await refresh();
+  open.value = false;
+};
+
+/* ================= DELETE ================= */
+
+const deleteOpen = ref(false);
+const deleting = ref(null);
+const deletingLoading = ref(false);
+
+const askDelete = (category) => {
+  deleting.value = category;
+  deleteOpen.value = true;
+};
+
+const deleteCategory = async () => {
+  if (!deleting.value) return;
+
+  deletingLoading.value = true;
+
+  const { error } = await supabase
+    .from("categories")
+    .delete()
+    .eq("id", deleting.value.id);
+
+  deletingLoading.value = false;
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  deleteOpen.value = false;
+  deleting.value = null;
+  await refresh();
+};
+
+const toggling = ref(null);
+
+const toggleActive = async (category) => {
+  toggling.value = category.id;
+
+  const { error } = await supabase
+    .from("categories")
+    .update({ is_active: !category.is_active })
+    .eq("id", category.id);
+
+  if (error) {
+    console.error("Toggle category error:", error);
+    alert("Nie udało się zmienić statusu kategorii");
+  } else {
+    await refresh();
+  }
+
+  toggling.value = null;
+};
+
+/* ================= HELPERS ================= */
+
 const slugify = (text) =>
   text
     .toLowerCase()
@@ -155,118 +313,4 @@ const slugify = (text) =>
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
-
-/* ---------- SUPABASE ---------- */
-const supabase = useSupabaseClient();
-
-const { data, refresh, status } = await useLazyAsyncData(
-  "categories",
-  async () => {
-    const { data } = await supabase
-      .from("categories")
-      .select("*")
-      .order("name");
-    return data ?? [];
-  },
-);
-
-const categories = computed(() => data.value ?? []);
-
-/* ---------- TABLE ---------- */
-const UButton = resolveComponent("UButton");
-
-const columns = [
-  {
-    header: "Nazwa",
-    cell: ({ row }) => row.original.name,
-  },
-  {
-    header: "Slug",
-    cell: ({ row }) => row.original.slug,
-  },
-  {
-    header: "Utworzono",
-    cell: ({ row }) => {
-      const date = new Date(row.original.created_at);
-      return new Intl.DateTimeFormat("pl-PL", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(date);
-    },
-  },
-  {
-    id: "actions",
-    cell: ({ row }) =>
-      h(UButton, {
-        icon: "i-lucide-trash",
-        color: "error",
-        variant: "subtle",
-        square: true,
-        size: "md",
-        class: "p-2 rounded-full",
-        ui: {
-          leadingIcon: "size-4",
-        },
-        loading: deleting.value === row.original.id,
-        onClick: () => {
-          categoryToDelete.value = row.original;
-          confirmOpen.value = true;
-        },
-      }),
-  },
-];
-
-/* ---------- ACTIONS ---------- */
-const resetForm = () => {
-  state.name = "";
-  state.slug = "";
-  state.error = null;
-  state.loading = false;
-};
-
-const addCategory = async () => {
-  if (!state.name || !state.slug) return;
-
-  state.loading = true;
-  state.error = null;
-
-  const { error } = await supabase.from("categories").insert({
-    name: state.name,
-    slug: state.slug,
-  });
-
-  if (error) {
-    state.error = error.message;
-    state.loading = false;
-    return;
-  }
-
-  await refresh();
-  open.value = false;
-  resetForm();
-};
-
-const confirmDelete = async () => {
-  if (!categoryToDelete.value) return;
-
-  deleting.value = categoryToDelete.value.id;
-
-  try {
-    await supabase
-      .from("categories")
-      .delete()
-      .eq("id", categoryToDelete.value.id);
-
-    await refresh();
-    confirmOpen.value = false;
-    categoryToDelete.value = null;
-  } catch (e) {
-    console.error(e);
-  } finally {
-    deleting.value = null;
-  }
-};
 </script>

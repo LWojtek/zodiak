@@ -1,8 +1,8 @@
 <template>
   <div>
-    <UHeader class="shadow-sm" :toggle="false">
+    <UHeader class="shadow-sm bg-almond-50 text-primary-950" :toggle="false">
       <template #left>
-        <NuxtLink to="/" class="flex items-center gap-2">
+        <NuxtLink to="/admin" class="flex items-center gap-2">
           <UIcon name="i-lucide-chef-hat" class="size-7" />
           <h1 class="text-xl font-semibold">Panel Admina</h1>
         </NuxtLink>
@@ -13,8 +13,7 @@
           @click="logout"
           size="sm"
           trailing-icon="i-lucide-log-out"
-          variant="subtle"
-          color="error"
+          variant="solid"
         >
           Wyloguj
         </UButton>
@@ -22,7 +21,7 @@
     </UHeader>
 
     <UMain class="flex">
-      <UContainer class="flex flex-col bg-almond-50 grow gap-8 py-8">
+      <UContainer class="flex flex-col grow gap-8 py-8">
         <slot />
       </UContainer>
     </UMain>
