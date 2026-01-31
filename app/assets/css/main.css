@@ -104,11 +104,7 @@
   );
   --ui-text: var(--color-black-900);
   --ui-text-dimmed: var(--color-gray-200);
-  --ui-bg-elevated: color-mix(
-    in oklab,
-    var(--color-almond-50) 40%,
-    transparent
-  );
+  --ui-bg-elevated: var(--color-primary);
 }
 
 @media screen and (max-width: 1023px) {

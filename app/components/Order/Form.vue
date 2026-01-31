@@ -15,7 +15,6 @@
         <UInput
           class="w-full"
           size="xl"
-          variant="subtle"
           v-model="state.customer_name"
           placeholder="Jan Kowalski"
         />
@@ -24,7 +23,6 @@
         <UInput
           class="w-full"
           size="xl"
-          variant="subtle"
           v-model="state.customer_phone"
           placeholder="+48 123 456 789"
         />
@@ -37,7 +35,6 @@
       >
         <UInput
           class="w-full"
-          variant="subtle"
           size="xl"
           v-model="state.customer_email"
           placeholder="jan@example.com"
@@ -54,7 +51,6 @@
           :min-value="minServiceDate"
           :default-value="minServiceDate"
           size="xl"
-          variant="subtle"
         >
           <template #trailing>
             <UPopover :reference="inputDate?.inputsRef[3]?.$el">
@@ -104,7 +100,6 @@
           class="w-full"
           :rows="4"
           size="xl"
-          variant="subtle"
           v-model="state.order_note"
           placeholder="Dodatkowe informacje, alergie, preferencje, inne..."
         />
@@ -231,7 +226,6 @@
         <UInput
           v-model="state.company_name"
           size="xl"
-          variant="subtle"
           class="w-full"
           placeholder="Firma Sp. z o.o."
         />
@@ -240,7 +234,6 @@
         <UInput
           v-model="state.company_nip"
           size="xl"
-          variant="subtle"
           placeholder="123-456-78-90"
           class="w-full"
         />
@@ -254,7 +247,6 @@
         <UInput
           v-model="state.company_address"
           size="xl"
-          variant="subtle"
           class="w-full"
           placeholder="ul. Przykładowa 1, 00-000"
         />
