@@ -10,6 +10,7 @@
         trigger: 'cursor-pointer data-[state=inactive]:text-primary/90',
         indicator: 'bg-primary',
       }"
+      class="w-full"
       @update:model-value="category = categories[$event].slug"
     />
   </div>
