@@ -6,7 +6,7 @@
     <template v-else>
       <div
         class="sticky z-1 bg-white transition-all"
-        :class="[isScrolled ? 'lg:top-18' : 'lg:top-22']"
+        :class="[isScrolled ? 'lg:top-18' : 'lg:top-20']"
       >
         <UContainer class="flex items-center justify-between py-4">
           <UButton variant="ghost" size="sm" to="/" class="-translate-x-4">

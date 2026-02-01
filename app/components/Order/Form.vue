@@ -418,7 +418,10 @@ const handleSubmit = async () => {
   const supabase = useSupabaseClient();
 
   try {
-    const { data: order, error } = await supabase
+    /* =========================
+       1. CREATE ORDER
+    ========================= */
+    const { data: order, error: orderError } = await supabase
       .from("orders")
       .insert({
         customer_name: state.customer_name,
@@ -428,6 +431,7 @@ const handleSubmit = async () => {
         fulfillment_method: state.order_fulfillment_method,
         service_date: formatDateForDb(state.service_date),
         service_time: formatTimeForDb(state.service_time),
+
         delivery_address_city:
           state.order_fulfillment_method === "delivery"
             ? state.order_delivery_city
@@ -440,41 +444,90 @@ const handleSubmit = async () => {
           state.order_fulfillment_method === "delivery"
             ? state.order_delivery_street_number
             : null,
+
         payment_method: state.order_payment_method,
         payment_status: "pending",
         status: "new",
         notes: state.order_note || null,
-        total_price: totalPrice.value,
+
+        total_price: Number(totalPrice.value),
         currency: "PLN",
         invoice_required: state.order_invoice_required,
       })
       .select()
       .single();
 
-    if (error) throw error;
+    if (orderError) throw orderError;
 
-    await supabase.from("order_items").insert(
-      cart.value.map((item) => ({
-        order_id: order.id,
-        product_id: item.productId,
-        product_name: item.name,
-        unit_price: item.price,
-        qty: item.qty,
-        total_price: item.price * item.qty,
-      })),
-    );
+    /* =========================
+       2. INSERT ORDER ITEMS
+       (BEZ DOSTAWY)
+    ========================= */
+    const cartItems = cart.value.filter((item) => item.productId !== 0);
 
-    if (state.order_invoice_required) {
-      await supabase.from("invoice_details").insert({
-        order_id: order.id,
-        company_name: state.company_name,
-        company_nip: state.company_nip,
-        company_address: state.company_address,
+    const orderItemsPayload = cartItems.map((item) => ({
+      order_id: order.id,
+      product_id: item.productId,
+      product_name: item.name,
+      unit_price: Number(item.unitPrice),
+      qty: item.qty,
+      total_price: Number(item.unitPrice) * item.qty,
+    }));
+
+    const { data: insertedItems, error: itemsError } = await supabase
+      .from("order_items")
+      .insert(orderItemsPayload)
+      .select();
+
+    if (itemsError) throw itemsError;
+
+    /* =========================
+       3. INSERT ADDONS (1:1)
+    ========================= */
+    const addonsPayload = [];
+
+    insertedItems.forEach((orderItem, index) => {
+      const cartItem = cartItems[index];
+      if (!cartItem?.addons?.length) return;
+
+      cartItem.addons.forEach((addon) => {
+        addonsPayload.push({
+          order_item_id: orderItem.id,
+          addon_id: addon.id ?? null,
+          addon_name: addon.name,
+          addon_price: Number(addon.price),
+          qty: cartItem.qty,
+        });
       });
+    });
+
+    if (addonsPayload.length) {
+      const { error: addonsError } = await supabase
+        .from("order_item_addons")
+        .insert(addonsPayload);
+
+      if (addonsError) throw addonsError;
     }
 
-    console.log(state.order_payment_method);
+    /* =========================
+       4. INVOICE DETAILS
+    ========================= */
+    if (state.order_invoice_required) {
+      const { error: invoiceError } = await supabase
+        .from("invoice_details")
+        .insert({
+          order_id: order.id,
+          company_name: state.company_name,
+          company_nip: state.company_nip,
+          company_address: state.company_address,
+        });
 
+      if (invoiceError) throw invoiceError;
+    }
+
+    /* =========================
+       5. PAYMENT / REDIRECT
+    ========================= */
     if (state.order_payment_method === "online") {
       const { redirectUrl } = await $fetch("/api/payu/create", {
         method: "POST",
@@ -487,6 +540,7 @@ const handleSubmit = async () => {
 
     navigateTo(`/order/success?id=${order.id}&payment_method=onsite`);
   } catch (err) {
+    console.error(err);
     state.error = "Coś poszło nie tak. Spróbuj ponownie później.";
   } finally {
     state.loading = false;

@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
   if (payuStatus === "COMPLETED") {
     update = {
       payment_status: "paid",
-      status: "paid",
+      status: "new",
       payu_order_id: payuOrderId,
     };
   }
@@ -80,7 +80,7 @@ export default defineEventHandler(async (event) => {
   if (payuStatus === "CANCELED" || payuStatus === "REJECTED") {
     update = {
       payment_status: "failed",
-      status: "payment_failed",
+      status: "pending_payment",
       payu_order_id: payuOrderId,
     };
   }
