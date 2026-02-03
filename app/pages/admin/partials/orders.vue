@@ -454,7 +454,7 @@ const columns = [
     header: "Status zamówienia",
     cell: ({ row }) =>
       h(USelect, {
-        size: "xs",
+        size: "md",
         modelValue: row.original.status,
 
         items: Object.values(dictionary.orderStatuses),
@@ -476,7 +476,7 @@ const columns = [
       row.original.payment_method === "online"
         ? dictionary.paymentStatuses[row.original.payment_status].label
         : h(USelect, {
-            size: "xs",
+            size: "md",
             modelValue: row.original.payment_status,
             items: Object.values(dictionary.paymentStatuses),
             valueKey: "value",
