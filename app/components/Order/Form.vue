@@ -447,7 +447,8 @@ const handleSubmit = async () => {
 
         payment_method: state.order_payment_method,
         payment_status: "pending",
-        status: "new",
+        status:
+          state.order_payment_method === "onsite" ? "pending_payment" : "new",
         notes: state.order_note || null,
 
         total_price: Number(totalPrice.value),
