@@ -1,56 +1,63 @@
 <template>
   <div class="h-full flex flex-col gap-4">
     <!-- HEADER -->
-    <div class="flex items-center justify-between">
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4"
+    >
       <h2 class="font-semibold text-lg">Kategorie</h2>
       <UButton
         size="sm"
         icon="i-lucide-plus"
         label="Dodaj kategorię"
         variant="subtle"
+        class="w-full md:w-auto"
         @click="openCreate"
       />
     </div>
 
     <!-- TABLE -->
-    <UTable
-      :data="categories"
-      :columns="columns"
-      :loading="status === 'pending'"
-      class="rounded-lg border border-primary-100 bg-white"
-      :ui="{ th: 'bg-primary/10', td: 'last:text-right' }"
-    >
-      <template #actions-cell="{ row }">
-        <div class="flex justify-end gap-2">
-          <UButton
-            size="xs"
-            icon="i-lucide-pencil"
-            variant="ghost"
-            @click="openEdit(row.original)"
-          />
-          <UButton
-            size="xs"
-            icon="i-lucide-trash"
-            color="error"
-            variant="ghost"
-            @click="askDelete(row.original)"
-          />
-        </div>
-      </template>
-      <template #empty>
-        <div
-          class="flex items-center justify-center min-h-24 text-sm text-gray-500"
-        >
-          Brak kategorii
-        </div>
-      </template>
+    <div class="overflow-x-auto rounded-lg border border-primary-100 bg-white">
+      <UTable
+        :data="categories"
+        :columns="columns"
+        :loading="status === 'pending'"
+        :ui="{
+          th: 'bg-primary/10 text-xs md:text-sm',
+          td: 'last:text-right text-xs md:text-sm p-2 md:p-3',
+        }"
+      >
+        <template #actions-cell="{ row }">
+          <div class="flex justify-end gap-2">
+            <UButton
+              size="xs"
+              icon="i-lucide-pencil"
+              variant="ghost"
+              @click="openEdit(row.original)"
+            />
+            <UButton
+              size="xs"
+              icon="i-lucide-trash"
+              color="error"
+              variant="ghost"
+              @click="askDelete(row.original)"
+            />
+          </div>
+        </template>
+        <template #empty>
+          <div
+            class="flex items-center justify-center min-h-24 text-sm text-gray-500"
+          >
+            Brak kategorii
+          </div>
+        </template>
 
-      <template #loading>
-        <div class="min-h-40 flex items-center justify-center">
-          <Spinner />
-        </div>
-      </template>
-    </UTable>
+        <template #loading>
+          <div class="min-h-40 flex items-center justify-center">
+            <Spinner />
+          </div>
+        </template>
+      </UTable>
+    </div>
 
     <!-- CREATE / EDIT MODAL -->
     <UModal

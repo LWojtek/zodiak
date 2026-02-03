@@ -1,10 +1,14 @@
 <template>
   <div class="flex flex-col gap-4">
     <!-- HEADER -->
-    <div class="flex items-center justify-between gap-4">
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-4"
+    >
       <h2 class="text-lg font-semibold">Pozycje cateringowe</h2>
 
-      <div class="flex items-center gap-4">
+      <div
+        class="flex flex-col md:flex-row md:items-center gap-3 md:gap-4 w-full md:w-auto"
+      >
         <USelect
           v-model="selectedCategoryId"
           :items="categoryFilterItems"
@@ -12,7 +16,7 @@
           value-key="id"
           placeholder="Wszystkie kategorie"
           size="md"
-          class="w-56"
+          class="w-full md:w-56"
           clearable
         />
 
@@ -21,50 +25,55 @@
           icon="i-lucide-plus"
           label="Dodaj pozycję"
           variant="subtle"
+          class="w-full md:w-auto"
           @click="openCreate"
         />
       </div>
     </div>
 
     <!-- TABLE -->
-    <UTable
-      :data="status === 'pending' ? undefined : filteredProducts"
-      :columns="columns"
-      :loading="status === 'pending'"
-      class="rounded-lg border border-primary-100 bg-white"
-      :ui="{ th: 'bg-primary/10' }"
-    >
-      <template #actions-cell="{ row }">
-        <div class="flex justify-end gap-2">
-          <UButton
-            size="xs"
-            icon="i-lucide-pencil"
-            variant="ghost"
-            @click="openEdit(row.original)"
-          />
-          <UButton
-            size="xs"
-            icon="i-lucide-trash"
-            color="error"
-            variant="ghost"
-            @click="confirmDelete(row.original)"
-          />
-        </div>
-      </template>
-      <template #empty>
-        <div
-          class="flex items-center justify-center min-h-24 text-sm text-gray-500"
-        >
-          Brak produktów
-        </div>
-      </template>
+    <div class="overflow-x-auto rounded-lg border border-primary-100 bg-white">
+      <UTable
+        :data="status === 'pending' ? undefined : filteredProducts"
+        :columns="columns"
+        :loading="status === 'pending'"
+        :ui="{
+          th: 'bg-primary/10 text-xs md:text-sm',
+          td: 'text-xs md:text-sm p-2 md:p-3',
+        }"
+      >
+        <template #actions-cell="{ row }">
+          <div class="flex justify-end gap-2">
+            <UButton
+              size="xs"
+              icon="i-lucide-pencil"
+              variant="ghost"
+              @click="openEdit(row.original)"
+            />
+            <UButton
+              size="xs"
+              icon="i-lucide-trash"
+              color="error"
+              variant="ghost"
+              @click="confirmDelete(row.original)"
+            />
+          </div>
+        </template>
+        <template #empty>
+          <div
+            class="flex items-center justify-center min-h-24 text-sm text-gray-500"
+          >
+            Brak produktów
+          </div>
+        </template>
 
-      <template #loading>
-        <div class="min-h-40 flex items-center justify-center">
-          <Spinner />
-        </div>
-      </template>
-    </UTable>
+        <template #loading>
+          <div class="min-h-40 flex items-center justify-center">
+            <Spinner />
+          </div>
+        </template>
+      </UTable>
+    </div>
 
     <!-- PRODUCT MODAL -->
     <UModal

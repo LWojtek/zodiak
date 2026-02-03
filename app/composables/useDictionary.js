@@ -31,36 +31,50 @@ export const useDictionary = () => {
       pending_payment: {
         value: "pending_payment",
         label: "Oczekiwanie na płatność",
-        color: "yellow",
+        color: "warning",
       },
-      paid: {
-        value: "paid",
-        label: "Opłacone",
-        color: "green",
+      new: {
+        value: "new",
+        label: "Nowe (opłacone)",
+        color: "neutral",
       },
-      payment_failed: {
-        value: "payment_failed",
-        label: "Płatność nieudana",
-        color: "red",
+      in_progress: {
+        value: "in_progress",
+        label: "W realizacji",
+        color: "info",
+      },
+      ready: {
+        value: "ready",
+        label: "Gotowe",
+        color: "info",
+      },
+      completed: {
+        value: "completed",
+        label: "Zrealizowane",
+        color: "success",
+      },
+      canceled: {
+        value: "canceled",
+        label: "Anulowane",
+        color: "error",
       },
     },
-
     // PAYMENT STATUSES (stored in 'payment_status' field)
     paymentStatuses: {
       pending: {
         value: "pending",
         label: "Oczekujące",
-        color: "yellow",
+        color: "warning",
       },
       paid: {
         value: "paid",
         label: "Opłacone",
-        color: "green",
+        color: "success",
       },
       failed: {
         value: "failed",
         label: "Nieudana",
-        color: "red",
+        color: "error",
       },
     },
   };

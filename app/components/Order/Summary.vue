@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- HEADER -->
     <div class="flex items-center gap-4">
       <div
         class="flex items-center justify-center p-2 rounded-lg text-primary bg-primary/10 ring ring-accented"
@@ -13,14 +14,44 @@
     </div>
 
     <!-- CART ITEMS -->
-    <div v-if="cart.length" class="mt-4 space-y-2">
+    <div v-if="cart.length" class="mt-4 space-y-3">
       <div
         v-for="item in cart"
-        :key="item.productId"
-        class="flex justify-between text-sm"
+        :key="item.key"
+        class="flex flex-col gap-1 text-sm"
       >
-        <span>{{ item.name }} × {{ item.qty }}</span>
-        <span>{{ formatPrice(item.price * item.qty) }}</span>
+        <!-- PRODUCT -->
+        <div class="flex justify-between font-medium">
+          <span>{{ item.name }} × {{ item.qty }}</span>
+          <span>
+            {{ formatPrice(item.basePrice * item.qty) }}
+          </span>
+        </div>
+
+        <!-- ADDONS -->
+        <div
+          v-if="item.addons?.length"
+          class="pl-4 text-xs text-muted space-y-1"
+        >
+          <div
+            v-for="addon in item.addons"
+            :key="addon.id"
+            class="flex justify-between"
+          >
+            <span>+ {{ addon.name }} × {{ item.qty }}</span>
+            <span>
+              {{ formatPrice(addon.price * item.qty) }}
+            </span>
+          </div>
+        </div>
+
+        <!-- ITEM TOTAL (optional, comment out if you don’t want it) -->
+        <div class="flex justify-between text-xs text-muted pt-1">
+          <span>Razem</span>
+          <span>
+            {{ formatPrice(item.unitPrice * item.qty) }}
+          </span>
+        </div>
       </div>
 
       <!-- TOTAL -->

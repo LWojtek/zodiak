@@ -62,14 +62,14 @@
         <div class="flex justify-between items-center lg:col-start-4">
           <!-- ADD / +/- -->
           <div
-            v-if="isInCart(product.id)"
+            v-if="getProductQty(product.id) > 0"
             class="flex items-center gap-2 w-full rounded-lg pl-5 pr-1 py-1 border border-primary-100"
           >
             <span class="justify-start"> Ilość </span>
             <UButton
               size="sm"
               variant="subtle"
-              @click="removeFromCart(product.id)"
+              @click="removeOneProduct(product.id)"
               class="ml-auto"
             >
               <template #leading>
@@ -78,10 +78,10 @@
             </UButton>
 
             <span class="min-w-6 text-center">
-              {{ getCartItem(product.id).qty }}
+              {{ getProductQty(product.id) }}
             </span>
 
-            <UButton size="sm" variant="subtle" @click="addToCart(product)">
+            <UButton size="sm" variant="subtle" @click="addonModalOpen = true">
               <template #leading>
                 <UIcon name="i-lucide-plus" />
               </template>
@@ -92,7 +92,7 @@
             v-else
             size="sm"
             class="w-full justify-center"
-            @click="addToCart(product)"
+            @click="addonModalOpen = true"
             leading-icon="i-lucide-plus"
           >
             Dodaj
@@ -101,6 +101,12 @@
       </div>
     </template>
   </UCard>
+
+  <ProductAddModal
+    v-model:open="addonModalOpen"
+    :product="product"
+    @confirm="handleConfirmAdd"
+  />
 </template>
 <script setup>
 const props = defineProps({
@@ -109,10 +115,14 @@ const props = defineProps({
     default: () => {},
   },
 });
-const { formatPrice, removeFromCart, addToCart, isInCart, getCartItem } =
-  useOrder();
+const { formatPrice, addToCart, getProductQty, removeOneProduct } = useOrder();
 
 const open = ref(false);
+
+const addonModalOpen = ref(false);
+const handleConfirmAdd = ({ product, addons, unitPrice }) => {
+  addToCart({ product, addons, unitPrice });
+};
 
 const hasDetails = computed(() => {
   return (

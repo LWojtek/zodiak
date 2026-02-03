@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col grow gap-8">
+  <div class="flex flex-col grow gap-4 md:gap-8">
     <UTabs
       :items="tabs"
       :content="false"
@@ -7,12 +7,15 @@
       color="primary"
       default-value="orders"
       :ui="{
-        list: 'bg-white border border-primary-100',
-        trigger: 'cursor-pointer data-[state=inactive]:text-primary/90',
+        list: 'bg-white border border-primary-100 overflow-x-auto',
+        trigger:
+          'cursor-pointer data-[state=inactive]:text-primary/90 text-xs md:text-sm px-2 md:px-3 py-2',
         indicator: 'bg-primary',
       }"
     />
-    <component :is="component" />
+    <div class="overflow-x-auto md:overflow-visible">
+      <component :is="component" />
+    </div>
   </div>
 </template>
 
@@ -38,21 +41,25 @@ const tabs = [
   {
     label: "Zamówienia",
     value: "orders",
+    icon: "i-lucide-shopping-cart",
     component: defineAsyncComponent(() => import("./partials/orders.vue")),
   },
   {
     label: "Kategorie",
     value: "categories",
+    icon: "i-lucide-boxes",
     component: defineAsyncComponent(() => import("./partials/categories.vue")),
   },
   {
     label: "Produkty",
     value: "products",
+    icon: "i-lucide-beef",
     component: defineAsyncComponent(() => import("./partials/products.vue")),
   },
   {
     label: "Ustawienia formularza zamówień",
     value: "orders-settings",
+    icon: "i-lucide-settings",
     component: defineAsyncComponent(() => import("./partials/settings.vue")),
   },
 ];
