@@ -524,6 +524,7 @@ const columns = [
         UBadge,
         {
           variant: "subtle",
+          size: "lg",
           leadingIcon:
             type === "delivery" ? "i-lucide-car" : "i-lucide-hand-platter",
         },
