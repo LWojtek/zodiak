@@ -32,7 +32,7 @@
       </div>
 
       <ClientOnly>
-        <PageGallery :images="pubImages" />
+        <PageGallery :images="pubImages" :show-desc="false" />
       </ClientOnly>
     </UContainer>
 
@@ -336,23 +336,27 @@
 <script setup>
 const pubImages = [
   {
-    src: "/images/pub1.jpg",
+    src: "/images/pub_1.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/pub2.jpg",
+    src: "/images/pub_2.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/pub3.jpg",
+    src: "/images/pub_3.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/pub4.jpg",
+    src: "/images/pub_4.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
   {
-    src: "/images/pub5.jpg",
+    src: "/images/pub_5.jpg",
+    alt: "Profesjonalne tory do kręgli",
+  },
+  {
+    src: "/images/pub_6.jpg",
     alt: "Profesjonalne tory do kręgli",
   },
 ];

@@ -259,28 +259,36 @@ onMounted(() => {
 });
 const partiesImages = [
   {
-    src: "/images/przyjecia1.jpg",
+    src: "/images/przyjecia_1.webp",
     alt: "Wyborne menu",
   },
   {
-    src: "/images/przyjecia2.jpg",
+    src: "/images/przyjecia_2.webp",
     alt: "Sala weselna",
   },
   {
-    src: "/images/przyjecia3.jpg",
+    src: "/images/przyjecia_3.webp",
     alt: "Sala weselna",
   },
   {
-    src: "/images/przyjecia4.jpg",
+    src: "/images/przyjecia_4.webp",
     alt: "Sala weselna",
   },
   {
-    src: "/images/przyjecia5.jpg",
+    src: "/images/przyjecia_5.webp",
     alt: "Wyborne menu",
   },
   {
-    src: "/images/hero.jpg",
-    alt: "Restauracja Zodiak z zewnątrz",
+    src: "/images/przyjecia_6.webp",
+    alt: "Sala weselna",
+  },
+  {
+    src: "/images/przyjecia_7.webp",
+    alt: "Wyborne menu",
+  },
+  {
+    src: "/images/przyjecia_8.webp",
+    alt: "Sala weselna",
   },
 ];
 </script>
