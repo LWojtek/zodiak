@@ -12,7 +12,7 @@
       class="h-full"
     >
       <UButton
-        class="p-0 sm:p-0 relative group block w-full h-full rounded-lg overflow-hidden max-h-50 sm:max-h-72"
+        class="p-0 sm:p-0 relative group block w-full h-full rounded-lg overflow-hidden max-h-50 sm:min-h-72 sm:max-h-72"
         @click="openModal(index)"
       >
         <NuxtImg
@@ -36,7 +36,7 @@
           <div
             class="mt-auto p-4 flex flex-col gap-1 text-left w-full translate-y-full transition-all duration-300 group-hover:translate-y-0"
           >
-            <p class="text-lg truncate">{{ image.alt }}</p>
+            <p v-if="showDesc" class="text-lg truncate">{{ image.alt }}</p>
             <p class="text-sm text-white/75">Kliknij, aby powiększyć</p>
           </div>
         </div>
@@ -96,6 +96,10 @@ const props = defineProps({
   images: {
     type: Array,
     default: () => [],
+  },
+  showDesc: {
+    type: Boolean,
+    default: true,
   },
 });
 
