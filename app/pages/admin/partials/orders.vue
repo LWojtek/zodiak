@@ -287,6 +287,8 @@ const { data, refresh, status } = useAsyncData("admin-orders", async () => {
 				delivery_address_street,
 				delivery_address_street_number,
 
+				confirmation_email_sent_at,
+
         invoice_details (
           company_name,
           company_nip,
@@ -317,6 +319,17 @@ const { data, refresh, status } = useAsyncData("admin-orders", async () => {
 
   return data ?? [];
 });
+
+const confirmOrder = async (orderId) => {
+  const { data, error } = await supabase.rpc("send_order_confirmation_email", {
+    p_order_id: orderId,
+  });
+
+  console.log("RPC DATA:", data);
+  console.log("RPC ERROR:", error);
+
+  if (error) throw error;
+};
 
 const orders = computed(() => data.value ?? []);
 
@@ -417,6 +430,8 @@ const invoiceFilterOptions = [
   { value: false, label: "Paragon" },
 ];
 
+const loadingOrderId = ref(null);
+
 const columns = [
   {
     id: "expand",
@@ -473,21 +488,18 @@ const columns = [
     accessorKey: "payment_status",
     header: "Status płatności",
     cell: ({ row }) =>
-      row.original.payment_method === "online"
-        ? dictionary.paymentStatuses[row.original.payment_status].label
-        : h(USelect, {
-            size: "md",
-            modelValue: row.original.payment_status,
-            items: Object.values(dictionary.paymentStatuses),
-            valueKey: "value",
-            labelKey: "label",
-            class: "min-w-32",
-            disabled: row.original.payment_method === "online",
+      h(USelect, {
+        size: "md",
+        modelValue: row.original.payment_status,
+        items: Object.values(dictionary.paymentStatuses),
+        valueKey: "value",
+        labelKey: "label",
+        class: "min-w-32",
 
-            "onUpdate:modelValue": async (v) => {
-              await updateOrder(row.original.id, { payment_status: v });
-            },
-          }),
+        "onUpdate:modelValue": async (v) => {
+          await updateOrder(row.original.id, { payment_status: v });
+        },
+      }),
   },
 
   {
@@ -500,20 +512,20 @@ const columns = [
         currency: "PLN",
       }).format(row.getValue("total_price")),
   },
-  // {
-  //   accessorKey: "created_at",
-  //   header: "Data złożenia zamówienia",
-  //   cell: ({ row }) =>
-  //     new Date(row.getValue("created_at")).toLocaleString("pl-PL"),
-  // },
   {
-    accessorKey: "service_date",
-    header: "Data realizacji",
+    accessorKey: "created_at",
+    header: "Data złożenia zamówienia",
     cell: ({ row }) =>
-      new Date(row.getValue("service_date")).toLocaleDateString("pl-PL") +
-      " " +
-      row.original.service_time,
+      new Date(row.getValue("created_at")).toLocaleString("pl-PL"),
   },
+  // {
+  //   accessorKey: "service_date",
+  //   header: "Data realizacji",
+  //   cell: ({ row }) =>
+  //     new Date(row.getValue("service_date")).toLocaleDateString("pl-PL") +
+  //     " " +
+  //     row.original.service_time,
+  // },
   {
     accessorKey: "fulfillment_method",
     header: "Typ",
@@ -534,6 +546,38 @@ const columns = [
   },
   {
     id: "actions",
+    header: "",
+    cell: ({ row }) => {
+      if (row.original.confirmation_email_sent_at) {
+        return h(
+          "span",
+          { class: "text-xs text-success font-medium" },
+          "Email wysłany",
+        );
+      }
+
+      return h(
+        resolveComponent("UButton"),
+        {
+          size: "sm",
+          color: "primary",
+          class: "py-1",
+          loading: loadingOrderId.value === row.original.id,
+          onClick: async () => {
+            try {
+              loadingOrderId.value = row.original.id;
+              await confirmOrder(row.original.id);
+              await refresh();
+            } catch (e) {
+              alert(e.message || "Błąd wysyłki emaila");
+            } finally {
+              loadingOrderId.value = null;
+            }
+          },
+        },
+        () => "Przyjmij zamówienie",
+      );
+    },
   },
 ];
 </script>
