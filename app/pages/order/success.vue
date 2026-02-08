@@ -31,8 +31,8 @@
         Pytania lub wątpliwości?
         <br />
         Zadzwoń:
-        <UButton size="xl" variant="link" href="tel:+48607588452"
-          >607 588 452
+        <UButton size="xl" variant="link" href="tel:+48607588452">
+          607 588 452
         </UButton>
       </p>
 
