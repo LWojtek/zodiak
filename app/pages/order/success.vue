@@ -1,33 +1,45 @@
 <template>
   <section>
     <UContainer class="py-16 max-w-2xl text-center">
-      <h1 class="text-3xl font-bold mb-4">Dziękujemy za zamówienie 🎉</h1>
+      <h1 class="text-3xl font-bold mb-6">
+        Dziękujemy za złożenie zamówienia! 🎉
+      </h1>
 
-      <!-- ONLINE PAYMENT -->
-      <p v-if="!isOnsitePayment" class="text-lg text-success mb-6">
-        Płatność została zakończona pomyślnie. Twoje zamówienie zostało
-        opłacone.
+      <!-- ORDER NUMBER -->
+      <p class="text-base mb-6">
+        Numer zamówienia:
+        <strong class="block text-success text-xl mt-1">
+          {{ route.query.id }}
+        </strong>
       </p>
 
-      <!-- ONSITE PAYMENT -->
-      <p v-else class="text-lg text-warning mb-6">
-        Zamówienie zostało przyjęte.
-        <br />
+      <!-- PAYMENT INFO -->
+      <p v-if="isOnsitePayment" class="text-lg font-medium">
         Płatność nastąpi na miejscu przy odbiorze lub dostawie.
       </p>
 
-      <p class="text-sm text-gray-500 mb-8">
-        Numer zamówienia:
-        <strong>{{ route.query.id }}</strong>
+      <p v-else class="text-lg text-success font-medium">
+        Zamówienie zostało opłacone.
       </p>
 
-      <div class="flex justify-center gap-4">
-        <UButton color="primary" size="lg" to="/">
-          Wróć na stronę główną
-        </UButton>
+      <!-- INFO -->
+      <p class="text-lg font-medium">
+        Oczekuj na email potwierdzający przyjęcie zamówienia.
+      </p>
 
-        <UButton variant="outline" size="lg" to="/order">
-          Złóż kolejne zamówienie
+      <p class="text-lg font-medium mb-8">
+        Pytania lub wątpliwości?
+        <br />
+        Zadzwoń:
+        <UButton size="xl" variant="link" href="tel:+48607588452"
+          >607 588 452
+        </UButton>
+      </p>
+
+      <!-- ACTIONS -->
+      <div class="flex justify-center gap-4">
+        <UButton color="primary" size="xl" to="/">
+          Wróć na stronę główną
         </UButton>
       </div>
     </UContainer>
