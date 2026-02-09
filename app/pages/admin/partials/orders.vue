@@ -41,7 +41,9 @@
     </UFormField>
   </div>
 
-  <div class="overflow-x-auto rounded-lg border border-primary-100 bg-white">
+  <div
+    class="overflow-x-auto rounded-lg border border-primary-100 bg-white mt-8"
+  >
     <UTable
       v-model:expanded="expanded"
       v-model:row-selection="rowSelection"
@@ -268,6 +270,7 @@ const { data, refresh, status } = useAsyncData("admin-orders", async () => {
     .select(
       `
         id,
+				order_number,
         created_at,
         customer_name,
         customer_email,
@@ -453,14 +456,14 @@ const columns = [
     accessorKey: "customer_name",
     header: "Klient",
   },
-  // {
-  //   accessorKey: "id",
-  //   header: "#",
-  //   cell: ({ row }) => `#${row.getValue("id").slice(0, 8)}`,
-  // },
+  {
+    accessorKey: "order_number",
+    header: "#",
+    cell: ({ row }) => `#${row.original.order_number}`,
+  },
   {
     accessorKey: "invoice_required",
-    header: "Paragon/Faktura",
+    header: "Dokument",
     cell: ({ row }) =>
       row.original.invoice_required ? "Faktura VAT" : "Paragon",
   },
@@ -469,7 +472,7 @@ const columns = [
     header: "Status zamówienia",
     cell: ({ row }) =>
       h(USelect, {
-        size: "md",
+        size: "sm",
         modelValue: row.original.status,
 
         items: Object.values(dictionary.orderStatuses),
@@ -489,7 +492,7 @@ const columns = [
     header: "Status płatności",
     cell: ({ row }) =>
       h(USelect, {
-        size: "md",
+        size: "sm",
         modelValue: row.original.payment_status,
         items: Object.values(dictionary.paymentStatuses),
         valueKey: "value",
@@ -504,7 +507,7 @@ const columns = [
 
   {
     accessorKey: "total_price",
-    header: "Wartość zamówienia",
+    header: "Kwota",
 
     cell: ({ row }) =>
       new Intl.NumberFormat("pl-PL", {
@@ -514,7 +517,7 @@ const columns = [
   },
   {
     accessorKey: "created_at",
-    header: "Data złożenia zamówienia",
+    header: "Data zamówienia",
     cell: ({ row }) =>
       new Date(row.getValue("created_at")).toLocaleString("pl-PL"),
   },
@@ -528,7 +531,7 @@ const columns = [
   // },
   {
     accessorKey: "fulfillment_method",
-    header: "Typ",
+    header: "Sposób obsługi",
     cell: ({ row }) => {
       const type = row.original.fulfillment_method;
 
@@ -536,11 +539,29 @@ const columns = [
         UBadge,
         {
           variant: "subtle",
-          size: "lg",
+          size: "md",
           leadingIcon:
             type === "delivery" ? "i-lucide-car" : "i-lucide-hand-platter",
         },
         () => (type === "delivery" ? "Dostawa" : "Odbiór osobisty"),
+      );
+    },
+  },
+  {
+    accessorKey: "payment_method",
+    header: "Sposób płatności",
+    cell: ({ row }) => {
+      const type = row.original.payment_method;
+
+      return h(
+        UBadge,
+        {
+          variant: "subtle",
+          size: "md",
+          leadingIcon:
+            type === "onsite" ? "i-lucide-hand-coins" : "i-lucide-credit-card",
+        },
+        () => (type === "onsite" ? "Przy odbiorze" : "Online"),
       );
     },
   },
@@ -552,7 +573,7 @@ const columns = [
         return h(
           "span",
           { class: "text-xs text-success font-medium" },
-          "Email wysłany",
+          "Email został wysłany",
         );
       }
 

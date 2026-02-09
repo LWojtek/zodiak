@@ -455,7 +455,7 @@ const handleSubmit = async () => {
         currency: "PLN",
         invoice_required: state.order_invoice_required,
       })
-      .select()
+      .select("id, order_number")
       .single();
 
     if (orderError) throw orderError;
