@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
    * 2️⃣ VERIFY SIGNATURE
    * -------------------------------------------------- */
   const signatureHeader = getHeader(event, "openpayu-signature");
-
   if (!signatureHeader) {
     throw createError({ statusCode: 400, message: "Missing signature" });
   }
@@ -38,19 +37,12 @@ export default defineEventHandler(async (event) => {
   const order = payload.order;
 
   if (!order) {
-    return "OK"; // PayU sometimes sends test pings
+    return "OK"; // PayU test ping
   }
 
-  /*
-    PAYU STATUS EXAMPLES:
-    - PENDING
-    - COMPLETED
-    - CANCELED
-    - REJECTED
-  */
-  const payuStatus = order.status;
+  const payuStatus = order.status; // COMPLETED | PENDING | CANCELED | REJECTED
   const payuOrderId = order.orderId;
-  const extOrderId = order.extOrderId; // <-- YOUR order.id
+  const extOrderId = order.extOrderId; // orders.id
 
   if (!extOrderId) {
     throw createError({
@@ -65,7 +57,7 @@ export default defineEventHandler(async (event) => {
   const supabase = createClient(config.supabaseUrl, config.supabaseSecretKey);
 
   /* --------------------------------------------------
-   * 5️⃣ MAP PAYU STATUS → YOUR STATUS
+   * 5️⃣ MAP PAYU STATUS → DB UPDATE
    * -------------------------------------------------- */
   let update = null;
 
@@ -85,18 +77,23 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  // Ignore PENDING → PayU will retry
+  // Ignore PENDING
   if (!update) {
     return "OK";
   }
 
   /* --------------------------------------------------
-   * 6️⃣ UPDATE ORDER (IDEMPOTENT)
+   * 6️⃣ UPDATE ORDER + VERIFY EFFECT
    * -------------------------------------------------- */
-  const { error } = await supabase
+  const { error, count } = await supabase
     .from("orders")
     .update(update)
-    .eq("id", extOrderId);
+    .eq("id", extOrderId)
+    .select("id", { count: "exact" });
+
+  console.log(
+    `[PAYU] status=${payuStatus} extOrderId=${extOrderId} updatedRows=${count}`,
+  );
 
   if (error) {
     console.error("SUPABASE UPDATE ERROR:", error);
@@ -104,6 +101,10 @@ export default defineEventHandler(async (event) => {
       statusCode: 500,
       message: "Database update failed",
     });
+  }
+
+  if (!count) {
+    console.warn(`[PAYU] No order updated for extOrderId=${extOrderId}`);
   }
 
   /* --------------------------------------------------
