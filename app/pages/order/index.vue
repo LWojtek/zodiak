@@ -73,7 +73,13 @@
 </template>
 
 <script setup>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({ layout: "page" });
+useZodiakSeoMeta({
+  title: "Zamów online – Restauracja Zodiak",
+  description:
+    "Zamów wyśmienite dania z Restauracji Zodiak online. Catering, szybka dostawa i szeroki wybór potraw!",
+});
 
 const { isScrolled } = useNavigation();
 const { filteredProducts, categories, products } = useOrder();

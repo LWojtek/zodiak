@@ -56,7 +56,13 @@
 </template>
 
 <script setup>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({ layout: "page" });
+useZodiakSeoMeta({
+  title: "Zamówienie przyjęte – Restauracja Zodiak",
+  description:
+    "Twoje zamówienie zostało przyjęte! Dziękujemy za skorzystanie z oferty Restauracji Zodiak.",
+});
 
 const route = useRoute();
 const supabase = useSupabaseClient();

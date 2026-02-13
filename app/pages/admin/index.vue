@@ -20,9 +20,15 @@
 </template>
 
 <script setup>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({
   layout: "admin",
   middleware: "auth",
+});
+useZodiakSeoMeta({
+  title: "Panel administracyjny – Restauracja Zodiak",
+  description:
+    "Panel administracyjny Restauracji Zodiak. Zarządzaj zamówieniami, produktami i kategoriami.",
 });
 const route = useRoute();
 const tab = ref("orders");

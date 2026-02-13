@@ -137,8 +137,14 @@
   </section>
 </template>
 <script>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({
   layout: "page",
   middleware: false,
+});
+useZodiakSeoMeta({
+  title: "Fundusze Europejskie – Restauracja Zodiak",
+  description:
+    "Informacje o wsparciu z Funduszy Europejskich dla Restauracji Zodiak oraz realizowanych projektach.",
 });
 </script>
