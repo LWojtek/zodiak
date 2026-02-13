@@ -42,7 +42,13 @@
   </section>
 </template>
 <script setup>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({
   layout: "page",
+});
+useZodiakSeoMeta({
+  title: "Polityka cookies – Restauracja Zodiak",
+  description:
+    "Dowiedz się, jak Restauracja Zodiak wykorzystuje pliki cookies na swojej stronie internetowej.",
 });
 </script>

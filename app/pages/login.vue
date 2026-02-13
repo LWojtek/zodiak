@@ -57,17 +57,21 @@
   </UForm>
 </template>
 <script setup>
+import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
 definePageMeta({
   layout: "auth",
   middleware: [
     () => {
       const user = useSupabaseUser();
-
       if (user.value) {
         return navigateTo("/admin");
       }
     },
   ],
+});
+useZodiakSeoMeta({
+  title: "Logowanie – Restauracja Zodiak",
+  description: "Zaloguj się do panelu administracyjnego Restauracji Zodiak.",
 });
 
 const show = ref(false);
