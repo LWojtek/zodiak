@@ -136,8 +136,7 @@
     </UContainer>
   </section>
 </template>
-<script>
-import { useZodiakSeoMeta } from "~/composables/useZodiakSeoMeta";
+<script setup>
 definePageMeta({
   layout: "page",
   middleware: false,
