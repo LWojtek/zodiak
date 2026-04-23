@@ -237,6 +237,65 @@
           ></div>
         </div>
       </div>
+      <div
+        class="flex flex-col max-w-prose mx-auto gap-4 mt-12 border-t border-accented text-center"
+      >
+        <h3
+          class="text-2xl text-center pt-8 md:text-3xl lg:text-4xl font-bold font-display"
+          v-motion-pop-bottom
+          :duration="700"
+        >
+          Ogłoszenie
+        </h3>
+        <p
+          class="text-sm text-gray-600 italic"
+          v-motion-pop-bottom
+          :duration="700"
+        >
+          Data ogłoszenia: 31 Pażdziernika 2025
+        </p>
+        <h4
+          class="text-lg font-semibold md:text-xl lg:text-2xl mx-auto text-center"
+          v-motion-pop-bottom
+          :duration="700"
+        >
+          Przedmiotem ogłoszenia jest zakup oraz instalacja nowoczesnego systemu
+          fotowoltaicznego wraz z magazynem energii i funkcją zasilania
+          awaryjnego.
+        </h4>
+
+        <p
+          v-motion-pop-bottom
+          :duration="700"
+          class="text-base font-semibold underline"
+        >
+          Specyfikacja systemu:
+        </p>
+
+        <p v-motion-pop-bottom :duration="700">
+          Moduły fotowoltaiczne – 22 sztuk o mocy 435 W każdy, co daje łączną
+          moc instalacji 9,57 kWp. Inwerter Sigenergy 10.0 TP – urządzenie
+          odpowiedzialne za przekształcanie prądu stałego (DC) produkowanego
+          przez panele na prąd zmienny (AC) wykorzystywany w instalacji
+          elektrycznej.
+        </p>
+        <p v-motion-pop-bottom :duration="700">
+          Magazyn energii o pojemności 24 kWh – umożliwiający przechowywanie
+          nadwyżek energii i ich wykorzystanie w późniejszym czasie, zwiększając
+          autokonsumpcję. Smart Meter Sigen Gateway – inteligentny licznik
+          służący do monitorowania, zarządzania oraz optymalizacji pracy całego
+          systemu energetycznego. Konstrukcja montażowa na dachówkę –
+          przystosowana do bezpiecznego i trwałego montażu modułów
+          fotowoltaicznych na dachu.
+        </p>
+
+        <p v-motion-pop-bottom :duration="700">
+          System zapewnia wysoką efektywność energetyczną, niezależność od
+          wzrostu cen energii oraz możliwość korzystania z zasilania awaryjnego
+          w przypadku przerw w dostawie prądu. Zapraszamy do składania ofert
+          oraz kontaktu w celu uzyskania dodatkowych informacji.
+        </p>
+      </div>
     </UContainer>
   </section>
 </template>
