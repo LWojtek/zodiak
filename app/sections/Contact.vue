@@ -237,7 +237,7 @@
           ></div>
         </div>
       </div>
-      <div
+      <!-- <div
         class="flex flex-col max-w-prose mx-auto gap-4 mt-12 border-t border-accented text-center"
       >
         <h3
@@ -295,7 +295,7 @@
           w przypadku przerw w dostawie prądu. Zapraszamy do składania ofert
           oraz kontaktu w celu uzyskania dodatkowych informacji.
         </p>
-      </div>
+      </div> -->
     </UContainer>
   </section>
 </template>
