@@ -238,7 +238,7 @@
         </div>
       </div>
       <div
-        class="flex flex-col max-w-prose mx-auto gap-4 mt-12 border-t border-accented text-center"
+        class="flex flex-col max-w-prose mx-auto gap-4 mt-12 border-t border-accented"
       >
         <h3
           class="text-2xl text-center pt-8 md:text-3xl lg:text-4xl font-bold font-display"
@@ -255,7 +255,7 @@
           Data ogłoszenia: 31 Pażdziernika 2025
         </p>
         <h4
-          class="text-lg font-semibold md:text-xl lg:text-2xl mx-auto text-center"
+          class="text-lg font-semibold md:text-xl lg:text-2xl mx-auto"
           v-motion-pop-bottom
           :duration="700"
         >
@@ -272,28 +272,42 @@
           Specyfikacja systemu:
         </p>
 
-        <p v-motion-pop-bottom :duration="700">
-          Moduły fotowoltaiczne – 22 sztuk o mocy 435 W każdy, co daje łączną
-          moc instalacji 9,57 kWp. Inwerter Sigenergy 10.0 TP – urządzenie
-          odpowiedzialne za przekształcanie prądu stałego (DC) produkowanego
-          przez panele na prąd zmienny (AC) wykorzystywany w instalacji
-          elektrycznej.
-        </p>
-        <p v-motion-pop-bottom :duration="700">
-          Magazyn energii o pojemności 24 kWh – umożliwiający przechowywanie
-          nadwyżek energii i ich wykorzystanie w późniejszym czasie, zwiększając
-          autokonsumpcję. Smart Meter Sigen Gateway – inteligentny licznik
-          służący do monitorowania, zarządzania oraz optymalizacji pracy całego
-          systemu energetycznego. Konstrukcja montażowa na dachówkę –
-          przystosowana do bezpiecznego i trwałego montażu modułów
-          fotowoltaicznych na dachu.
-        </p>
+        <ul
+          class="flex flex-col gap-4 list-disc pl-6"
+          v-motion-pop-bottom
+          :duration="700"
+        >
+          <li>
+            Moduły fotowoltaiczne – 22 sztuk o mocy 435 W każdy, co daje łączną
+            moc instalacji 9,57 kWp.
+          </li>
+          <li>
+            Inwerter Sigenergy 10.0 TP – urządzenie odpowiedzialne za
+            przekształcanie prądu stałego (DC) produkowanego przez panele na
+            prąd zmienny (AC) wykorzystywany w instalacji elektrycznej.
+          </li>
+          <li>
+            Smart Meter Sigen Gateway – inteligentny licznik służący do
+            monitorowania, zarządzania oraz optymalizacji pracy całego systemu
+            energetycznego.
+          </li>
+          <li>
+            Magazyn energii o pojemności 24 kWh – umożliwiający przechowywanie
+            nadwyżek energii i ich wykorzystanie w późniejszym czasie,
+            zwiększając autokonsumpcję.
+          </li>
 
-        <p v-motion-pop-bottom :duration="700">
-          System zapewnia wysoką efektywność energetyczną, niezależność od
-          wzrostu cen energii oraz możliwość korzystania z zasilania awaryjnego
-          w przypadku przerw w dostawie prądu. Zapraszamy do składania ofert
-          oraz kontaktu w celu uzyskania dodatkowych informacji.
+          <li>
+            Konstrukcja montażowa na dachówkę – przystosowana do bezpiecznego i
+            trwałego montażu modułów fotowoltaicznych na dachu. System zapewnia
+            wysoką efektywność energetyczną, niezależność od wzrostu cen energii
+            oraz możliwość korzystania z zasilania awaryjnego w przypadku przerw
+            w dostawie prądu.
+          </li>
+        </ul>
+        <p class="font-bold mt-4" v-motion-pop-bottom :duration="700">
+          Zapraszamy do składania ofert oraz kontaktu w celu uzyskania
+          dodatkowych informacji.
         </p>
       </div>
     </UContainer>
