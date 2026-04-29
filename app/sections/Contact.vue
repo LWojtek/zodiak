@@ -318,7 +318,7 @@
           Zapraszamy do składania ofert oraz kontaktu w celu uzyskania
           dodatkowych informacji.
         </p>
-      </div>
+      </div> -->
     </UContainer>
   </section>
 </template>
