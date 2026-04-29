@@ -286,15 +286,17 @@
             przekształcanie prądu stałego (DC) produkowanego przez panele na
             prąd zmienny (AC) wykorzystywany w instalacji elektrycznej.
           </li>
-          <li>
-            Smart Meter Sigen Gateway – inteligentny licznik służący do
-            monitorowania, zarządzania oraz optymalizacji pracy całego systemu
-            energetycznego.
-          </li>
+
           <li>
             Magazyn energii o pojemności 24 kWh – umożliwiający przechowywanie
             nadwyżek energii i ich wykorzystanie w późniejszym czasie,
             zwiększając autokonsumpcję.
+          </li>
+
+          <li>
+            Smart Meter Sigen Gateway – inteligentny licznik służący do
+            monitorowania, zarządzania oraz optymalizacji pracy całego systemu
+            energetycznego.
           </li>
 
           <li>
@@ -305,6 +307,13 @@
             w dostawie prądu.
           </li>
         </ul>
+
+        <p class="mt-4" v-motion-pop-bottom :duration="700">
+          System zapewnia wysoką efektywność energetyczną, niezależność od
+          wzrostu cen energii oraz możliwość korzystania z zasilania awaryjnego
+          w przypadku przerw w dostawie prądu.
+        </p>
+
         <p class="font-bold mt-4" v-motion-pop-bottom :duration="700">
           Zapraszamy do składania ofert oraz kontaktu w celu uzyskania
           dodatkowych informacji.
